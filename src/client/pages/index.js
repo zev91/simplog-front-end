@@ -1,13 +1,15 @@
 import React from 'react';
-import { setInitData } from 'src/utils/helper';
-import Tdk from 'src/components/tdk';
-
-export default class Index extends React.Component {
+import withInitialData from 'src/components/with-initial-data';
+class Index extends React.Component {
     constructor(props) {
       super(props);
-      this.state = setInitData({ page: {} }, props)
     }
 
+    static state () {
+      return (
+        { page: {} } 
+      )
+    }
     static async getInitialProps() {
       return ({
         page: {
@@ -20,14 +22,6 @@ export default class Index extends React.Component {
       });
     }
 
-    componentDidMount() {
-      if (!this.state.page.tdk) {//判断是否有初始化数据
-        Index.getInitialProps().then(({page }) => {
-          this.setState({page});
-        })
-      }
-    }
-
    handlerClick(){
       console.log('点击事件测试=======>>>> click');
    }
@@ -35,9 +29,10 @@ export default class Index extends React.Component {
     render() {
         return (
           <div>
-            <Tdk {...this.state.page.tdk} />
             <h1 onClick={this.handlerClick}>This is Home page hahhahah!</h1>
           </div>
         ) 
     }
 }
+
+export default withInitialData(Index)

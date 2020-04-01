@@ -4,6 +4,7 @@ import { matchRoute } from '../../router';
 import getAssets from '../../../server/common/assets';
 import getStaticRoutes from '../middlewares/get-static-routes';
 import { encrypt } from '../../utils/helper';
+import proConfig from '../../share/pro-config';
 
 const assetsMap = getAssets();
 
@@ -11,7 +12,6 @@ export default async (req) => {
   let staticRoutes = await getStaticRoutes();
   let targetRoute = matchRoute(req.path,staticRoutes);
 
-  console.log('targetRoute===>>>',targetRoute)
   let serverEntry;
   let template;
   let fetchDataFn = targetRoute ? targetRoute.component.getInitialProps : null;
@@ -22,6 +22,7 @@ export default async (req) => {
   }
 
   let { page } = fetchResult || {};
+
   let tdk = {
     title: '默认标题',
     keywords: '默认关键词',
@@ -35,7 +36,6 @@ export default async (req) => {
   const context = {
     initialData: encrypt(fetchResult)
   };
-  
 
   serverEntry = <Index location={req.path} context={context} routeList={staticRoutes}/>;
 
@@ -52,6 +52,9 @@ export default async (req) => {
       <!--react-ssr-outlet-->
     </body>
     ${assetsMap.js.join('')}
+    <script>
+      window.__IS__SSR__=${proConfig.__IS_SSR__};
+    </script>
   </html>`;
 
   return { serverEntry, template, context }

@@ -46,25 +46,24 @@ const decrypt = word => {
   return decryptedStr.toString();
 }
 
-const setInitData = (initState,props) => {
-  let initialData;//初始化数据
-  if(__SERVER__){
-      initialData = JSON.parse(decrypt(props.staticContext.initialData)) || deepCopy(initState);
-  }else{
-      initialData = props.initialData ? JSON.parse(props.initialData) : deepCopy(initState);
-  }
+// const setInitData = (initState,props) => {
+//   let initialData;//初始化数据
+//   if(__SERVER__){
+//       initialData = JSON.parse(decrypt(props.staticContext.initialData)) || deepCopy(initState);
+//   }else{
+//       initialData = props.initialData ? JSON.parse(props.initialData) : deepCopy(initState);
+//   }
 
-  if(JSON.stringify(initialData) === '{}'){
-    initialData = initState;
-  }
+//   if(JSON.stringify(initialData) === '{}'){
+//     initialData = initState;
+//   }
 
-  return initialData
-}
+//   return initialData
+// }
 
 export {
   asyncWrap,
   deepCopy,
   encrypt,
-  decrypt,
-  setInitData
+  decrypt
 }

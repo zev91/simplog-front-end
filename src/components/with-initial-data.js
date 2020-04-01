@@ -1,6 +1,18 @@
 import React, { Component } from 'react';
+import { decrypt } from 'src/utils/helper';
+import Tdk from 'src/components/tdk';
 
-export default sourceComponent => {
+let _this = null;
+
+const popStateCallback = ()=> {
+    // 使用popStateFn保存函数防止addEventListener重复注册
+    if (_this && _this.getInitialProps) {
+        _this.getInitialProps();
+    }
+};
+
+
+export default SourceComponent => {
   return class HocComponent extends Component {
     constructor(props) {
       super(props);
@@ -24,12 +36,14 @@ export default sourceComponent => {
     }
 
     async componentDidMount() {
+      _this = this; // 修正_this指向，保证_this指向当前渲染的页面组件
+      //注册事件，用于在页面回退的时候触发
+      window.__IS__SSR && window.addEventListener('popstate', popStateCallback);
       const canClientFetch = this.props.history && this.props.history.action === 'PUSH';
-      if (canClientFetch) {
+      if (canClientFetch || !window.__IS__SSR) {
         await this.getInitialProps();
       }
     }
-
 
     render() {
       const props = {
@@ -37,27 +51,28 @@ export default sourceComponent => {
         ...this.props
       };
 
-      
-
       if (__SERVER__) {
-        props.initialData = JSON.parse(decrypt(props.staticContext.initialData)) || deepCopy(initState);
+        props.initialData = JSON.parse(decrypt(props.staticContext.initialData));
       } else {
-       //客户端渲染
-       if (this.state.canClientFetch) {//需要异步请求数据
-        props.initialData = this.state.initialData||{};
-    } else {
-        props.initialData = window.__INITIAL_DATA__;
-
-        window.__INITIAL_DATA__={};//使用过后清除数据,否则其他页面会使用
-    }
+        //客户端渲染
+        if (this.state.canClientFetch) {//需要异步请求数据
+          props.initialData = this.state.initialData || {};
+        } else {
+          props.initialData = window.__INITIAL_DATA__;
+          window.__INITIAL_DATA__ = {};//使用过后清除数据,否则其他页面会使用
+        }
       }
 
-      if (JSON.stringify(initialData) === '{}') {
-        initialData = initState;
+      if (JSON.stringify(props.initialData) === '{}') {
+        props.initialData = SourceComponent.state();
       }
-
-      // return initialData
-      return <div>ssd</div>
+  
+      return(
+        <div>
+           <Tdk {...props.initialData.page.tdk} />
+          <SourceComponent  {...props}></SourceComponent>
+        </div> 
+      ) 
     }
   }
 }

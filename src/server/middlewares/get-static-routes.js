@@ -1,9 +1,7 @@
 import routes from 'src/router';//得到动态路由的配置
 import proConfig from '../../share/pro-config';
 
-
 const checkIsAsyncRoute = (component) => {
-  console.log('component.name', component[proConfig.asyncComponentKey]);
   return component[proConfig.asyncComponentKey];
 }
 

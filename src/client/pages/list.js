@@ -1,13 +1,19 @@
 import React from 'react';
 import axios from 'axios';
 import { setInitData } from 'src/utils/helper';
-import Tdk from 'src/components/tdk';
+
+import withInitialData from 'src/components/with-initial-data';
 
 //组件
-export default class List extends React.Component {
+class List extends React.Component {
   constructor(props) {
     super(props);
-    this.state = setInitData({ list: [], page: {} }, props)
+  }
+
+  static state () {
+    return (
+      { list: [], page: {} } 
+    )
   }
 
   static async getInitialProps() {
@@ -24,28 +30,15 @@ export default class List extends React.Component {
     });
   }
 
-  componentDidMount() {
-    console.log(this.state)
-    if (!this.state.list.length) {//判断是否有初始化数据
-      //进行数据请求
-      List.getInitialProps().then(({ list, page }) => {
-        this.setState({
-          list: list || [],
-          page
-        });
-      })
-    }
-  }
-
   render() {
-    const { list, page } = this.state;
+    const { list } = this.props.initialData;
+  
     return (
       <div>
-        <Tdk {...page.tdk} />
         {!list.length ?
           '暂无数据'
           :
-          <ul>{this.state.list.map(((item, idx) => {
+          <ul>{list.map(((item, idx) => {
             return (
               <li key={idx}>
                 user: {item.user}
@@ -61,3 +54,5 @@ export default class List extends React.Component {
     )
   }
 }
+
+export default withInitialData(List)

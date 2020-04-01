@@ -14,7 +14,7 @@ function renderDom() {
     document.getElementById('root'));
 }
 
-let initialData = decrypt(JSON.parse(document.getElementById('ssrTextInitData').value).initialData);
+let initialData = JSON.parse(decrypt(JSON.parse(document.getElementById('ssrTextInitData').value).initialData));
 let targetRoute = matchRoute(document.location.pathname);
 window.__INITIAL_DATA__ = initialData;
 
