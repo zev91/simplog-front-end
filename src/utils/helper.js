@@ -53,6 +53,11 @@ const setInitData = (initState,props) => {
   }else{
       initialData = props.initialData ? JSON.parse(props.initialData) : deepCopy(initState);
   }
+
+  if(JSON.stringify(initialData) === '{}'){
+    initialData = initState;
+  }
+
   return initialData
 }
 

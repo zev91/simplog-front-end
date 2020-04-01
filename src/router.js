@@ -1,24 +1,23 @@
 import React from 'react';
 import { matchPath } from "react-router";
-import Home from './client/pages/index';
-import List from './client/pages/list';
+import AsyncLoader from 'src/components/async-loader';
 
 const routeList = [
   {
     path: '/',
-    component: Home,
+    component: AsyncLoader(() => import('./client/pages/index')),
     exact: true
   },
   {
     path: '/list',
-    component: List,
+    component: AsyncLoader(() => import('./client/pages/list')),
     exact: true
   }
 ]
 
-const matchRoute = path =>{
+const matchRoute = (path,list=routeList) =>{
   let route;
-  for(var item of routeList){
+  for(var item of list){
      if(matchPath(path,item)){
       route = item;
       break;

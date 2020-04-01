@@ -2,12 +2,16 @@ import React from 'react';
 import Index from '../server-entry';
 import { matchRoute } from '../../router';
 import getAssets from '../../../server/common/assets';
+import getStaticRoutes from '../middlewares/get-static-routes';
 import { encrypt } from '../../utils/helper';
 
 const assetsMap = getAssets();
 
 export default async (req) => {
-  let targetRoute = matchRoute(req.path);
+  let staticRoutes = await getStaticRoutes();
+  let targetRoute = matchRoute(req.path,staticRoutes);
+
+  console.log('targetRoute===>>>',targetRoute)
   let serverEntry;
   let template;
   let fetchDataFn = targetRoute ? targetRoute.component.getInitialProps : null;
@@ -31,8 +35,9 @@ export default async (req) => {
   const context = {
     initialData: encrypt(fetchResult)
   };
+  
 
-  serverEntry = <Index location={req.path} context={context} />;
+  serverEntry = <Index location={req.path} context={context} routeList={staticRoutes}/>;
 
   template = `<!DOCTYPE html>
   <html lang="en">
