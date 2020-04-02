@@ -15,8 +15,6 @@ let compilationTime=0;//编译次数
 const WDS_PORT = proConfig.wdsPort;//wds 服务端口
 
 const NODE_SERVER_PORT=proConfig.nodeServerPort;//node 服务端口
-
-console.log('proConfig====>>>>',proConfig)
 const HOST='localhost';
 
 //释放wds端口

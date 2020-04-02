@@ -1,7 +1,7 @@
 const path = require('path')
 const webpack = require('webpack');
 const merge = require('webpack-merge');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+// const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const ManifestPlugin = require('webpack-manifest-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
@@ -29,22 +29,6 @@ module.exports = merge(baseCongig,{
       exclude: /node_modules/
     },
     {
-      test: /\.(sa|sc|c)ss$/,
-      use: [{
-        loader: MiniCssExtractPlugin.loader,
-      },
-      {
-        loader: "css-loader",
-      },
-      {
-        loader: "postcss-loader"
-      },
-      {
-        loader: "sass-loader"
-      },
-      ]
-    },
-    {
       test: /\.(png|jpg|gif)$/,
       use: [{
         loader: 'file-loader',
@@ -58,9 +42,9 @@ module.exports = merge(baseCongig,{
   },
 
   plugins: [
-    new MiniCssExtractPlugin({
-      filename: 'css/[name].[contenthash:8].css'
-    }),
+    // new MiniCssExtractPlugin({
+    //   filename: 'css/[name].[contenthash:8].css'
+    // }),
     // 清理上一次构建的文件
     new CleanWebpackPlugin(),
     //生成 manifest 方便定位对应的资源文件

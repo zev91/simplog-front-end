@@ -1,5 +1,9 @@
 import React from 'react';
 import withInitialData from 'src/components/with-initial-data';
+import withStyles from 'isomorphic-style-loader/withStyles'
+// import css from './style.scss';
+const css = require('./style.scss');
+
 class Index extends React.Component {
     constructor(props) {
       super(props);
@@ -28,11 +32,10 @@ class Index extends React.Component {
 
     render() {
         return (
-          <div>
+          <div className='home-page-wrap'>
             <h1 onClick={this.handlerClick}>This is Home page hahhahah!</h1>
           </div>
         ) 
     }
 }
-
-export default withInitialData(Index)
+export default withStyles(css)(withInitialData(Index));

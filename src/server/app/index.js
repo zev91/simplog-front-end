@@ -1,5 +1,5 @@
 
-const {renderToString} =  require('react-dom/server');
+
 
 const express = require('express');
 const path = require('path');
@@ -9,8 +9,8 @@ const reactSsr  = require('src/server//middlewares/react-ssr').default;
 
 const render = async function(req,res){
   const data = await reactSsr(req);
-  const { serverEntry,template,context } = data;
-  const html = renderToString(serverEntry);
+  const { html,template,context } = data;
+  // const html = renderToString(serverEntry);
   let htmlStr = template.replace("<!--react-ssr-outlet-->", `<div id='root'>${html}</div><textarea id="ssrTextInitData" style="display:none;"> ${JSON.stringify(context)}</textarea>`);
 
   res.send(htmlStr);

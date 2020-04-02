@@ -5,12 +5,12 @@ import AsyncLoader from 'src/components/async-loader';
 const routeList = [
   {
     path: '/',
-    component: AsyncLoader(() => import('./client/pages/index')),
+    component: AsyncLoader(() => import('./client/pages/home/')),
     exact: true
   },
   {
     path: '/list',
-    component: AsyncLoader(() => import('./client/pages/list')),
+    component: AsyncLoader(() => import('./client/pages/list/')),
     exact: true
   }
 ]

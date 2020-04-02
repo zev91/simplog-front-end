@@ -1,4 +1,5 @@
 const path = require('path');
+const webpack = require('webpack');
 const resolvePath = (pathstr) => path.resolve(__dirname, pathstr);
 
 module.exports = {
@@ -18,7 +19,24 @@ module.exports = {
         test: /\.jsx?$/,
         loader: 'babel-loader',
         exclude: /node_modules/
+      },
+      {
+        test: /\.(sa|sc|c)ss$/,
+        use: [
+          'isomorphic-style-loader',
+          {
+            loader: "css-loader",
+            options: {
+              importLoaders: 2
+            }
+          },
+          'postcss-loader',
+          'sass-loader'
+        ]
       }
     ]
-  }
+  },
+  plugins: [
+    new webpack.HashedModuleIdsPlugin()
+  ]
 }

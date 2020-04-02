@@ -11,12 +11,12 @@ const resolvePath = (pathstr) => path.resolve(__dirname, pathstr);
 module.exports = merge(baseCongig, {
   mode: 'development',
   entry: {
-    main: ['react-hot-loader/patch',resolvePath('../src/client/client-entry.js')],
+    main: ['react-hot-loader/patch', resolvePath('../src/client/client-entry.js')],
   },
   output: {
     filename: '[name].js',
     path: resolvePath('../dist/static'),
-    publicPath: 'http://localhost:'+proConfig.wdsPort+'/'
+    publicPath: 'http://localhost:' + proConfig.wdsPort + '/'
   },
   resolve: {
     alias: {
@@ -25,16 +25,6 @@ module.exports = merge(baseCongig, {
   },
   module: {
     rules: [
-      {
-        test: /\.(sa|sc|c)ss$/,
-        use: [
-          MiniCssExtractPlugin.loader,
-          'css-loader',
-          'postcss-loader',
-          'sass-loader',
-          
-        ]
-      },
       {
         test: /\.(png|jpg|gif)$/,
         use: [
@@ -45,22 +35,28 @@ module.exports = merge(baseCongig, {
             }
           }]
       },
-    
     ]
   },
   plugins: [
-    new webpack.DefinePlugin({
-      'process.env': { NODE_ENV: '"development"'},
-        '__IS_PROD__':false,
-        '__SERVER__': false
-    }),
+    new webpack.HotModuleReplacementPlugin(),
     new MiniCssExtractPlugin({
       filename: '[name].css' //设置名称
-    })
+    }),
+    new webpack.DefinePlugin({
+      'process.env': { NODE_ENV: '"development"' },
+      '__IS_PROD__': false,
+      '__SERVER__': false
+    }),
   ],
   optimization: {
     splitChunks: {
       cacheGroups: {
+        // styles: {
+        //   name: 'styles',
+        //   test: /\.scss$/,
+        //   chunks: 'all',
+        //   enforce: true,
+        // },
         libs: { // 抽离第三方库
           test: /node_modules/, // 指定是node_modules下的第三方包
           chunks: 'initial',

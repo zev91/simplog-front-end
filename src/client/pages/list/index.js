@@ -1,20 +1,22 @@
 import React from 'react';
 import axios from 'axios';
-import { setInitData } from 'src/utils/helper';
-
 import withInitialData from 'src/components/with-initial-data';
+import withStyles from 'isomorphic-style-loader/withStyles'
+const css = require('./style.scss');
 
 //组件
 class List extends React.Component {
   constructor(props) {
     super(props);
+    console.log(css)
   }
 
   static state () {
-    return (
+    return (  
       { list: [], page: {} } 
     )
   }
+
 
   static async getInitialProps() {
     const res = await axios.get('https://www.fastmock.site/mock/b6100fac0c7cd8fd548cee0fa0035255/crm/todo-list');
@@ -38,7 +40,7 @@ class List extends React.Component {
         {!list.length ?
           '暂无数据'
           :
-          <ul>{list.map(((item, idx) => {
+          <ul className='user-list'>{list.map(((item, idx) => {
             return (
               <li key={idx}>
                 user: {item.user}
@@ -55,4 +57,5 @@ class List extends React.Component {
   }
 }
 
-export default withInitialData(List)
+
+export default withStyles(css)(withInitialData(List)); 
