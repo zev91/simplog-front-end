@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 import { hot } from 'react-hot-loader/root';
 import withStyles from 'isomorphic-style-loader/withStyles'
-// import css from './layout.scss';
-const css = require('./layout.scss');
+import css from './layout.scss';
 
 class Index extends Component{
   constructor(props){

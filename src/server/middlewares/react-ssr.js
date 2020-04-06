@@ -80,5 +80,3 @@ export default async (req) => {
 
   return { html, template, context }
 }
-
- // ${assetsMap.css.join('')}

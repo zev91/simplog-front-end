@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import withInitialData from 'src/components/with-initial-data';
 import withStyles from 'isomorphic-style-loader/withStyles'
-const css = require('./style.scss');
+import css from './style.scss';
 
 //组件
 class List extends React.Component {

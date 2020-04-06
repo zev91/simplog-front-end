@@ -1,8 +1,7 @@
 import React from 'react';
 import withInitialData from 'src/components/with-initial-data';
 import withStyles from 'isomorphic-style-loader/withStyles'
-// import css from './style.scss';
-const css = require('./style.scss');
+import css from './style.scss';
 
 class Index extends React.Component {
     constructor(props) {
