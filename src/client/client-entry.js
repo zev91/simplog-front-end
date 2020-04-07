@@ -7,6 +7,9 @@ import routeList, { matchRoute } from '../router';
 import { decrypt } from '../utils/helper';
 import proConfig from '../share/pro-config';
 
+import { Provider } from 'react-redux';
+import getStore from '../share/redux/store';
+
 
 let initialData = JSON.parse(decrypt(JSON.parse(document.getElementById('ssrTextInitData').value).initialData));
 let targetRoute = matchRoute(document.location.pathname);
@@ -19,12 +22,19 @@ function renderDom() {
     return () => removeCss.forEach(dispose => dispose());//组件卸载时 移除当前的 style 标签
   }
 
+  const store = getStore(initialData);
+  //将store 放入全局，方便后期的使用
+  window.__STORE__ = store;
+  
+
   ReactDom.hydrate(
-    <StyleContext.Provider value={{ insertCss }}>
-      <BrowserRouter>
-        <App routeList={routeList} />
-      </BrowserRouter>
-    </StyleContext.Provider>,
+    <Provider store={store}>
+      <StyleContext.Provider value={{ insertCss }}>
+        <BrowserRouter>
+          <App routeList={routeList} />
+        </BrowserRouter>
+      </StyleContext.Provider>
+    </Provider>,
     document.getElementById('root'));
 }
 
