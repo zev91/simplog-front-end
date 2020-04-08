@@ -1,20 +1,14 @@
 import React from 'react';
 import ReactDom from 'react-dom';
-// import { browserHistory } from 'react-router'
+
 import { BrowserRouter } from 'react-router-dom';
 import StyleContext from 'isomorphic-style-loader/StyleContext';
 import App from './app';
 import routeList, { matchRoute } from '../router';
 import { decrypt } from '../utils/helper';
 import proConfig from '../share/pro-config';
-
 import { Provider } from 'react-redux';
-import getStore from '../share/redux/store';
-
-const createBrowserHistory = require("history").createBrowserHistory
-export const history = createBrowserHistory({ basename: '/' })
-
-// console.log('browserHistory====>>>>',browserHistory);
+import getStore from '../share/store';
 
 let initialData = JSON.parse(decrypt(JSON.parse(document.getElementById('ssrTextInitData').value).initialData));
 let targetRoute = matchRoute(document.location.pathname);
@@ -30,7 +24,6 @@ function renderDom() {
   const store = getStore(initialData);
   //将store 放入全局，方便后期的使用
   window.__STORE__ = store;
-  
 
   ReactDom.hydrate(
     <Provider store={store}>

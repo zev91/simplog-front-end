@@ -1,6 +1,6 @@
 import React from 'react';
 import { matchPath } from "react-router";
-import AsyncLoader from 'src/components/async-loader';
+import AsyncLoader from 'src/componentHOC/async-loader';
 
 const routeList = [
   {

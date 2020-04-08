@@ -43,5 +43,4 @@ export default loader => {
 
   asyncFn[proConfig.asyncComponentKey] = true;
   return asyncFn
-
 }

@@ -1,8 +1,6 @@
 import { compose, createStore as _createStore, applyMiddleware } from 'redux'
-import { browserHistory } from 'react-router'
 import thunk from 'redux-thunk'
 import { makeRootReducer } from './reducer';
-import { updateLocation } from './location'
 
 export const createStore = (reducer, initialState, middlewares = []) => {
   const middls = [ thunk, ...middlewares ];
@@ -23,10 +21,6 @@ export const createStore = (reducer, initialState, middlewares = []) => {
     )
   );
   store.asyncReducers = {};
-
-  if(browserHistory) {
-    store.unsubscribeHistory = browserHistory.listen(updateLocation(store));
-  };
 
   return store;
 }

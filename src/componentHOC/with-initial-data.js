@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { decrypt } from 'src/utils/helper';
-import Tdk from 'src/components/tdk';
+import Tdk from 'src/componentCommon/tdk';
 
 let _this = null;
 
@@ -16,15 +16,17 @@ export default SourceComponent => {
     constructor(props) {
       super(props);
 
+      console.log(SourceComponent.getInitialProps)
       this.state = {
         initialData: {},
         canClientFetch: false //浏览器端是否需要请求数据
       }
     }
 
-    static async getInitialProps() {
-      return SourceComponent.getInitialProps ? await SourceComponent.getInitialProps() : {}; //服务端渲染会执行
-    }
+    // static async getInitialProps({store}) {
+    //   console.log('store====>>>>',store)
+    //   return SourceComponent.getInitialProps ? await SourceComponent.getInitialProps() : {}; //服务端渲染会执行
+    // }
 
     async getInitialProps() {
       const props = this.props;

@@ -2,7 +2,7 @@
 // import thunk from 'redux-thunk';
 require ('@babel/polyfill');
 import * as enRedux from 'utils/redux';
-const { createStore, asyncMiddleware, InjectReducerManager } = enRedux.default;
+const { createStore, asyncMiddleware, InjectReducerManager,locationReducer } = enRedux.default;
 import { axiosCreater } from 'utils/http/axios';
 import asyncHandler from 'utils/asyncHandler';
 
@@ -38,9 +38,7 @@ axios.interceptors.response.use(function (response) {
   return Promise.reject(error)
 })
 
-const reducer = {
-  // userInfo: userInfoReducer
-}
+// const reducer = locationReducer
 
 const middlewares = [asyncMiddleware({
   http: axios,     
@@ -48,26 +46,10 @@ const middlewares = [asyncMiddleware({
 })]
 
 export default (initialState) => {
-  const store = createStore(reducer, initialState, middlewares);
+  const store = createStore(null, initialState, middlewares);
   InjectReducerManager.with(store);
   return store;
 } 
 
-
-// import { createStore as }
-// import reducer from './reducer';
-
-// let composeEnhancers = compose;
-
-// if (!__SERVER__) {
-//   const composeWithDevToolsExtension = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__     
-//   if (typeof composeWithDevToolsExtension === 'function') {
-//     composeEnhancers = composeWithDevToolsExtension;
-//   }
-// }
-
-// export default (defaultState = {}) => {
-//   const store = createStore(reducer, defaultState, composeEnhancers(applyMiddleware(thunk)));
-// }
 
 

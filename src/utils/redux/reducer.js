@@ -9,6 +9,7 @@ export let initReducers = {
 
 export const makeRootReducer = (reducers = {}) => {
   initReducers = { ...initReducers, ...reducers };
+
   return combineReducers({
     ...initReducers
   });

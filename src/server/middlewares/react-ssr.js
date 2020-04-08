@@ -5,11 +5,12 @@ import { matchRoute } from '../../router';
 import getAssets from '../../../server/common/assets';
 import getStaticRoutes from '../middlewares/get-static-routes';
 import { encrypt } from '../../utils/helper';
+import shouldSsrList from '../../share/should-ssr-list';
 import proConfig from '../../share/pro-config';
 
 import { StaticRouter, Route } from 'react-router';
 import App from '../../client/app/index';
-import getStore from '../../share/redux/store';
+import getStore from '../../share/store';
 
 import StyleContext from 'isomorphic-style-loader/StyleContext';
 
@@ -28,9 +29,11 @@ export default async (req) => {
     fetchResult = await fetchDataFn({ store });
   }
 
+  for(let key in shouldSsrList){
+    fetchResult[key] = await shouldSsrList[key].getInitialProps({ store })
+  }
 
-  console.log('req.path=====>>>>',req.path)
-  console.log('store=====>>>>',store.getState())
+  console.log(shouldSsrList)
 
   let { page } = fetchResult || {};
 

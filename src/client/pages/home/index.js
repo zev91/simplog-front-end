@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import withInitialData from 'src/components/with-initial-data';
+import withInitialData from 'src/componentHOC/with-initial-data';
 import { actions } from './redux';
 import withStyles from 'isomorphic-style-loader/withStyles';
 import { getInitialData } from './redux';

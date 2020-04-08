@@ -1,8 +1,8 @@
-import { match } from 'react-router';
+import { matchPath } from 'react-router';
 export function preload({ history, routes, location}, cb) {
   routes = typeof routes == 'function' ? routes(dispatch, getState) : routes;
 
-  match({ history, routes, location }, (error, redirect, props) => {
+  matchPath({ history, routes, location }, (error, redirect, props) => {
 
 		const { components, location, params } = props;
 

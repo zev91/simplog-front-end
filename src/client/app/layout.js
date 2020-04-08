@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import withStyles from 'isomorphic-style-loader/withStyles';
 import { Link } from "react-router-dom";
 import { hot } from 'react-hot-loader/root';
-import withStyles from 'isomorphic-style-loader/withStyles'
+import Header from 'src/componentLayout/header';
+
 import css from './layout.scss';
 
 class Index extends Component{
@@ -12,6 +14,7 @@ class Index extends Component{
   render(){
     return (
       <div className='layout-box'>
+        <Header />
         <header>
           <Link to='/'>首页</Link>
           <Link to='/list'>列表页</Link>

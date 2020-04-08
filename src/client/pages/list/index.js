@@ -2,9 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { actions } from './redux';
-import withInitialData from 'src/components/with-initial-data';
+import withInitialData from 'src/componentHOC/with-initial-data';
 import withStyles from 'isomorphic-style-loader/withStyles';
-// import { getInitialData } from './redux';
 import composeHOC from 'src/utils/composeHOC';
 import css from './style.scss';
 
@@ -14,24 +13,23 @@ class List extends React.Component {
     super(props);
   }
 
-  static state () {
-    return (  
-      { list: [], page: {} } 
+  static state() {
+    return (
+      { list: [], page: {} }
     )
   }
 
-  static async getInitialProps({store}){
-    console.log('actions.getInitialData()===>>',actions.getInitialData())
+  static async getInitialProps({ store }) {
     return store.dispatch(actions.getInitialData());
-}
+  }
 
-handlerClick = () => {
-  console.log(this.props)
-}
+  handlerClick = () => {
+    console.log(this.props)
+  }
 
   render() {
     const { list } = this.props.initialData;
-  
+
     return (
       <div>
         <button onClick={this.handlerClick}> 加载</button>
@@ -62,11 +60,11 @@ const mapStateToProps = state => ({
 
 //将获取数据的方法也做为 props传递给组件
 const mapDispatchToProps = dispatch => (
-  bindActionCreators({...actions},dispatch)
+  bindActionCreators({ ...actions }, dispatch)
 )
 
 export default composeHOC(
   withStyles(css),
   withInitialData,
   connect(mapStateToProps, mapDispatchToProps, null)
-) (List); 
+)(List); 
