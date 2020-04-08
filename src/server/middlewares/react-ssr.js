@@ -13,7 +13,6 @@ import getStore from '../../share/redux/store';
 
 import StyleContext from 'isomorphic-style-loader/StyleContext';
 
-
 const assetsMap = getAssets();
 
 export default async (req) => {
@@ -28,6 +27,10 @@ export default async (req) => {
   if (fetchDataFn) {
     fetchResult = await fetchDataFn({ store });
   }
+
+
+  console.log('req.path=====>>>>',req.path)
+  console.log('store=====>>>>',store.getState())
 
   let { page } = fetchResult || {};
 

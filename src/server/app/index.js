@@ -17,6 +17,7 @@ const render = async function(req,res){
 }
 
 app.use(express.static('dist/static'));
+app.use(express.static('static'));
 
 app.get('*',asyncWrap(render));
 app.listen(9001);

@@ -1,47 +1,58 @@
-import axios from 'axios';
+import * as enRedux from 'utils/redux';
+const { action, createReducer, injectReducer } = enRedux.default;
 
-export const ACTION_TYPE = {
-  changeList: 'list/changelist'
-}
-
-//用于更新状态 action creater
-const changeList = list => ({
-  type: ACTION_TYPE.changeList,
-  list
-});
-
-export const getInitialData = (props) => {
-  return (dispatch, getState) => (
-    axios.get('https://www.fastmock.site/mock/b6100fac0c7cd8fd548cee0fa0035255/crm/todo-list').then(res => {
-      const data = {
-        list:res.data.data,
-        page: {
-          tdk: {
-            title: '列表页 - express-react-ssr',
-            keywords: '关键词 express-react-ssr',
-            description: '描述 express-react-ssr'
-          }
-        }
+const reducerHandler = createReducer();
+// console.log(reducerHandler)
+export const actions = {
+  getList: action({
+    type: 'listPage.getList',
+    action: (http,dispatch,getstate) => {
+      return http.get('https://www.fastmock.site/mock/b6100fac0c7cd8fd548cee0fa0035255/crm/todo-list')
+    },
+    handler: (state, result) => {
+      return {
+        ...state
       }
-      dispatch(changeList(data));
-      return data;
-    })
-  )
-};
+    }
+  },reducerHandler),
 
-const defaultState = {
-  list: [],
-  page: {}
-};
+  getPage: action({
+    type: 'listPage.getPage',
+    action: () => ({
+      tdk: {
+        title: '列表页',
+        keywords: '前端技术江湖',
+        description: '前端技术江湖'
+      }
+    }),
+    handler: (state, result) => {
+      return {
+        ...state
+      }
+    }
+  },reducerHandler),
 
-export const reducer = (state = defaultState, action) => {
-  switch (action.type) {
-    case ACTION_TYPE.changeList:
-      return {//通过共享结构返回一个新对象
+  getInitialData: action({
+    type: 'listPage.getInitialData',
+    action: async (http,dispatch) => {
+
+      const res = await dispatch(actions.getList());
+      const page = await dispatch(actions.getPage());
+      return ({
+        list: res.data,
+        page
+      })
+    },
+    handler: (state, result) => {
+      return {
         ...state,
-        ...action.list
-      };
-    default:
-      return state;//返回默认
-  }
-}
+        list: result.list,
+        page: result.page
+      }
+    }
+  },reducerHandler),
+};
+
+injectReducer({ key: 'listPage', reducer: reducerHandler({list:[],page:{}})});
+
+

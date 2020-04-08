@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import withInitialData from 'src/components/with-initial-data';
+import { actions } from './redux';
 import withStyles from 'isomorphic-style-loader/withStyles';
 import { getInitialData } from './redux';
 import composeHOC from 'src/utils/composeHOC';
@@ -16,8 +17,8 @@ class Index extends React.Component {
         { page: {} } 
       )
     }
-    static async  getInitialProps({store}) {
-      return store.dispatch(getInitialData());
+    static async getInitialProps({store}) {
+      return store.dispatch(actions.getInitialData());
   }
 
    handlerClick(){
@@ -38,14 +39,9 @@ const mapStateToProps = state => ({
 });
 
 //将获取数据的方法也做为 props传递给组件
-const mapDispatchToProps = dispatch => ({
-  getInitialData() {
-      return dispatch(getInitialData());
-  }
-});
 
 export default composeHOC(
   withStyles(css),
   withInitialData,
-  connect(mapStateToProps, mapDispatchToProps,null)
+  connect(mapStateToProps, actions,null)
 ) (Index); 

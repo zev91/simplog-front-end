@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDom from 'react-dom';
+// import { browserHistory } from 'react-router'
 import { BrowserRouter } from 'react-router-dom';
 import StyleContext from 'isomorphic-style-loader/StyleContext';
 import App from './app';
@@ -10,6 +11,10 @@ import proConfig from '../share/pro-config';
 import { Provider } from 'react-redux';
 import getStore from '../share/redux/store';
 
+const createBrowserHistory = require("history").createBrowserHistory
+export const history = createBrowserHistory({ basename: '/' })
+
+// console.log('browserHistory====>>>>',browserHistory);
 
 let initialData = JSON.parse(decrypt(JSON.parse(document.getElementById('ssrTextInitData').value).initialData));
 let targetRoute = matchRoute(document.location.pathname);

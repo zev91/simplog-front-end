@@ -49,6 +49,7 @@
     "webpack-node-externals": "^1.7.2"
   },
   "dependencies": {
+    "@babel/polyfill": "^7.8.7",
     "@babel/runtime": "^7.9.2",
     "axios": "^0.19.2",
     "chalk": "^3.0.0",

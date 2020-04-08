@@ -10,7 +10,8 @@ module.exports = {
         'config': resolvePath('../config/'),
         'dist': resolvePath('../dist/'),
         'server': resolvePath('../server/'),
-        'src': resolvePath('../src/')
+        'src': resolvePath('../src/'),
+        'utils': resolvePath('../src/utils/'),
       }
   },
   module: {
