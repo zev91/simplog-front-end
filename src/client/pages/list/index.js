@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { actions } from './redux';
+import { Button } from '@material-ui/core';
 import withInitialData from 'src/componentHOC/with-initial-data';
 import withStyles from 'isomorphic-style-loader/withStyles';
 import composeHOC from 'src/utils/composeHOC';
@@ -32,7 +33,7 @@ class List extends React.Component {
 
     return (
       <div>
-        <button onClick={this.handlerClick}> 加载</button>
+        <Button color="primary" variant="contained" onClick={this.handlerClick}>加载</Button>
         {!list.length ?
           '暂无数据'
           :

@@ -25,6 +25,11 @@ function renderDom() {
   //将store 放入全局，方便后期的使用
   window.__STORE__ = store;
 
+  // const jssStyles = document.querySelector('#jss-server-side');
+  //   if (jssStyles) {
+  //     jssStyles.parentElement.removeChild(jssStyles);
+  //   }
+
   ReactDom.hydrate(
     <Provider store={store}>
       <StyleContext.Provider value={{ insertCss }}>

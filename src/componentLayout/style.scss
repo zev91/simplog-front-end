@@ -1,3 +1,17 @@
-.header{
-  color: red;
+
+.app-header{
+  color: #07a2b9!important;
+  background-color: #fff!important;
+
+  .tool-bar{
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .logo-wrap{
+    img{
+      width: 150px;
+    }
+  }
 }
+

@@ -23,20 +23,7 @@ module.exports = merge(baseCongig, {
       'react-dom': '@hot-loader/react-dom'
     }
   },
-  module: {
-    rules: [
-      {
-        test: /\.(png|jpg|gif|ico)$/,
-        use: [
-          {
-            loader: 'file-loader',
-            options: {
-              name: 'img/[name].[ext]'//配置图片的输出路径和名称
-            }
-          }]
-      },
-    ]
-  },
+
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new MiniCssExtractPlugin({

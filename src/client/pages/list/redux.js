@@ -2,7 +2,6 @@ import * as enRedux from 'utils/redux';
 const { action, createReducer, injectReducer } = enRedux.default;
 
 const reducerHandler = createReducer();
-// console.log(reducerHandler)
 export const actions = {
   getList: action({
     type: 'listPage.getList',

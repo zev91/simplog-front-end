@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import withInitialData from 'src/componentHOC/with-initial-data';
 import { actions } from './redux';
 import withStyles from 'isomorphic-style-loader/withStyles';
-import { getInitialData } from './redux';
 import composeHOC from 'src/utils/composeHOC';
 import css from './style.scss';
 

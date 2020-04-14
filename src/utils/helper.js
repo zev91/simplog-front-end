@@ -46,24 +46,16 @@ const decrypt = word => {
   return decryptedStr.toString();
 }
 
-// const setInitData = (initState,props) => {
-//   let initialData;//初始化数据
-//   if(__SERVER__){
-//       initialData = JSON.parse(decrypt(props.staticContext.initialData)) || deepCopy(initState);
-//   }else{
-//       initialData = props.initialData ? JSON.parse(props.initialData) : deepCopy(initState);
-//   }
+const validateEmail = email => {
+  let reg = /^[A-Za-z0-9]+([_\.][A-Za-z0-9]+)*@([A-Za-z0-9\-]+\.)+[A-Za-z]{2,6}$/;
+  return reg.test(email);
+}
 
-//   if(JSON.stringify(initialData) === '{}'){
-//     initialData = initState;
-//   }
-
-//   return initialData
-// }
 
 export {
   asyncWrap,
   deepCopy,
   encrypt,
-  decrypt
+  decrypt,
+  validateEmail
 }

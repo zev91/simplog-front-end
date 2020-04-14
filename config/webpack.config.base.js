@@ -1,6 +1,9 @@
 const path = require('path');
 const webpack = require('webpack');
+const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
 const resolvePath = (pathstr) => path.resolve(__dirname, pathstr);
+
+const proConfig = require('../src/share/pro-config');
 
 module.exports = {
   mode: 'development',
@@ -34,10 +37,22 @@ module.exports = {
           'postcss-loader',
           'sass-loader'
         ]
-      }
+      },
+      {
+        test: /\.(png|jpg|gif|ico)$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: 'images/[name].[ext]',
+              publicPath: 'http://localhost:' + proConfig.wdsPort + '/'
+            }
+          }]
+      },
     ]
   },
   plugins: [
-    new webpack.HashedModuleIdsPlugin()
+    new webpack.HashedModuleIdsPlugin(),
+    new HardSourceWebpackPlugin()
   ]
 }

@@ -6,13 +6,13 @@ const reducerHandler = createReducer();
 export const actions = {
   
   getInitialData: action({
-    type: 'homePage.getPage',
+    type: 'registerPage.getPage',
     action: () => ({
       page:{
         tdk: {
-          title: '首页',
-          keywords: '前端技术首页',
-          description: '前端技术首页'
+          title: '注册',
+          keywords: 'simplog',
+          description: 'simplog 简约博客'
         }
       }
     }),
@@ -25,7 +25,7 @@ export const actions = {
   },reducerHandler),
 };
 
-injectReducer({ key: 'homePage', reducer: reducerHandler({page:{}})});
+injectReducer({ key: 'registerPage', reducer: reducerHandler({page:{}})});
 
 
 

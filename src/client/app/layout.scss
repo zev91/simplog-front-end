@@ -1,36 +1,5 @@
-body {
-  background-color: #f4f5f5;
-}
+@import './reset.scss';
 
-.layout-box {
-  max-width: 750px;
-  margin: 120px auto;
-  padding: 20px;
-  // text-align: center;
-  background: #fff;
-  box-shadow: 6px 6px 21px rgba(0,0,0,.05);
-
-  header{
-    a{
-      margin-right: 12px;
-    }
-  }
-  a{
-    text-decoration: none;
-  }
-
-  a,a:focus{
-    color: #2bbfcd
-  }
-  ul{
-    padding-left: 0;
-  }
-  ul,li{
-    list-style: none;
-  }
-}
-
-.layout-box h1 {
-  margin-top: 20px;
-  margin-top: 20px;
+#root {
+  padding-top: 64px;
 }

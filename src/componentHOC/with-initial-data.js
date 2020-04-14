@@ -15,8 +15,6 @@ export default SourceComponent => {
   return class HocComponent extends Component {
     constructor(props) {
       super(props);
-
-      console.log(SourceComponent.getInitialProps)
       this.state = {
         initialData: {},
         canClientFetch: false //浏览器端是否需要请求数据
@@ -69,8 +67,6 @@ export default SourceComponent => {
       if (JSON.stringify(props.initialData) === '{}') {
         props.initialData = SourceComponent.state();
       }
-
-
       return (
         <div>
           <Tdk {...props.initialData.page.tdk} />
