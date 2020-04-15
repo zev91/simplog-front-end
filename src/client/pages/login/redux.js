@@ -1,16 +1,17 @@
 import * as enRedux from 'utils/redux';
 const { action, createReducer, injectReducer } = enRedux.default;
 import Cookie from 'js-cookie';
+
 const reducerHandler = createReducer();
 
 export const actions = {
   
   getInitialData: action({
-    type: 'registerPage.getPage',
+    type: 'loginPage.getPage',
     action: () => ({
       page:{
         tdk: {
-          title: '注册',
+          title: '登录',
           keywords: 'simplog',
           description: 'simplog 简约博客'
         }
@@ -24,22 +25,10 @@ export const actions = {
     }
   },reducerHandler),
 
-  sendVerifyCode: action({
-    type: 'registerPage.sendVerifyCode',
+  fetchLogin: action({
+    type: 'loginPage.fetchLogin',
     action: (params,http) => {
-      return http.post('/api/email',params)
-    },
-    handler: (state, result) => {
-      return {
-        ...state
-      }
-    }
-  },reducerHandler),
-
-  fetchRegister: action({
-    type: 'registerPage.fetchRegister',
-    action: (params,http) => {
-      return http.post('/api/user/register',params)
+      return http.post('/api/user/login',params)
     },
     handler: (state, result) => {
       const { success } = result;
@@ -54,7 +43,7 @@ export const actions = {
 
 };
 
-injectReducer({ key: 'registerPage', reducer: reducerHandler({page:{}})});
+injectReducer({ key: 'loginPage', reducer: reducerHandler({page:{}})});
 
 
 

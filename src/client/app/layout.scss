@@ -1,5 +1,13 @@
 @import './reset.scss';
+@import './toast.scss';
 
 #root {
   padding-top: 64px;
+}
+
+a{
+  cursor: pointer;
+  &:hover{
+    text-decoration: none!important;
+  }
 }

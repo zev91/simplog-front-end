@@ -30,6 +30,7 @@ function renderDom() {
   //     jssStyles.parentElement.removeChild(jssStyles);
   //   }
 
+  console.log('render')
   ReactDom.hydrate(
     <Provider store={store}>
       <StyleContext.Provider value={{ insertCss }}>

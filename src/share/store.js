@@ -1,6 +1,7 @@
 // import { createStore, applyMiddleware, compose } from 'redux';
 // import thunk from 'redux-thunk';
 require ('@babel/polyfill');
+import Cookie from 'js-cookie';
 import * as enRedux from 'utils/redux';
 const { createStore, asyncMiddleware, InjectReducerManager,locationReducer } = enRedux.default;
 import { axiosCreater } from 'utils/http/axios';
@@ -13,7 +14,7 @@ export const axios = axiosCreater({
   },
   failMiddleware: (error) => {
     if (!error.response || (error.response && error.response.status === 403)) {
-      // location.href = __BASENAME__ + 'login'
+      // location.href = '/login'
       throw new Error('没有登录')
     } else {
       throw error
@@ -25,10 +26,10 @@ export const axios = axiosCreater({
 });
 
 axios.interceptors.request.use(function (config) {
-  // if (config.url.charAt(0) !== '/') {
-  //   config.url = '/' + config.url
-  // }
-  return config
+  if(__SERVER__ !== true ){
+    config.headers['Authorization'] = Cookie.get()['token']
+  }
+    return config;
 })
 
 axios.interceptors.response.use(function (response) {

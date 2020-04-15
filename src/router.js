@@ -17,6 +17,11 @@ const routeList = [
     path: '/register',
     component: AsyncLoader(() => import('./client/pages/register/')),
     exact: true
+  },
+  {
+    path: '/login',
+    component: AsyncLoader(() => import('./client/pages/login/')),
+    exact: true
   }
 ]
 

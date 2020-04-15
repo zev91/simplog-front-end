@@ -12,13 +12,26 @@ class Index extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      hideHeader : this.hideHeader(props)
+      hideHeader : this.hideHeader(props.location)
     }
   }
 
-  hideHeader = props => {
-    const { pathname } = props.location;
+  hideHeader = location => {
+    const { pathname } = location;
     return ['/register','/login'].indexOf(pathname) > -1;
+  }
+
+  componentDidMount(){
+    console.log('this.componentDidMount')
+    this.props.history.listen(location => {
+      // 最新路由的 location 对象，可以通过比较 pathname 是否相同来判断路由的变化情况
+      if (this.props.location.pathname !== location.pathname) {
+        this.setState({
+          hideHeader : this.hideHeader(location)
+        })
+      }
+  })
+
   }
 
   render() {
