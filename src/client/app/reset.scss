@@ -65,6 +65,17 @@ select {
   font: inherit;
 }
 
+html{
+  font-family: -apple-system,system-ui,BlinkMacSystemFont,Helvetica Neue,PingFang SC,Hiragino Sans GB,Microsoft YaHei,Arial,sans-serif;
+  font-size: 16px;
+  line-height: 1.2;
+  text-rendering: optimizeLegibility;
+}
+
+body{
+  font-size: 0.875rem;
+}
+
 /* Remove all animations and transitions for people that prefer not to see them */
 @media (prefers-reduced-motion: reduce) {
   * {

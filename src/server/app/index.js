@@ -9,23 +9,28 @@ const app = express();
 const TIME_OUT = 30 * 1e3;
 
 const render = async function(req,res){
-  const data = await reactSsr(req);
-  const { html,template,context } = data;
+  global.__SERVER_TOKEN__ = req.cookies.token;
+  try{
+    const data = await reactSsr(req);
+    const { html,template,context } = data;
+    
+    let htmlStr = template.replace("<!--react-ssr-outlet-->", `<div id='root'>${html}</div><textarea id="ssrTextInitData" style="display:none;"> ${JSON.stringify(context)}</textarea>`);
   
-  let htmlStr = template.replace("<!--react-ssr-outlet-->", `<div id='root'>${html}</div><textarea id="ssrTextInitData" style="display:none;"> ${JSON.stringify(context)}</textarea>`);
-
-  res.send(htmlStr);
+    res.send(htmlStr);
+  }catch(error){
+    if(error.message === '没有登录'){
+      res.redirect(301, '/login');
+    }
+  }
+  
 }
 
 const proxyOption = {
   	target: 'http://localhost:9999',
-    changeOrigoin:true,
-    onProxyReq: function(proxyReq, req, res){
-      console.log(proxyReq.cookies,req)
-    }
-
+    changeOrigoin:true
 };
 app.use(cookieParser());
+
 app.use('/api', createProxyMiddleware(proxyOption));
 app.use(express.static('dist/static'));
 app.use(express.static('static'));

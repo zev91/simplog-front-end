@@ -33,6 +33,11 @@ module.exports = {
             options: {
               importLoaders: 2
             }
+            // include: [
+            //   resolvePath('../src'),
+            //   resolvePath('/node_modules/codemirror/lib/codemirror.css'),
+            //   resolvePath('/node_modules/codemirror/theme/material.css')
+            // ]
           },
           'postcss-loader',
           'sass-loader'
@@ -49,6 +54,10 @@ module.exports = {
             }
           }]
       },
+      {
+        test: /\.md$/,
+        use: "raw-loader"
+      }
     ]
   },
   plugins: [

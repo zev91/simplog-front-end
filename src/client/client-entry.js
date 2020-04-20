@@ -4,6 +4,8 @@ import ReactDom from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import StyleContext from 'isomorphic-style-loader/StyleContext';
 import App from './app';
+import { ThemeProvider } from '@material-ui/core/styles';
+import theme from 'src/share/theme';
 import routeList, { matchRoute } from '../router';
 import { decrypt } from '../utils/helper';
 import proConfig from '../share/pro-config';
@@ -24,22 +26,27 @@ function renderDom() {
   const store = getStore(initialData);
   //将store 放入全局，方便后期的使用
   window.__STORE__ = store;
-
-  // const jssStyles = document.querySelector('#jss-server-side');
-  //   if (jssStyles) {
-  //     jssStyles.parentElement.removeChild(jssStyles);
-  //   }
-
-  console.log('render')
-  ReactDom.hydrate(
-    <Provider store={store}>
-      <StyleContext.Provider value={{ insertCss }}>
-        <BrowserRouter>
-          <App routeList={routeList} />
-        </BrowserRouter>
-      </StyleContext.Provider>
-    </Provider>,
-    document.getElementById('root'));
+  function Main() {
+    React.useEffect(() => {
+      const jssStyles = document.querySelector('#jss-server-side');
+      if (jssStyles) {
+        jssStyles.parentElement.removeChild(jssStyles);
+      }
+    }, []);
+  
+    return (
+      <ThemeProvider theme={theme}>
+        <Provider store={store}>
+        <StyleContext.Provider value={{ insertCss }}>
+          <BrowserRouter>
+            <App routeList={routeList} />
+          </BrowserRouter>
+        </StyleContext.Provider>
+      </Provider>
+      </ThemeProvider>
+    );
+  }
+  ReactDom.hydrate(<Main/>,document.getElementById('root'));
 }
 
 if (targetRoute) {

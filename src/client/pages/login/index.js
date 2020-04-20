@@ -28,7 +28,11 @@ class Login extends React.Component {
   handleSubmit = () => {
     const { data, valid } = this.props.handleSubmit();
     if(!valid) return;
-    this.props.fetchLogin(data);
+    this.props.fetchLogin(data).then(res => {
+      if(res && res.success){
+        this.props.history.push('/')
+      }
+    });
   }
 
   render() {

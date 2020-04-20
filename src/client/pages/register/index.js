@@ -50,7 +50,6 @@ class Register extends React.Component {
     if(!validFields('email')) return;
     const email  = getFieldValues('email');
     this.props.sendVerifyCode({email}).then(res => {
-      console.log(res)
       this.startCountDown();
       this.siv = setInterval(this.startCountDown,1000);
     })

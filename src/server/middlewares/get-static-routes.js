@@ -18,7 +18,22 @@ async function getStaticRoutes() {
   const staticRoutes = [];
 
   for (; i < len; i++) {
+      // console.log(routes[i])
       let item = routes[i];
+      // const comp = (await item.component().props.load()).default;'
+      item.component().props.load().then(res => {
+        console.log({
+          path: item.path,
+          res
+        })
+      },error => {
+        console.log({
+          path: item.path,
+          error
+        })
+      })
+    
+      // console.log({name:item.path,item:item.component().props.load()})
       if (checkIsAsyncRoute(item.component)) {
           staticRoutes.push({
               ...item,

@@ -154,7 +154,6 @@ export default WrappedComponent =>
     }
 
     render() {
-      console.log(this.state.error)
       const props = {
         ...this.props,
         initState: this.initState,

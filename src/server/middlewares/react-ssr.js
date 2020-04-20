@@ -18,10 +18,15 @@ import StyleContext from 'isomorphic-style-loader/StyleContext';
 
 const assetsMap = getAssets();
 
+const shouldSsr = path => ['/login','/register'].indexOf(path) === -1;
+
 export default async (req) => {
+  
   let staticRoutes = await getStaticRoutes();
+
+  // console.log({staticRoutes})
   let targetRoute = matchRoute(req.path, staticRoutes);
-  // let serverEntry;
+  // console.log({targetRoute})
   let template;
   let fetchDataFn = targetRoute ? targetRoute.component.getInitialProps : null;
   let fetchResult = {};
@@ -31,8 +36,10 @@ export default async (req) => {
     fetchResult = await fetchDataFn({ store });
   }
 
-  for (let key in shouldSsrList) {
-    fetchResult[key] = await shouldSsrList[key].getInitialProps({ store })
+  if(shouldSsr(req.path)){
+    for (let key in shouldSsrList) {
+      fetchResult[key] = await shouldSsrList[key].getInitialProps({ store })
+    }
   }
 
   let { page } = fetchResult || {};

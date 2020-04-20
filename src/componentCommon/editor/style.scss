@@ -1,0 +1,187 @@
+
+@import './codemirror.scss';
+@import './theme.scss';
+
+.editor-header{
+  display: flex;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 0 1.4rem;
+  height: 4rem;
+  background-color: #fff;
+  border-bottom: 1px solid #ddd;
+  z-index: 100;
+
+  .editor-title{
+    margin: 0;
+    padding: 0;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #000;
+    border: none;
+    outline: none;
+  }
+}
+
+.editor-main {
+  display: flex;
+  position: absolute;
+  top: 4rem;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+
+  .editor-box{
+    display: flex;
+    flex-direction: column;
+    background-color: #f8f9fa;
+    flex: 1 1 50%;
+    height: 100%;
+    overflow-y: auto;
+
+    .raw-editor-content{
+      padding: 20px 32px;
+    }
+  }
+
+  .preview-content{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    padding: 20px 32px;
+    background-color: #fff;
+    overflow: hidden;
+    border-left: 1px solid #ddd;
+    flex: 1 1 50%;
+    height: 100%;
+    overflow-y: auto;
+    font-family: -apple-system, "PingFang SC","Helvetica Neue", "Hiragino Sans GB", "Microsoft YaHei", "Microsoft JhengHei", "Source Han Sans SC", "Noto Sans CJK SC", "Source Han Sans CN", "Noto Sans SC", "Source Han Sans TC", "Noto Sans CJK TC", "WenQuanYi Micro Hei", SimSun, sans-serif;
+    
+    code{
+      padding: .5em 1em;
+      display: block;
+      overflow-x: auto;
+      padding: 0.5em;
+      color: #383a42;
+      background: #f8f8f8;
+    }
+
+    p {
+      code{
+        margin: 1em 0px;
+      }
+    }
+  }
+
+  h1 {
+    font-size: 36px;
+  }
+  h2 {
+    font-size: 22px;
+  }
+
+  h3 {
+    font-size: 20px;
+  }
+  h4 {
+    font-size: 18px;
+  }
+
+  h5 {
+    font-size: 16px;
+  }
+
+  h6 {
+    font-size: 15px;
+  }
+
+  h1, h2,  h3,  h4,  h5, h6 {
+    margin-top: -90px;
+    padding: 100px 0 0;
+    font-weight: 400;
+  }
+
+  p {
+    margin: 0 0 20px;
+  }
+}
+.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 0.5em;
+  color: #383a42;
+  background: #f8f8f8;
+}
+
+.hljs-comment,
+.hljs-quote {
+  color: #a0a1a7;
+  font-style: italic;
+}
+
+.hljs-doctag,
+.hljs-keyword,
+.hljs-formula {
+  color: #a626a4;
+}
+
+.hljs-section,
+.hljs-name,
+.hljs-selector-tag,
+.hljs-deletion,
+.hljs-subst {
+  color: #e45649;
+}
+
+.hljs-literal {
+  color: #0184bb;
+}
+
+.hljs-string,
+.hljs-regexp,
+.hljs-addition,
+.hljs-attribute,
+.hljs-meta-string {
+  color: #50a14f;
+}
+
+.hljs-built_in,
+.hljs-class .hljs-title {
+  color: #c18401;
+}
+
+.hljs-attr,
+.hljs-variable,
+.hljs-template-variable,
+.hljs-type,
+.hljs-selector-class,
+.hljs-selector-attr,
+.hljs-selector-pseudo,
+.hljs-number {
+  color: #986801;
+}
+
+.hljs-symbol,
+.hljs-bullet,
+.hljs-link,
+.hljs-meta,
+.hljs-selector-id,
+.hljs-title {
+  color: #4078f2;
+}
+
+.hljs-emphasis {
+  font-style: italic;
+}
+
+.hljs-strong {
+  font-weight: bold;
+}
+
+.hljs-link {
+  text-decoration: underline;
+}

@@ -13,5 +13,19 @@
       width: 150px;
     }
   }
+
+  .right-tool-wrap{
+    display: flex;
+    justify-content: space-between;
+
+    & > button{
+      margin-left: 12px;
+    }
+  }
+
+  .user-avater{
+    color: #fff;
+    background-color: #673ab7
+  }
 }
 

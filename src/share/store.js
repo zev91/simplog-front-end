@@ -8,12 +8,20 @@ import { axiosCreater } from 'utils/http/axios';
 import asyncHandler from 'utils/asyncHandler';
 
 export const axios = axiosCreater({
-  baseURL: '/',
+  baseURL: __SERVER__ ? 'http://localhost:9999/' : '/',
   validateStatus: function (status) {
     return status >= 200 && status < 300
   },
+  activitySiteSuccessMiddleware : (response) => {
+    if (response.staus === 200) {
+      //to do
+    }
+    return response;
+  },
   failMiddleware: (error) => {
-    if (!error.response || (error.response && error.response.status === 403)) {
+    console.log(error.response)
+    if (!error.response || (error.response && error.response.status === 401)) {
+      // console.log(error)
       // location.href = '/login'
       throw new Error('没有登录')
     } else {
@@ -26,9 +34,7 @@ export const axios = axiosCreater({
 });
 
 axios.interceptors.request.use(function (config) {
-  if(__SERVER__ !== true ){
-    config.headers['Authorization'] = Cookie.get()['token']
-  }
+  config.headers['Authorization'] = __SERVER__ ? global.__SERVER_TOKEN__ : Cookie.get()['token'];
     return config;
 })
 

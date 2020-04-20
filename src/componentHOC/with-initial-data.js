@@ -21,11 +21,6 @@ export default SourceComponent => {
       }
     }
 
-    // static async getInitialProps({store}) {
-    //   console.log('store====>>>>',store)
-    //   return SourceComponent.getInitialProps ? await SourceComponent.getInitialProps() : {}; //服务端渲染会执行
-    // }
-
     async getInitialProps() {
       const props = this.props;
       const store = window.__STORE__;//从全局得到 store 
