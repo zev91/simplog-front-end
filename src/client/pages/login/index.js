@@ -6,7 +6,7 @@ import { Grid,  Button, Divider,Link } from '@material-ui/core';
 import withInitialData from 'src/componentHOC/with-initial-data';
 import composeHOC from 'src/utils/composeHOC';
 import createForm, { InputFormItem } from 'src/componentHOC/form-create';
-import logo from 'src/assets/logo.png'
+import logo from 'src/assets/logo.png';
 import { actions } from './redux';
 import css from './style.scss';
 

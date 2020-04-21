@@ -33,7 +33,7 @@ export default async (req) => {
   const store = getStore();
 
   if (fetchDataFn) {
-    fetchResult = await fetchDataFn({ store });
+    fetchResult = await fetchDataFn({ store,path: req.path });
   }
 
   if(shouldSsr(req.path)){

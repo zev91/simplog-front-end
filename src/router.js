@@ -28,11 +28,11 @@ const routeList = [
     component: AsyncLoader(() => import('./client/pages/post-editor/')),
     exact: true
   },
-  // {
-  //   path: '/editor/draft',
-  //   component: AsyncLoader(() => import('./client/pages/draft-editor/')),
-  //   exact: true
-  // },
+  {
+    path: '/editor/draft/:id',
+    component: AsyncLoader(() => import('./client/pages/draft-editor/')),
+    exact: true
+  },
   // {
   //   path: '/editor',
   //   component: AsyncLoader(() => import('./client/pages/draft-post/')),

@@ -9,8 +9,9 @@ import composeHOC from 'src/utils/composeHOC';
 import Editor from 'src/componentCommon/editor';
 import css from './style.scss';
 
+
 //组件
-class EditPost extends React.Component {
+class DraftPost extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -21,25 +22,24 @@ class EditPost extends React.Component {
     )
   }
 
-  static async getInitialProps({ store }) {
-    return store.dispatch(actions.getInitialData());
-  }
-
-  handlerClick = () => {
-    console.log(this.props)
+  static async getInitialProps({ store, path }) {
+    return store.dispatch(actions.getInitialData(path));
   }
 
   render() {
+
     // const { list } = this.props.initialData;
     return (
-     <Editor uploadImage = {this.props.uploadImage}/>
+      <Editor 
+        {...this.props}
+      />
     )
   }
 }
 
 
 const mapStateToProps = state => ({
-  initialData: state.editPostPage,
+  initialData: state.editorDraftPage,
 });
 
 //将获取数据的方法也做为 props传递给组件
@@ -47,10 +47,8 @@ const mapDispatchToProps = dispatch => (
   bindActionCreators({ ...actions }, dispatch)
 )
 
-EditPost.__OPEN_SSR__=false;
-
 export default composeHOC(
   withStyles(css),
   withInitialData,
   connect(mapStateToProps, mapDispatchToProps, null)
-)(EditPost); 
+)(DraftPost); 

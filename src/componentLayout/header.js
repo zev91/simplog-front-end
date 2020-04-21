@@ -46,7 +46,7 @@ class Header extends Component {
               color="secondary"
               disableElevation
               // className={classes.button}
-              onClick={() => this.props.history.push('/editor/post/33')}
+              onClick={() => this.props.history.push('/editor/draft/new')}
               startIcon={<CreateIcon />}
             >
               写文章

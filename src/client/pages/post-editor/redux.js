@@ -50,6 +50,18 @@ export const actions = {
       }
     }
   },reducerHandler),
+
+  uploadImage: action({
+    type: 'editPostPage.uploadImage',
+    action: (params,http) => {
+      return http.post('/api/upload',params)
+    },
+    handler: (state, result) => {
+      return {
+        ...state
+      }
+    }
+  },reducerHandler),
 };
 
 injectReducer({ key: 'editPostPage', reducer: reducerHandler({list:[],page:{}})});

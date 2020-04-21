@@ -21,8 +21,11 @@ export const axios = axiosCreater({
   failMiddleware: (error) => {
     console.log(error.response)
     if (!error.response || (error.response && error.response.status === 401)) {
-      // console.log(error)
-      // location.href = '/login'
+      if(__SERVER__ === false){
+      location.href = '/login'
+      }
+
+
       throw new Error('没有登录')
     } else {
       throw error

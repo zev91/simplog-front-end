@@ -1,9 +1,9 @@
-
 @import './codemirror.scss';
 @import './theme.scss';
 
-.editor-header{
+.editor-header {
   display: flex;
+  justify-content: space-between;
   align-items: center;
   position: fixed;
   top: 0;
@@ -15,7 +15,7 @@
   border-bottom: 1px solid #ddd;
   z-index: 100;
 
-  .editor-title{
+  .editor-title {
     margin: 0;
     padding: 0;
     font-size: 1.5rem;
@@ -35,33 +35,54 @@
   bottom: 0;
   overflow: hidden;
 
-  .editor-box{
+  .editor-box {
     display: flex;
     flex-direction: column;
     background-color: #f8f9fa;
     flex: 1 1 50%;
     height: 100%;
-    overflow-y: auto;
+    overflow-y: hidden;
 
-    .raw-editor-content{
+    .react-codemirror2{
+      height: calc(100% - 40px);
+      overflow: auto;
+
+      &.editor-fullscreen{
+        width: 920px;
+        margin: 0 auto;
+      }
+    }
+
+    .raw-editor-content {
+      height: calc(100% - 40px);
       padding: 20px 32px;
+      overflow-y: auto;
     }
   }
 
-  .preview-content{
+  .preview-content {
     display: flex;
     flex-direction: column;
     position: relative;
-    padding: 20px 32px;
     background-color: #fff;
     overflow: hidden;
     border-left: 1px solid #ddd;
     flex: 1 1 50%;
     height: 100%;
     overflow-y: auto;
-    font-family: -apple-system, "PingFang SC","Helvetica Neue", "Hiragino Sans GB", "Microsoft YaHei", "Microsoft JhengHei", "Source Han Sans SC", "Noto Sans CJK SC", "Source Han Sans CN", "Noto Sans SC", "Source Han Sans TC", "Noto Sans CJK TC", "WenQuanYi Micro Hei", SimSun, sans-serif;
-    
-    code{
+    font-family: -apple-system, "PingFang SC", "Helvetica Neue", "Hiragino Sans GB", "Microsoft YaHei", "Microsoft JhengHei", "Source Han Sans SC", "Noto Sans CJK SC", "Source Han Sans CN", "Noto Sans SC", "Source Han Sans TC", "Noto Sans CJK TC", "WenQuanYi Micro Hei", SimSun, sans-serif;
+
+    &.fold{
+      display: none;
+    }
+
+    .preview-content-html {
+      padding: 20px 32px;
+      height: calc(100% - 40px);
+      overflow: auto;
+    }
+
+    code {
       padding: .5em 1em;
       display: block;
       overflow-x: auto;
@@ -71,44 +92,92 @@
     }
 
     p {
-      code{
+      code {
         margin: 1em 0px;
       }
     }
+
+
+    h1 {
+      font-size: 36px;
+    }
+
+    h2 {
+      font-size: 22px;
+    }
+
+    h3 {
+      font-size: 20px;
+    }
+
+    h4 {
+      font-size: 18px;
+    }
+
+    h5 {
+      font-size: 16px;
+    }
+
+    h6 {
+      font-size: 15px;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      margin-top: -90px;
+      padding: 100px 0 0;
+      font-weight: 400;
+    }
+
+    p {
+      margin: 0 0 20px;
+    }
   }
 
-  h1 {
-    font-size: 36px;
-  }
-  h2 {
-    font-size: 22px;
+  .bottom-tool-bar{
+    display: flex;
+    justify-content: space-between;
+    line-height: 40px;
+    height: 40px;
+    padding: 0 8px;
+    background: #fff;
+    border-top: 1px solid #ddd;
+
+    .MuiIconButton-root{
+      color: #aaa;
+      padding: 8px;
+    }
+
+    .upload-content{
+      input{
+        display: none;
+      }
+    }
+
+
+    &.toRight{
+      .fullscreen{
+        transform: rotate(90deg);
+      }
+    }
+
+    &.toLeft{
+      .fullscreen{
+        transform: rotate(-90deg);
+      }
+    }
+
+    &.preview-tool-bar{
+      color: #ddd;
+    }
   }
 
-  h3 {
-    font-size: 20px;
-  }
-  h4 {
-    font-size: 18px;
-  }
-
-  h5 {
-    font-size: 16px;
-  }
-
-  h6 {
-    font-size: 15px;
-  }
-
-  h1, h2,  h3,  h4,  h5, h6 {
-    margin-top: -90px;
-    padding: 100px 0 0;
-    font-weight: 400;
-  }
-
-  p {
-    margin: 0 0 20px;
-  }
 }
+
 .hljs {
   display: block;
   overflow-x: auto;

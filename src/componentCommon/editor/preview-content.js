@@ -15,10 +15,9 @@ export default class PreviewContent extends Component {
   constructor(props){
     super(props);
     this.state = {
-      doms: null
+      doms: marked(props.code, { breaks: true })
     }
     this.debounceGetContent = debounce(this.onContentChange,200);
-    this.debounceGetContent();
   }
   
   componentWillReceiveProps(nextProps){
@@ -27,19 +26,25 @@ export default class PreviewContent extends Component {
 
   onContentChange = () => {
     const { code } = this.props;
-    console.log({code})
     this.setState({
       doms: marked(code, { breaks: true })
     })
   }
   render(){
-    const { getPreviewRef } = this.props;
+    const { getPreviewRef, className, code} = this.props;
     const { doms } = this.state;
-    console.log(doms)
+
+    console.log(code)
 
     return (
-      <div className='preview-content' ref={getPreviewRef}>
-        <div dangerouslySetInnerHTML={{ __html: doms }} />
+      <div className={`preview-content ${className}`} ref={getPreviewRef}>
+        <div className='preview-content-html'>
+          <div dangerouslySetInnerHTML={{ __html: doms }} />
+        </div>
+        <div className='bottom-tool-bar preview-tool-bar'>
+            <div>预览</div>
+            <div>{code ? code.length : 0}字</div>
+          </div>
       </div>
     )
   }
