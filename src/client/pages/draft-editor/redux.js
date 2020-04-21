@@ -5,27 +5,31 @@ const reducerHandler = createReducer();
 export const actions = {
   getInitialData: action({
     type: 'editorDraftPage.getInitialData',
-    action: async (path,http,dispatch) => {
+    action: async (http,dispatch) => {
+      const path = __SERVER__ ? global.REQUEST_PATH : location.pathname;
       const urlInfo = path.split('/');
-      const res = await dispatch(actions.getPost(urlInfo[urlInfo.length-1]));
+      const postId = urlInfo[urlInfo.length-1];
+
+      const res = postId === 'new' ? {data:{post:{}}} : await dispatch(actions.getPost(postId));
       const page = await dispatch(actions.getPage());
-      console.log({res,page})
+
       return ({
         post: res.data.post,
         page
       })
     },
     handler: (state, result) => {
+      console.log({result})
       return {
         ...state,
-       ...result
+        ...result
       }
     }
   },reducerHandler),
 
   getPost: action({
-    type: 'editorDraftPage.getData',
-    action: (id,http,dispatch,getstate) => {
+    type: 'editorDraftPage.getPost',
+    action: (id,http) => {
       return http.get(`/api/getEditPost/${id}`)
     },
     handler: (state, result) => {

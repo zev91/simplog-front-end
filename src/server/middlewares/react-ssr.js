@@ -23,17 +23,14 @@ const shouldSsr = path => ['/login','/register'].indexOf(path) === -1;
 export default async (req) => {
   
   let staticRoutes = await getStaticRoutes();
-
-  // console.log({staticRoutes})
   let targetRoute = matchRoute(req.path, staticRoutes);
-  // console.log({targetRoute})
   let template;
   let fetchDataFn = targetRoute ? targetRoute.component.getInitialProps : null;
   let fetchResult = {};
   const store = getStore();
 
   if (fetchDataFn) {
-    fetchResult = await fetchDataFn({ store,path: req.path });
+    fetchResult = await fetchDataFn({ store });
   }
 
   if(shouldSsr(req.path)){

@@ -1,0 +1,39 @@
+.notfound-page-wrap{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  & > div{
+    display: flex;
+  }
+ 
+
+  .text-content{
+    max-width: 387px;
+    padding-left: 32px;
+
+    header{
+      margin-bottom: 32px;
+      line-height: 1;
+      font-size: 120px;
+      font-weight: 500;
+    }
+
+    .second-header{
+      font-size: 32px;
+      
+      .chinese-text{
+        font-weight: 500;
+      }
+
+    }
+    .tips{
+      margin-bottom: 12px;
+      font-size: 16px;
+    }
+  }
+}

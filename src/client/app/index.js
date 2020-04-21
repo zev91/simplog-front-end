@@ -9,7 +9,7 @@ import withStyles from 'isomorphic-style-loader/withStyles';
 
 import css from './layout.scss';
 
-const noHeaderList = ['/register', '/login', '/editor/post/:id', '/editor/draft/:id']
+const noHeaderList = ['/register', '/login', '/editor/post/:id', '/editor/draft/:id','/404']
 
 function App({ routeList, history }) {
   const [count, setCount] = useState(0);

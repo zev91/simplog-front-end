@@ -4,8 +4,8 @@ import AsyncLoader from 'src/componentHOC/async-loader';
 
 const routeList = [
   {
-    path: '/',
-    component: AsyncLoader(() => import('./client/pages/home/')),
+    path: '/404',
+    component: AsyncLoader(() => import('./client/pages/404/')),
     exact: true
   },
   {

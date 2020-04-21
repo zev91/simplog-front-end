@@ -23,7 +23,7 @@ export default SourceComponent => {
 
     async getInitialProps() {
       const props = this.props;
-      const store = window.__STORE__;//从全局得到 store 
+      // const store = window.__STORE__;//从全局得到 store 
 
       const initialData = props.getInitialData ? await props.getInitialData(): (
         SourceComponent.getInitialProps ? await SourceComponent.getInitialProps() : {}

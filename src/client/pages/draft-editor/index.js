@@ -22,8 +22,8 @@ class DraftPost extends React.Component {
     )
   }
 
-  static async getInitialProps({ store, path }) {
-    return store.dispatch(actions.getInitialData(path));
+  static async getInitialProps({ store }) {
+    return store.dispatch(actions.getInitialData());
   }
 
   render() {
