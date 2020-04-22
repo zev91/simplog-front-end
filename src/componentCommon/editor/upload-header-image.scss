@@ -1,0 +1,47 @@
+.MuiPopover-paper{
+  padding: 24px;
+
+  .title{
+    font-size: 18px;
+    font-weight: 700;
+    color: hsla(218,9%,51%,.8);
+    margin-bottom: 14px;
+  }
+
+  .upload-content{
+    & > .image-content {
+      position: relative;
+      & > .delete-header-image{
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        color: #fff;
+        background: rgba(0,0,0,.5);
+
+        &:hover{
+          background: rgba(0,0,0,1);
+        }
+      }
+      & > img{
+        width: 240px!important;
+        display: block;
+      }
+    }
+  }
+
+  #upload-header-image{
+    display: none;
+  }
+}
+.MuiButtonBase-root{
+ 
+  &.upload-header-btn{
+    width: 240px;
+    padding: 48px 20px;
+
+    color: rgba(51,51,51,.4);
+    font-size: 16px;
+    background-color: hsla(0,0%,87%,.6);
+  }
+}
+

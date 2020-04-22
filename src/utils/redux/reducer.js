@@ -1,6 +1,9 @@
 import { combineReducers } from 'redux';
 import * as loca from './location';
-import { set, has } from 'lodash';
+
+// import { set, has } from 'lodash';
+const set = require('lodash.set');
+const has = require('lodash.has');
 const combine = combineReducers;
 
 export let initReducers = {

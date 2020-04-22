@@ -9,7 +9,6 @@ import composeHOC from 'src/utils/composeHOC';
 import Editor from 'src/componentCommon/editor';
 import css from './style.scss';
 
-
 //组件
 class DraftPost extends React.Component {
   constructor(props) {
@@ -36,7 +35,6 @@ class DraftPost extends React.Component {
     )
   }
 }
-
 
 const mapStateToProps = state => ({
   initialData: state.editorDraftPage,

@@ -7,6 +7,7 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const baseCongig = require('./webpack.config.base');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 const resolvePath = (pathstr) => path.resolve(__dirname, pathstr);
 process.env.BABEL_ENV = 'development';//指定 babel 编译环境
@@ -55,7 +56,21 @@ module.exports = merge(baseCongig,{
       'process.env': { NODE_ENV: '"production"'},
       '__IS_PROD__': true,
       '__SERVER__': false
-    })
+    }),
+    new BundleAnalyzerPlugin(
+      {
+        analyzerMode: 'server',
+        analyzerHost: '127.0.0.1',
+        analyzerPort: 8888,
+        reportFilename: 'report.html',
+        defaultSizes: 'parsed',
+        openAnalyzer: true,
+        generateStatsFile: false,
+        statsFilename: 'stats.json',
+        statsOptions: null,
+        logLevel: 'info'
+      }
+  )
   ],
 
   optimization: {

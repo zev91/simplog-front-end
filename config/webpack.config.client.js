@@ -33,8 +33,7 @@ module.exports = merge(baseCongig, {
       'process.env': { NODE_ENV: '"development"' },
       '__IS_PROD__': false,
       '__SERVER__': false
-    }),
-  ],
+    })],
   optimization: {
     splitChunks: {
       cacheGroups: {

@@ -84,7 +84,19 @@ export const actions = {
   uploadImage: action({
     type: 'editorDraftPage.uploadImage',
     action: (params,http) => {
-      return http.post('/api/upload',params)
+      return http.post('/api/upload/post',params)
+    },
+    handler: (state, result) => {
+      return {
+        ...state
+      }
+    }
+  },reducerHandler),
+
+  uploadHeaderImage: action({
+    type: 'editorDraftPage.uploadHeaderImage',
+    action: (params,http) => {
+      return http.post('/api/upload/header',params)
     },
     handler: (state, result) => {
       return {

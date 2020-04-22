@@ -35,9 +35,6 @@ export default class PreviewContent extends Component {
   render(){
     const { getPreviewRef, className, code} = this.props;
     const { doms } = this.state;
-
-    console.log(code)
-
     return (
       <div className={`preview-content ${className}`} ref={getPreviewRef}>
         <div className='preview-content-html'>

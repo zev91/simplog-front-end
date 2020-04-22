@@ -20,15 +20,18 @@ const render = async function(req,res){
     res.send(htmlStr);
   }catch(error){
     if(error.message === '没有登录'){
-      res.redirect(301, '/login');
+      res.redirect(302, '/login');
+    }
+    if(error.message === '页面不存在'){
+      res.redirect(302, '/404');
     }
   }
   
 }
 
 const proxyOption = {
-  	target: 'http://localhost:9999',
-    changeOrigoin:true
+  target: 'http://localhost:9999',
+  changeOrigoin:true
 };
 app.use(cookieParser());
 

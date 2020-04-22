@@ -13,21 +13,42 @@ export const axios = axiosCreater({
     return status >= 200 && status < 300
   },
   activitySiteSuccessMiddleware: (response) => {
+  
     if (response.staus === 200) {
       //to do
     }
     return response;
   },
   failMiddleware: (error) => {
+    // console.log('error.response====>>>',error.response.status);
 
-    if (!error.response || (error.response && error.response.status === 401)) {
-      if (__SERVER__ === false) {
-        location.href = '/login'
-      }
-      throw new Error('没有登录')
-    } else {
-      throw error
+
+
+    if(!error.response ){
+      throw new Error('没有登录');
     }
+    if(error.response){
+      if(error.response.status === 401){
+        if (__SERVER__ === false) {
+          location.href = '/login'
+        }
+        throw new Error('没有登录')
+      }
+
+      if(error.response.status === 404){
+        throw new Error('页面不存在')
+      }
+    }
+    throw error
+
+    // if (!error.response || (error.response && error.response.status === 401)) {
+    //   if (__SERVER__ === false) {
+    //     location.href = '/login'
+    //   }
+    //   throw new Error('没有登录')
+    // } else {
+    //   throw error
+    // }
   },
   headers: {
     'Content-Type': 'application/json'
