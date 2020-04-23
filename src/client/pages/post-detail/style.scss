@@ -3,6 +3,18 @@
 @import 'src/componentCommon/editor/hljs.scss';
 @import 'src/componentCommon/editor/preview-content.scss';
 
+#root{
+  padding: 0;
+}
+
+.app-header {
+  opacity: 0!important;
+  transition: opacity 600ms;
+  &.header-visible{
+    opacity: .8!important;
+  }
+}
+
 .post-detail-header{
   background-attachment: scroll;
   height: 300px;

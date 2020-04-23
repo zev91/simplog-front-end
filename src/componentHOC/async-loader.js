@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import Backdrop from '@material-ui/core/Backdrop';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import proConfig from 'src/share/pro-config';
 
 class AsyncLoader extends Component {
@@ -30,7 +32,12 @@ class AsyncLoader extends Component {
   }
 
   render() {
-    return this.state.COMPT ? this.props.children(this.state.COMPT) : <span>正在加载......</span>;
+    return this.state.COMPT ? this.props.children(this.state.COMPT) : (
+      <Backdrop open={true} className='async-loading'>
+        <CircularProgress color="secondary" />
+        <span className='loading-tips'>模块加载中...</span>
+      </Backdrop>
+    );
   }
 }
 

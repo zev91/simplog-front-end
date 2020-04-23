@@ -11,10 +11,10 @@ class Index extends Component {
 
   render() {
     return (
-      <div>
-          <Header />
-          <div>{this.props.children}</div>
-      </div>
+      [
+      <Header />,
+      <div>{this.props.children}</div>
+      ]
     )
   }
 }

@@ -16,7 +16,11 @@ class List extends React.Component {
 
   static state() {
     return (
-      { list: [], page: {} }
+      { postData:{
+        datas:[],
+        page:{}
+      }, 
+      page: {} }
     )
   }
 
@@ -28,25 +32,27 @@ class List extends React.Component {
     console.log(this.props)
   }
 
-  render() {
-    const { list } = this.props.initialData;
+  toDetail = id => {
+    this.props.history.push('/post/'+id);
+    console.log(id,this.props)
+  }
 
+  render() {
+    const { postData } = this.props.initialData;
+    console.log(postData)
     return (
       <div>
         <Button color="primary" variant="contained" onClick={this.handlerClick}>加载</Button>
-        {!list.length ?
+        {!postData || !postData.datas || !postData.datas.length ?
           '暂无数据'
           :
-          <ul className='user-list'>{list.map(((item, idx) => {
-            return (
-              <li key={idx}>
-                user: {item.user}
-                city: {item.city}
-                groupName: {item.groupName}
-                intention: {item.intention}
-                date: {item.date}
-              </li>
-            )
+          <ul className='user-list'>
+            {postData.datas.map(((item, idx) => {
+              return (
+                <li key={item.postId} onClick={this.toDetail.bind(this,item._id)}>
+                  {item.title}
+                </li>
+              )
           }))}</ul>
         }
       </div>

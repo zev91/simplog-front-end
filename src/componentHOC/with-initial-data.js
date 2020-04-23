@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { decrypt } from 'src/utils/helper';
 import Tdk from 'src/componentCommon/tdk';
+import Backdrop from '@material-ui/core/Backdrop';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 let _this = null;
 
@@ -19,6 +21,10 @@ export default SourceComponent => {
         initialData: {},
         canClientFetch: false //浏览器端是否需要请求数据
       }
+    }
+
+    static async getInitialProps(props){
+        return SourceComponent.getInitialProps ? await SourceComponent.getInitialProps(props):{};
     }
 
     async getInitialProps() {
@@ -41,11 +47,18 @@ export default SourceComponent => {
       const canClientFetch = this.props.history && this.props.history.action === 'PUSH';//路由跳转的时候可以异步请求数据
       if (canClientFetch) {
         //如果是 history PUSH 操作 则更新数据
-        await this.getInitialProps();
+        try{
+          this.setState({loading:true});
+          await this.getInitialProps();
+        }finally{
+          this.setState({loading:false});
+        }
+        
       }
     }
 
     render() {
+      const { loading } =this.state;
       const props = {
         initialData: {},
         ...this.props
@@ -63,6 +76,12 @@ export default SourceComponent => {
         props.initialData = SourceComponent.state();
       }
       return (
+        loading ?
+        <Backdrop className='async-loading' open={true} >
+          <CircularProgress color="primary" />
+          <span className='loading-tips'>数据加载中...</span>
+        </Backdrop>
+        :
         <div>
           <Tdk {...props.initialData.page.tdk} />
           <SourceComponent  {...props}></SourceComponent>

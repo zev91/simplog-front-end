@@ -23,6 +23,9 @@ export default class PreviewContent extends Component {
   componentWillReceiveProps(nextProps){
     this.debounceGetContent();
   }
+  componentWillUnmount(){
+    this.debounceGetContent = null;
+  }
 
   onContentChange = () => {
     const { code } = this.props;

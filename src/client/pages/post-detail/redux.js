@@ -52,7 +52,17 @@ export const actions = {
 
 };
 
-injectReducer({ key: 'postDetailPage', reducer: reducerHandler({data:{},page:{}})});
+const inintState = {
+  data:{
+    post: {
+      body:'',
+      headerBg:'',
+      tags:[]
+    }
+  },
+  page:{}
+}
+injectReducer({ key: 'postDetailPage', reducer: reducerHandler(inintState)});
 
 
 

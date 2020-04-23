@@ -30,7 +30,11 @@ class Header extends Component {
       Toast.error('请先登录！')
       this.props.history.push('/login');
     }
+  }
 
+  goToHomePage = () => {
+    this.props.history.push('/list');
+    // console.log(this.props)
   }
 
   render() {
@@ -38,7 +42,7 @@ class Header extends Component {
     return (
       <AppBar className="app-header">
         <Toolbar className='tool-bar'>
-          <Typography variant="h6" className='logo-wrap'>
+          <Typography variant="h6" className='logo-wrap' onClick={this.goToHomePage}>
             <img src={logo} />
           </Typography>
 

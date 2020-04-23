@@ -3,10 +3,10 @@ const { action, createReducer, injectReducer } = enRedux.default;
 
 const reducerHandler = createReducer();
 export const actions = {
-  getList: action({
-    type: 'listPage.getList',
+  getPosts: action({
+    type: 'listPage.getPosts',
     action: (http,dispatch,getstate) => {
-      return http.get('https://www.fastmock.site/mock/b6100fac0c7cd8fd548cee0fa0035255/crm/todo-list')
+      return http.get('/api/posts')
     },
     handler: (state, result) => {
       return {
@@ -35,23 +35,23 @@ export const actions = {
     type: 'listPage.getInitialData',
     action: async (http,dispatch) => {
 
-      const res = await dispatch(actions.getList());
+      const res = await dispatch(actions.getPosts());
       const page = await dispatch(actions.getPage());
       return ({
-        list: res.data,
+        postData: res.data,
         page
       })
     },
     handler: (state, result) => {
+      console.log({result})
       return {
         ...state,
-        list: result.list,
-        page: result.page
+        ...result
       }
     }
   },reducerHandler),
 };
 
-injectReducer({ key: 'listPage', reducer: reducerHandler({list:[],page:{}})});
+injectReducer({ key: 'listPage', reducer: reducerHandler({postData:{datas:[],page:{}},page:{}})});
 
 

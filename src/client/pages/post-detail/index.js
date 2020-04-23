@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { createRef } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { actions } from './redux';
@@ -25,9 +25,7 @@ marked.setOptions({
 class PostDetail extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      doms: marked(props.post.body, { breaks: true })
-    }
+    this.headerRef = createRef();
   }
 
   static state() {
@@ -35,17 +33,38 @@ class PostDetail extends React.Component {
       { page: {} }
     )
   }
+  
 
   static async getInitialProps({ store }) {
     return store.dispatch(actions.getInitialData());
   }
 
+  onScoll = () => {
+    const appHeader = document.getElementsByClassName('app-header')[0];
+    const height = this.headerRef.current.getBoundingClientRect().height;
+    const scrollTop = document.documentElement.scrollTop;
+
+    if(scrollTop > height){
+      appHeader.classList.add('header-visible');
+    }else{
+      appHeader.classList.remove('header-visible');
+    }
+  }
+
+  componentDidMount(){
+    window.addEventListener('scroll',this.onScoll.bind(this));
+  }
+  componentWillUnmount(){
+    document.getElementsByClassName('app-header')[0].classList.remove('header-visible');
+    window.removeEventListener('scroll',this.onScoll.bind(this));
+  }
+
   render() {
     const { post } =this.props;
-    const { doms } = this.state;
     return (
       [
         <div 
+          ref={this.headerRef}
           className='post-detail-header' 
           style={{
             background: `#808080 url(${post.headerBg+'?x-oss-process=style/post-header-bg'}) center no-repeat`,
@@ -62,20 +81,18 @@ class PostDetail extends React.Component {
 
               <div className='post-tags'>
                 {
-                  post.tags.map(tag => <span key={tag} className='tag-item'>{tag}</span>)
+                  post.tags.map((tag,idx) => <span key={tag+idx} className='tag-item'>{tag}</span>)
                 }
               </div>
             </div>
           </div>
         </div>,
-        // <img src={post.headerBg+'?x-oss-process=style/post-header-bg'}/>,
         <div className='preview-content post-detail'>
           <div className='preview-content-html'>
-            <div dangerouslySetInnerHTML={{ __html: doms }} />
+            <div dangerouslySetInnerHTML={{ __html: marked(post.body, { breaks: true }) }} />
           </div>
         </div>
       ]
-
     )
   }
 }
