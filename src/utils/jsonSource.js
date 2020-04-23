@@ -1,0 +1,1 @@
+export const postCategorys = ['前端','后端','Android','iOS','人工智能','阅读','大数据','UI','产品'];

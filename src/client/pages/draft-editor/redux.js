@@ -11,10 +11,20 @@ export const actions = {
       const postId = urlInfo[urlInfo.length-1];
 
       const res = postId === 'new' ? {data:{post:{}}} : await dispatch(actions.getPost(postId));
-      const page = await dispatch(actions.getPage());
+      const page = {
+        tdk: {
+          title: '',
+          keywords: '',
+          description: ''
+        }
+      }
+
+      const post = res.data.post;
+
+      page.tdk.title = '草稿-'+ (post.title || '');
 
       return ({
-        post: res.data.post,
+        post,
         page
       })
     },
@@ -32,22 +42,6 @@ export const actions = {
     action: (id,http) => {
       return http.get(`/api/getEditPost/${id}`)
     },
-    handler: (state, result) => {
-      return {
-        ...state
-      }
-    }
-  },reducerHandler),
-
-  getPage: action({
-    type: 'editorDraftPage.getPage',
-    action: () => ({
-      tdk: {
-        title: '草稿',
-        keywords: '前端技术江湖 草稿',
-        description: '前端技术江湖'
-      }
-    }),
     handler: (state, result) => {
       return {
         ...state
@@ -73,6 +67,20 @@ export const actions = {
       const { id } = params;
       delete params.id;
       return http.put(`/api/posts/${id}`,params)
+    },
+    handler: (state, result) => {
+      return {
+        ...state
+      }
+    }
+  },reducerHandler),
+
+  publishPost: action({
+    type: 'editorDraftPage.publishPost',
+    action: (params,http) => {
+      const { id } = params;
+      delete params.id;
+      return http.post(`/api/publishPost/${id}`,params)
     },
     handler: (state, result) => {
       return {

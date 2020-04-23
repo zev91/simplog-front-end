@@ -4,6 +4,8 @@ import { IconButton, Button, Popover, ButtonBase, Input, Chip, Divider } from '@
 import ArrowDropDown from '@material-ui/icons/ArrowDropDown';
 import ArrowDropUp from '@material-ui/icons/ArrowDropUp';
 import PopupState, { bindTrigger, bindPopover } from 'material-ui-popup-state';
+import Toast from 'src/componentCommon/toast'
+import { postCategorys } from 'utils/jsonSource';
 import css from './publish-post.scss';
 
 class PublishPost extends Component {
@@ -11,36 +13,55 @@ class PublishPost extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      tags: []
+      tagInputValue:'',
+      pubText : props.published ? '更新' : '发布'
     }
     this.tagInput = createRef();
   }
   handleDelete = deleTag => {
-    const { tags } =this.state;
-    this.setState({
-      tags: tags.filter(tag => tag !== deleTag)
-    })
+    const { tags } = this.props;
+    this.props.updatePostAndCb({tags: tags.filter(tag => tag !== deleTag)});
   }
+
   handlerAddTag = e => {
     if(e.nativeEvent.keyCode === 13){ //e.nativeEvent获取原生的事件对像
-      const { tags, tagInputValue } =this.state;
-      this.setState({
-        tags: Array.from(new Set([...tags,tagInputValue]))
-      },() => {
-          this.setState({
-            tagInputValue:''
-          })
-      })
-   }
+      const { tagInputValue } =this.state;
+      const { tags } =this.props;
+
+      this.props.updatePostAndCb({tags: Array.from(new Set([...tags,tagInputValue]))});
+      this.setState({tagInputValue:''});
+    }
+  }
+
+  selectCategory = category => {
+    this.props.updatePostAndCb({category});
+  }
+
+  submitPublish = () => {
+    const { tags, category } = this.props;
+    if(!category){
+      Toast.error('请选择文章分类！');
+      return;
+    }
+
+    if(!tags.length){
+      Toast.error('请至少添加一个标签！');
+      return;
+    }
+    this.props.publishPost();
+
+
+    console.log({tags, category})
   }
   render() {
-    const { tags, tagInputValue } = this.state;
-    console.log(tags)
+    const { tagInputValue, pubText } = this.state;
+    const { tags, category, saving, published } = this.props;
+
     return (
       <PopupState variant="popover" popupId="publish-post-img-popup-popover">
         {(popupState) => (
           <div className='publish-post-content'>
-            <Button className='publish-post-op-btn' color="primary" endIcon={popupState.isOpen ? <ArrowDropUp /> : <ArrowDropDown />} {...bindTrigger(popupState)}>发布</Button>
+            <Button className='publish-post-op-btn' color="primary" endIcon={popupState.isOpen ? <ArrowDropUp /> : <ArrowDropDown />} {...bindTrigger(popupState)}>{pubText}</Button>
             <Popover
               {...bindPopover(popupState)}
               anchorOrigin={{
@@ -53,11 +74,24 @@ class PublishPost extends Component {
               }}
             >
               <div className='public-content'>
-                <div className='title'>发布文章</div>
-                <div className='tags-wrap'>
+                <div className='title'>{pubText}文章</div>
+                <div className='category-wrap content-wraps'>
+                  <header>分类</header>
+                  <div className='category-btn-wrap'>
+                    {
+                      postCategorys.map(postCategory => (
+                        <Button key={postCategory} variant='outlined' color={category === postCategory ? 'primary' : 'default'} size="small" onClick={this.selectCategory.bind(this,postCategory)}>
+                        {postCategory}
+                      </Button>
+                      ))
+                    }
+                  </div>
+                </div>
+                <div className='tags-wrap content-wraps'>
                   <header>标签</header>
                   <Input 
                     ref={this.tagInput}
+                    size='small'
                     placeholder='输入内容 按下回车以添加标签' 
                     fullWidth  
                     disabled={tags && tags.length >=10}
@@ -72,18 +106,13 @@ class PublishPost extends Component {
                     {
                       tags.map(tag => <Chip key={tag} label={tag} variant="outlined" onDelete={this.handleDelete.bind(this,tag)} color="primary" />)
                     }
-                   
-                  </div>
-
-                  <Divider />
-                  
-                  <div className='post-submit-content'>
-                    <Button variant="contained" color="primary" disableElevation>
-                      确定并发布
-                    </Button>
                   </div>
                 </div>
-
+                <div className='post-submit-content'>
+                <Button  disabled={saving} variant="contained" color="primary" disableElevation onClick={this.submitPublish}>
+                  确定并{pubText}
+                </Button>
+              </div>
               </div>
             </Popover>
           </div>

@@ -1,6 +1,7 @@
 @import './codemirror.scss';
 @import './theme.scss';
 @import './hljs.scss';
+@import './preview-content.scss';
 
 .editor-header {
   display: flex;
@@ -80,83 +81,7 @@
     }
   }
 
-  .preview-content {
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    background-color: #fff;
-    overflow: hidden;
-    border-left: 1px solid #ddd;
-    flex: 1 1 50%;
-    height: 100%;
-    overflow-y: auto;
-    font-family: -apple-system, "PingFang SC", "Helvetica Neue", "Hiragino Sans GB", "Microsoft YaHei", "Microsoft JhengHei", "Source Han Sans SC", "Noto Sans CJK SC", "Source Han Sans CN", "Noto Sans SC", "Source Han Sans TC", "Noto Sans CJK TC", "WenQuanYi Micro Hei", SimSun, sans-serif;
-
-    &.fold{
-      display: none;
-    }
-
-    .preview-content-html {
-      padding: 20px 32px;
-      height: calc(100% - 40px);
-      overflow: auto;
-    }
-
-    code {
-      padding: .5em 1em;
-      display: block;
-      overflow-x: auto;
-      padding: 0.5em;
-      color: #383a42;
-      background: #f8f8f8;
-    }
-
-    p {
-      code {
-        margin: 1em 0px;
-      }
-    }
-
-
-    h1 {
-      font-size: 36px;
-    }
-
-    h2 {
-      font-size: 22px;
-    }
-
-    h3 {
-      font-size: 20px;
-    }
-
-    h4 {
-      font-size: 18px;
-    }
-
-    h5 {
-      font-size: 16px;
-    }
-
-    h6 {
-      font-size: 15px;
-    }
-
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-      margin-top: -90px;
-      padding: 100px 0 0;
-      font-weight: 400;
-    }
-
-    p {
-      margin: 0 0 20px;
-    }
-  }
+  
 
   .bottom-tool-bar{
     display: flex;

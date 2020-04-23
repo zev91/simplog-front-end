@@ -1,12 +1,12 @@
 import React, { Component, createRef } from 'react';
 import withStyles from 'isomorphic-style-loader/withStyles';
 import PreviewContent from './preview-content';
-import { IconButton, Button } from '@material-ui/core';
+import { IconButton, Button, Avatar } from '@material-ui/core';
 import ImageIcon from '@material-ui/icons/Image';
 import PublishIcon from '@material-ui/icons/Publish';
 import { debounce } from 'src/utils/helper';
-import  UploadHeaderImage from './upload-header-image';
-import  PublishPost from './publish-post';
+import UploadHeaderImage from './upload-header-image';
+import PublishPost from './publish-post';
 import css from './style.scss';
 import Toast from 'src/componentCommon/toast'
 
@@ -27,7 +27,9 @@ class Editor extends Component {
       saveTips: '文章将会被保存至',
       title: props.initialData.post.title,
       headerBg: props.initialData.post.headerBg,
-      code: props.initialData.post.body
+      code: props.initialData.post.body,
+      tags: props.initialData.post.tags,
+      category: props.initialData.post.category
     };
   }
 
@@ -80,20 +82,25 @@ class Editor extends Component {
   }
 
   handlerTitleChange = e => {
+    document.title = `${this.props.published ? '写文章' : '草稿' }-${e.target.value}`;
     this.setState({ title: e.target.value })
     this.debounceSavePost();
   }
 
-uploadHeaderImageCb = url => { //上传文章头部大图回调
-  this.setState({
-    headerBg: url
-  },this.handlerSavePost);
-}
+  uploadHeaderImageCb = url => { //上传文章头部大图回调
+    this.setState({
+      headerBg: url
+    }, this.handlerSavePost);
+  }
+
+  updatePostAndCb = state => { //更新文章回调
+    this.setState(state, this.handlerSavePost);
+  }
 
   handlerSavePost = async () => {
     try {
       const { match, history } = this.props;
-      const { title, code, headerBg } = this.state;
+      const { title, code, headerBg, tags, category } = this.state;
       this.setState({
         saving: true,
         saveTips: '已保存至'
@@ -101,22 +108,35 @@ uploadHeaderImageCb = url => { //上传文章头部大图回调
 
       if (match.params.id === 'new') {
         const status = 'DRAFT';
-        const res = await this.props.createPost({ title, body: code, headerBg, status });
+        const res = await this.props.createPost({ title, body: code, headerBg, status, tags, category });
         if (res && res.success) {
           history.replace({ pathname: `/editor/draft/${res.data.id}` })
         }
         return;
       }
 
-      await this.props.updatePost({ id: match.params.id, title, body: code, headerBg });
+      await this.props.updatePost({ id: match.params.id, title, body: code, headerBg, tags, category });
     } finally {
       setTimeout(() => this.setState({ saving: false }), 500); //防止提示过快
     }
+  }
 
+  publishPost = async () => {
+    try {
+      const { match, history } = this.props;
+      const { title, code, headerBg, tags, category } = this.state;
+
+      const res = await this.props.publishPost({ id: match.params.id, title, body: code, headerBg, tags, category });
+      Toast.success(res.data.message);
+      history.push('/post/'+match.params.id)
+    }catch(error){
+      Toast.error(res.message);
+    } 
   }
 
   render() {
-    const { fold, code, title, preContent, saving, saveTips, headerBg } = this.state;
+    const { fold, code, title, preContent, saving, saveTips, headerBg, tags, category } = this.state;
+    const { userInfo } =this.props;
     return [
       <header key='header' className='editor-header'>
         <input
@@ -132,13 +152,21 @@ uploadHeaderImageCb = url => { //上传文章头部大图回调
             {saving ? '保存中...' : <div>{saveTips} <Button size="small" variant="outlined">草稿</Button></div>}
           </div>
 
-          <UploadHeaderImage 
+          <UploadHeaderImage
             headerBg={headerBg}
             uploadHeaderImage={this.props.uploadHeaderImage}
-            uploadHeaderImageCb={this.uploadHeaderImageCb}
+            updatePostAndCb={this.updatePostAndCb}
           />
 
-          <PublishPost/>
+          <PublishPost
+            tags={tags || []}
+            saving={saving}
+            category={category || ''}
+            updatePostAndCb={this.updatePostAndCb}
+            publishPost={this.publishPost}
+            published={this.props.published}
+          />
+          <Avatar className='user-avater'>{userInfo.username[0]}</Avatar>
 
         </div>
       </header>,
@@ -187,12 +215,4 @@ uploadHeaderImageCb = url => { //上传文章头部大图回调
   }
 }
 
-export default withStyles(css)(Editor)
-
-
-
-
-
-
-
-
+export default withStyles(css)(Editor);

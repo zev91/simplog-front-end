@@ -10,14 +10,14 @@ import Editor from 'src/componentCommon/editor';
 import css from './style.scss';
 
 //组件
-class EditPost extends React.Component {
+class EditorPost extends React.Component {
   constructor(props) {
     super(props);
   }
 
   static state() {
     return (
-      { list: [], page: {} }
+      { page: {} }
     )
   }
 
@@ -25,18 +25,16 @@ class EditPost extends React.Component {
     return store.dispatch(actions.getInitialData());
   }
 
-  handlerClick = () => {
-    console.log(this.props)
-  }
-
   render() {
-    // const { list } = this.props.initialData;
+
     return (
-     <Editor uploadImage = {this.props.uploadImage}/>
+      <Editor 
+        {...this.props}
+        published={true}
+      />
     )
   }
 }
-
 
 const mapStateToProps = state => ({
   initialData: state.editPostPage,
@@ -47,10 +45,8 @@ const mapDispatchToProps = dispatch => (
   bindActionCreators({ ...actions }, dispatch)
 )
 
-EditPost.__OPEN_SSR__=false;
-
 export default composeHOC(
   withStyles(css),
   withInitialData,
   connect(mapStateToProps, mapDispatchToProps, null)
-)(EditPost); 
+)(EditorPost); 

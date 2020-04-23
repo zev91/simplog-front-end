@@ -14,9 +14,7 @@ marked.setOptions({
 export default class PreviewContent extends Component {
   constructor(props){
     super(props);
-    console.log({props})
     this.state = {
-
       doms: marked(props.code || '', { breaks: true })
     }
     this.debounceGetContent = debounce(this.onContentChange,200);
@@ -29,7 +27,7 @@ export default class PreviewContent extends Component {
   onContentChange = () => {
     const { code } = this.props;
     this.setState({
-      doms: marked(code, { breaks: true })
+      doms: marked(code || '', { breaks: true })
     })
   }
   render(){

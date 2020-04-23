@@ -18,12 +18,12 @@ class UploadHeaderImage extends Component {
     // Toast.loading('上传中');
     const res = await this.props.uploadHeaderImage(formData);
     if (res && res.success) {
-      this.props.uploadHeaderImageCb(res.data.url);
+      this.props.updatePostAndCb({headerBg: res.data.url});
     }
   }
 
   handlerDeleteHeaderImage = () => {
-    this.props.uploadHeaderImageCb('');
+    this.props.updatePostAndCb({headerBg:''});
   }
   render() {
     const { headerBg } =this.props;

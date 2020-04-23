@@ -9,6 +9,7 @@ import CreateIcon from '@material-ui/icons/Create';
 import AcUnitIcon from '@material-ui/icons/AcUnit';
 import composeHOC from 'src/utils/composeHOC';
 import css from './style.scss';
+import Toast from 'src/componentCommon/toast';
 import logo from 'src/assets/logo.png';
 
 
@@ -21,6 +22,15 @@ class Header extends Component {
   componentDidMount() {
     const { username } = this.props.userInfo;
     !username && this.props.getInitialData();
+  }
+  goToDraft = () => {
+    if(this.props.userInfo.username){
+      this.props.history.push('/editor/draft/new');
+    }else{
+      Toast.error('请先登录！')
+      this.props.history.push('/login');
+    }
+
   }
 
   render() {
@@ -42,11 +52,11 @@ class Header extends Component {
               ) : <Avatar className='user-avater'>{username[0]}</Avatar>
             }
             <Button
-              variant="contained"
+              // variant="contained"
               color="secondary"
               disableElevation
               // className={classes.button}
-              onClick={() => this.props.history.push('/editor/draft/new')}
+              onClick={this.goToDraft}
               startIcon={<CreateIcon />}
             >
               写文章

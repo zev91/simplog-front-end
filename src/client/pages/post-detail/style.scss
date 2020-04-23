@@ -1,0 +1,66 @@
+// @import 'src/componentCommon/editor/codemirror.scss';
+@import 'src/componentCommon/editor/theme.scss';
+@import 'src/componentCommon/editor/hljs.scss';
+@import 'src/componentCommon/editor/preview-content.scss';
+
+.post-detail-header{
+  background-attachment: scroll;
+  height: 300px;
+  display: table;
+  width: 100%;
+  margin-bottom: 20px;
+  color: #fff;
+
+  & > .container{
+    display: flex;
+    padding: 124px 15px 15px;
+    justify-content: center;
+    align-items: center;
+
+    .post-heading{
+      text-align: center;
+      h1{
+        margin-top: 0;
+        margin-bottom: 24px;
+        font-size: 36px;
+        font-weight: 300;
+      }
+
+      .meta{
+        font-weight: 300;
+        font-size: 16px;
+        color: #eee;
+
+        & > span{
+          margin-left: 16px;
+        }
+      }
+      .post-tags{
+        text-align: center;
+        margin-top: 20px;
+
+        .tag-item{
+          font-weight: 300;
+          border-radius: 4px;
+          border: 1px solid;
+          margin: 4px;
+          padding: 2px 10px;
+          font-size: 12px;
+        }
+      }
+    }
+
+  }
+}
+
+.post-detail{
+  max-width: 920px;
+  margin: 0 auto;
+  border: none;
+}
+
+@media only screen and (min-width: 768px){
+  .post-detail-header {
+    height: 370px;
+  } 
+}

@@ -12,7 +12,7 @@
     text-align: center;
   }
 
-  .tags-wrap{
+  .content-wraps{
     header{
       font-size: 16px;
       color: #909090;
@@ -22,8 +22,22 @@
 
 .tags-list{
   padding: 10px 0;
-
   & > div{
+    margin: 2px 4px 2px 0;
+  }
+}
+
+// .category-wrap{
+//   padding-bottom: 12px;
+// }
+
+.category-btn-wrap{
+  & > button:not(.MuiButton-outlinedPrimary){
+    color: #aaa;
+  }
+  & > button {
+    padding: 0 8px;
+    min-width: 42px;
     margin: 2px 4px 2px 0;
   }
 }

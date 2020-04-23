@@ -33,11 +33,11 @@ const routeList = [
     component: AsyncLoader(() => import('./client/pages/draft-editor/')),
     exact: true
   },
-  // {
-  //   path: '/editor',
-  //   component: AsyncLoader(() => import('./client/pages/draft-post/')),
-  //   exact: true
-  // }
+  {
+    path: '/post/:id',
+    component: AsyncLoader(() => import('./client/pages/post-detail/')),
+    exact: true
+  }
 ]
 
 const matchRoute = (path,list=routeList) =>{

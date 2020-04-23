@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { actions } from './redux';
-import { Button } from '@material-ui/core';
 import withInitialData from 'src/componentHOC/with-initial-data';
 import withStyles from 'isomorphic-style-loader/withStyles';
 import composeHOC from 'src/utils/composeHOC';
@@ -10,7 +9,7 @@ import Editor from 'src/componentCommon/editor';
 import css from './style.scss';
 
 //组件
-class DraftPost extends React.Component {
+class EditorDraft extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -26,8 +25,6 @@ class DraftPost extends React.Component {
   }
 
   render() {
-
-    // const { list } = this.props.initialData;
     return (
       <Editor 
         {...this.props}
@@ -38,6 +35,7 @@ class DraftPost extends React.Component {
 
 const mapStateToProps = state => ({
   initialData: state.editorDraftPage,
+  userInfo: state.userInfo
 });
 
 //将获取数据的方法也做为 props传递给组件
@@ -49,4 +47,4 @@ export default composeHOC(
   withStyles(css),
   withInitialData,
   connect(mapStateToProps, mapDispatchToProps, null)
-)(DraftPost); 
+)(EditorDraft); 
