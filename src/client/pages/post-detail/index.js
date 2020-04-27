@@ -4,13 +4,13 @@ import { bindActionCreators } from 'redux';
 import { actions } from './redux';
 import withInitialData from 'src/componentHOC/with-initial-data';
 import withStyles from 'isomorphic-style-loader/withStyles';
-import composeHOC from 'src/utils/composeHOC';
 import moment from 'moment';
-
-
+import composeHOC from 'src/utils/composeHOC';
 import marked from 'marked';
 import hljs from 'highlight.js';
 import languageList from 'src/componentCommon/editor/language-list';
+import Comments from './comments';
+import CommentsLists from './comments-lists';
 
 import css from './style.scss';
 
@@ -33,43 +33,45 @@ class PostDetail extends React.Component {
       { page: {} }
     )
   }
-  
+
 
   static async getInitialProps({ store }) {
     return store.dispatch(actions.getInitialData());
   }
 
   onScoll = () => {
-    const appHeader = document.getElementsByClassName('app-header')[0];
-    const height = this.headerRef.current.getBoundingClientRect().height;
+    const height = document.getElementsByClassName('post-detail-header')[0].getBoundingClientRect().height;
     const scrollTop = document.documentElement.scrollTop;
 
-    if(scrollTop > height){
-      appHeader.classList.add('header-visible');
-    }else{
-      appHeader.classList.remove('header-visible');
+    if (scrollTop > height) {
+      this.appHeader.classList.add('header-visible');
+    } else {
+      this.appHeader.classList.remove('header-visible');
     }
   }
 
-  componentDidMount(){
-    window.addEventListener('scroll',this.onScoll.bind(this));
+  componentDidMount() {
+    this.appHeader = document.getElementsByClassName('app-header')[0];
+    this.postDetailHeader = document.getElementsByClassName('post-detail-header')[0];
+
+    window.addEventListener('scroll', this.onScoll.bind(this));
   }
-  componentWillUnmount(){
-    document.getElementsByClassName('app-header')[0].classList.remove('header-visible');
-    window.removeEventListener('scroll',this.onScoll.bind(this));
+  componentWillUnmount() {
+    this.appHeader.classList.remove('header-visible');
+    window.removeEventListener('scroll', this.onScoll.bind(this));
   }
 
   render() {
-    const { post } =this.props;
+    const { post, comments } = this.props;
     return (
-      [
-        <div 
-          ref={this.headerRef}
-          className='post-detail-header' 
+      <div className='post-detail-page'>
+        <div
+          // ref={this.headerRef}
+          className='post-detail-header'
           style={{
-            background: `#808080 url(${post.headerBg+'?x-oss-process=style/post-header-bg'}) center no-repeat`,
+            background: `#808080 url(${post.headerBg + '?x-oss-process=style/post-header-bg'}) center no-repeat`,
             backgroundSize: 'cover'
-            }}
+          }}
         >
           <div className='container'>
             <div className='post-heading'>
@@ -81,25 +83,37 @@ class PostDetail extends React.Component {
 
               <div className='post-tags'>
                 {
-                  post.tags.map((tag,idx) => <span key={tag+idx} className='tag-item'>{tag}</span>)
+                  post.tags.map((tag, idx) => <span key={tag + idx} className='tag-item'>{tag}</span>)
                 }
               </div>
             </div>
           </div>
-        </div>,
+        </div>
         <div className='preview-content post-detail'>
           <div className='preview-content-html'>
             <div dangerouslySetInnerHTML={{ __html: marked(post.body, { breaks: true }) }} />
           </div>
         </div>
-      ]
+
+      <Comments 
+        comments={comments}
+        createComment={this.props.createComment}
+        getComment={this.props.getComment}
+      />
+
+      <CommentsLists 
+        comments={comments}
+      />
+    </div>
+
     )
   }
 }
 
 const mapStateToProps = state => ({
   initialData: state.postDetailPage,
-  post: state.postDetailPage.data.post
+  post: state.postDetailPage.post,
+  comments: state.postDetailPage.comments
 });
 
 //将获取数据的方法也做为 props传递给组件

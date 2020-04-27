@@ -10,7 +10,8 @@ export const actions = {
       const urlInfo = path.split('/');
       const postId = urlInfo[urlInfo.length-1];
 
-      const res = await dispatch(actions.getPost(postId));
+      const resPost = await dispatch(actions.getPost(postId));
+      const resComment = await dispatch(actions.getComment(postId));
       const page = {
         tdk: {
           title: '',
@@ -19,14 +20,16 @@ export const actions = {
         }
       }
 
-      const data = res.data;
+      const post = resPost.data.post;
+      const comments = resComment.data.comments;
 
-      page.tdk.title = data.post.title;
-      page.tdk.keywords = data.post.tags .join(',');
-      page.tdk.description = data.post.title;
+      page.tdk.title = post.title;
+      page.tdk.keywords = post.tags .join(',');
+      page.tdk.description = post.title;
 
       return ({
-        data,
+        post,
+        comments,
         page
       })
     },
@@ -50,16 +53,44 @@ export const actions = {
     }
   },reducerHandler),
 
+  getComment: action({
+    type: 'postDetailPage.getComments',
+    action: (id,http) => {
+      return http.get(`/api/posts/${id}/comment`)
+    },
+    handler: (state, result) => {
+      const comments = result.data.comments;
+      return {
+        ...state,
+        comments
+      }
+    }
+  },reducerHandler),
+
+  createComment: action({
+    type: 'postDetailPage.createComment',
+    action: (params,http) => {
+      let id = params.id;
+      delete params.id;
+      return http.post(`/api/posts/${id}/comment`,params)
+    },
+    handler: (state, result) => {
+
+      return {
+        ...state,
+      }
+    }
+  },reducerHandler),
+
 };
 
 const inintState = {
-  data:{
-    post: {
-      body:'',
-      headerBg:'',
-      tags:[]
-    }
+  post: {
+    body:'',
+    headerBg:'',
+    tags:[]
   },
+  comments:[],
   page:{}
 }
 injectReducer({ key: 'postDetailPage', reducer: reducerHandler(inintState)});

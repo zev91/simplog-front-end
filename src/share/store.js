@@ -21,7 +21,7 @@ export const axios = axiosCreater({
   },
   failMiddleware: (error) => {
     // console.log('error.response====>>>',error.response.status);
-
+  console.log('没有登录====>>>>',error)
 
 
     if(!error.response ){
@@ -56,7 +56,8 @@ export const axios = axiosCreater({
 });
 
 axios.interceptors.request.use(function (config) {
-  config.headers['Authorization'] = __SERVER__ ? global.__SERVER_TOKEN__ : Cookie.get()['token'];
+
+  config.headers['Authorization'] = __SERVER__ ? global.__SERVER_TOKEN__ : (Cookie.get()['token'] || '');
   return config;
 })
 

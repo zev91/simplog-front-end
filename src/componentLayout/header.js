@@ -20,8 +20,9 @@ class Header extends Component {
   }
 
   componentDidMount() {
-    const { username } = this.props.userInfo;
-    !username && this.props.getInitialData();
+    if(this.props.userInfo['userInfo.getInitialData.pending'] !== false){
+      this.props.getInitialData();
+    }
   }
   goToDraft = () => {
     if(this.props.userInfo.username){
@@ -38,7 +39,8 @@ class Header extends Component {
   }
 
   render() {
-    const { username } = this.props.userInfo;
+    const { userInfo } = this.props;
+    console.log(userInfo.username)
     return (
       <AppBar className="app-header">
         <Toolbar className='tool-bar'>
@@ -48,12 +50,12 @@ class Header extends Component {
 
           <div className='right-tool-wrap'>
             {
-              !username ? (
+              !userInfo.username ? (
                 <div>
                   <Button onClick={() => this.props.history.push('/login')}>登录</Button>
                   <Button onClick={() => this.props.history.push('/register')} color="inherit" variant="outlined">注册</Button>
                 </div>
-              ) : <Avatar className='user-avater'>{username[0]}</Avatar>
+              ) : <Avatar className='user-avater'>{userInfo.username[0]}</Avatar>
             }
             <Button
               // variant="contained"

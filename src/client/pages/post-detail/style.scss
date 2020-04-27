@@ -3,19 +3,25 @@
 @import 'src/componentCommon/editor/hljs.scss';
 @import 'src/componentCommon/editor/preview-content.scss';
 
-#root{
+#root {
   padding: 0;
 }
 
 .app-header {
-  opacity: 0!important;
+  opacity: 0 !important;
   transition: opacity 600ms;
-  &.header-visible{
-    opacity: .8!important;
+
+  &.header-visible {
+    opacity: .8 !important;
   }
 }
 
-.post-detail-header{
+.post-detail-page {
+  padding-bottom: 20px;
+  background: #f8f8f8;
+}
+
+.post-detail-header {
   background-attachment: scroll;
   height: 300px;
   display: table;
@@ -23,35 +29,37 @@
   margin-bottom: 20px;
   color: #fff;
 
-  & > .container{
+  &>.container {
     display: flex;
     padding: 124px 15px 15px;
     justify-content: center;
     align-items: center;
 
-    .post-heading{
+    .post-heading {
       text-align: center;
-      h1{
+
+      h1 {
         margin-top: 0;
         margin-bottom: 24px;
         font-size: 36px;
         font-weight: 300;
       }
 
-      .meta{
+      .meta {
         font-weight: 300;
         font-size: 16px;
         color: #eee;
 
-        & > span{
+        &>span {
           margin-left: 16px;
         }
       }
-      .post-tags{
+
+      .post-tags {
         text-align: center;
         margin-top: 20px;
 
-        .tag-item{
+        .tag-item {
           font-weight: 300;
           border-radius: 4px;
           border: 1px solid;
@@ -69,10 +77,12 @@
   max-width: 920px;
   margin: 0 auto;
   border: none;
+  box-shadow: 7px 12px 18px rgba(0, 0, 0, .03);
 }
 
-@media only screen and (min-width: 768px){
+
+@media only screen and (min-width: 768px) {
   .post-detail-header {
     height: 370px;
-  } 
+  }
 }

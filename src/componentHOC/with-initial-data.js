@@ -44,7 +44,9 @@ export default SourceComponent => {
     async componentDidMount() { //客户端渲染会执行
       _this = this; // 修正_this指向，保证_this指向当前渲染的页面组件
       window.addEventListener('popstate', popStateCallback);
-      const canClientFetch = this.props.history && this.props.history.action === 'PUSH';//路由跳转的时候可以异步请求数据
+
+      console.log("this.props.history.action=====>>>",this.props.history.action)
+      const canClientFetch = this.props.history && (this.props.history.action === 'PUSH');//路由跳转的时候可以异步请求数据
       if (canClientFetch) {
         //如果是 history PUSH 操作 则更新数据
         try{

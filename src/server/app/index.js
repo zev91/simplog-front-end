@@ -9,7 +9,7 @@ const app = express();
 const TIME_OUT = 30 * 1e3;
 
 const render = async function(req,res){
-  global.__SERVER_TOKEN__ = req.cookies.token;
+  global.__SERVER_TOKEN__ = req.cookies.token || '';
   global.REQUEST_PATH = req.path;
   try{
     const data = await reactSsr(req);

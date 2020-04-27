@@ -10,6 +10,7 @@ export const actions = {
 
     },
     handler: (state, result) => {
+      console.log({result})
       return {
         ...state,
         ...result.data.user

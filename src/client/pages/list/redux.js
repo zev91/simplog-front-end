@@ -3,6 +3,7 @@ const { action, createReducer, injectReducer } = enRedux.default;
 
 const reducerHandler = createReducer();
 export const actions = {
+ 
   getPosts: action({
     type: 'listPage.getPosts',
     action: (http,dispatch,getstate) => {
@@ -34,7 +35,6 @@ export const actions = {
   getInitialData: action({
     type: 'listPage.getInitialData',
     action: async (http,dispatch) => {
-
       const res = await dispatch(actions.getPosts());
       const page = await dispatch(actions.getPage());
       return ({
@@ -43,7 +43,6 @@ export const actions = {
       })
     },
     handler: (state, result) => {
-      console.log({result})
       return {
         ...state,
         ...result
