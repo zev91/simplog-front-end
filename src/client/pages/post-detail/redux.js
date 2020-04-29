@@ -12,6 +12,7 @@ export const actions = {
 
       const resPost = await dispatch(actions.getPost(postId));
       const resComment = await dispatch(actions.getComment(postId));
+      const resLikers = await dispatch(actions.getPostLikers(postId));
       const page = {
         tdk: {
           title: '',
@@ -22,6 +23,7 @@ export const actions = {
 
       const post = resPost.data.post;
       const comments = resComment.data.comments;
+      const likers = resLikers.data.likers;
 
       page.tdk.title = post.title;
       page.tdk.keywords = post.tags .join(',');
@@ -30,6 +32,7 @@ export const actions = {
       return ({
         post,
         comments,
+        likers,
         page
       })
     },
@@ -95,6 +98,35 @@ export const actions = {
     }
   },reducerHandler),
 
+  likePost: action({
+    type: 'postDetailPage.likePost',
+    action: (postId,http) => {
+      return http.post(`/api/likePost/${postId}`)
+    },
+    handler: (state, result) => {
+
+      return {
+        ...state,
+      }
+    }
+  },reducerHandler),
+
+  getPostLikers: action({
+    type: 'postDetailPage.getPostLikers',
+    action: (postId,http) => {
+      return http.get(`/api/getPostLikers/${postId}`)
+    },
+    handler: (state, result) => {
+   console.log({result})
+      return {
+        ...state,
+        ...result.data
+      }
+    }
+  },reducerHandler),
+
+
+
 };
 
 const inintState = {
@@ -103,6 +135,7 @@ const inintState = {
     headerBg:'',
     tags:[]
   },
+  likers: [],
   comments:[],
   page:{}
 }

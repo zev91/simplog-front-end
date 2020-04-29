@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Collapse from '@material-ui/core/Collapse';
-import Toast from 'src/componentCommon/toast'
+import Toast from 'src/componentCommon/toast';
 
-export default ({createComment, getComment,id}) => {
+export default ({createComment, getComment,id, currentUser}) => {
   const [value, setValue] = useState('');
   const [visible, setVisible] = useState(false);
 
@@ -13,6 +13,10 @@ export default ({createComment, getComment,id}) => {
   }
 
   async function submitComment(){
+    if(!currentUser._id){
+      Toast.error('还没登录！')
+      return;
+    }
     const createRes = await createComment({id,body:value});
     if(createRes && createRes.success){
       Toast.success(createRes.data.message);

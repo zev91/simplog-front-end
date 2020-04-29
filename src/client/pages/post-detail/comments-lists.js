@@ -5,11 +5,16 @@ import { Link, Avatar, Button } from '@material-ui/core';
 import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
 import DeleteIcon from '@material-ui/icons/Delete';
 import ReplyInput from './reply-input';
-import Comfirm from 'src/componentCommon/confirm'
+import Comfirm from 'src/componentCommon/confirm';
+import Toast from 'src/componentCommon/toast'
 import css from './comments-lists.scss';
 
 const Commentitem = ({ setVisible, setPid, parentId, _id, likeCount, fromUser, replyToUser, currentUser, isAuthor, body, createdAt, setReply, deleteComment, getComment, match }) => {
   function handlerReply() {
+    if(!currentUser._id){
+      Toast.error('请先登录!');
+      return;
+    }
     setPid(parentId || _id);
     setVisible(true);
     setReply(parentId ? { id: fromUser._id, name: fromUser.username } : {});

@@ -21,6 +21,39 @@
   background: #f8f8f8;
 }
 
+.hover-bars-wrap {
+  position: fixed;
+  display: none;
+  top: 140px;
+  z-index: 9;
+ 
+  .MuiFab-root{
+    background: #fff;
+  }
+
+  .like-num{
+    text-align: center;
+    padding: 8px 0;
+  }
+
+  &.hover-bars-wrap-visible{
+    display: block;
+  }
+
+  .liked{
+    color:#ec7259;
+
+    .MuiFab-root{
+      background: #ec7259;
+    }
+
+    .MuiSvgIcon-root{
+      fill: #fff;
+    }
+    
+  }
+}
+
 .post-detail-header {
   background-attachment: scroll;
   height: 300px;
