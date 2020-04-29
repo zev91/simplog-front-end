@@ -8,6 +8,7 @@ import composeHOC from 'src/utils/composeHOC';
 import createForm, { InputFormItem } from 'src/componentHOC/form-create';
 import logo from 'src/assets/logo.png';
 import { actions } from './redux';
+import { actions as getUserInfo } from 'src/componentLayout/redux';
 import css from './style.scss';
 
 class Login extends React.Component {
@@ -30,6 +31,7 @@ class Login extends React.Component {
     if(!valid) return;
     this.props.fetchLogin(data).then(res => {
       if(res && res.success){
+        this.props.getUserInfo();
         this.props.history.push('/')
       }
     });
@@ -70,5 +72,5 @@ export default composeHOC(
   withRouter,
   withStyles(css),
   withInitialData,
-  connect(mapStateToProps, actions, null)
+  connect(mapStateToProps, {...actions,getUserInfo:getUserInfo.getInitialData}, null)
 )(Login); 

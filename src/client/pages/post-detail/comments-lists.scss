@@ -42,12 +42,16 @@
         font-weight: 500;
 
         & > span {
-          color: #07a2b9;
-          font-size: 12px;
-          font-weight: 400;
-          border: 1px solid;
-          border-radius: 4px;
           padding: 0 3px;
+          color: #888;
+          font-size: 12px;
+
+          &.is-auther{
+            color: #07a2b9;
+            border: 1px solid;
+            border-radius: 4px;
+            font-weight: 400;
+          }
         }
       }
 
@@ -79,7 +83,7 @@
           }
         }
 
-        & > span {
+        span {
           cursor: pointer;
           margin-right: 16px;
           color: #b0b0b0;

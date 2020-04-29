@@ -13,44 +13,57 @@
   .main-comment-input-wrap {
     display: flex;
 
-    .add-comments-content{
-      width: 100%;
+   
+  }
 
-      .comment-btns-wrap{
-        text-align: right;
-        padding: 10px 0;
-        
-        button{
-          margin-left: 6px;
-        }
+  
+}
+
+.add-comments-content{
+  width: 100%;
+
+  .comment-btns-wrap{
+    text-align: right;
+    padding: 10px 0;
+    
+    button{
+      margin-left: 6px;
+    }
+  }
+}
+
+.reply-input-wrap{
+  margin-left: 62px;
+}
+
+.MuiAvatar-root {
+  color: #fff;
+  background-color: #bdbdbd;
+  margin-right: 10px;
+}
+
+.comment-input {
+  background: #f9fbfb;
+
+  .MuiOutlinedInput-root {
+    &.Mui-focused{
+      .MuiOutlinedInput-notchedOutline {
+        border-width: 1px;
       }
     }
 
-    .MuiAvatar-root {
-      color: #fff;
-      background-color: #bdbdbd;
-      margin-right: 10px;
-    }
+    border-color: rgba(0, 0, 0, 0.17);
+    font-size: 12px;
   }
 
-  .comment-input {
-    background: #f9fbfb;
-
-    .MuiOutlinedInput-root {
-      &.Mui-focused{
-        .MuiOutlinedInput-notchedOutline {
-          border-width: 1px;
-        }
-      }
-
-      border-color: rgba(0, 0, 0, 0.17);
-      font-size: 12px;
-    }
-
-    .MuiInputBase-input:focus {
-      outline: none;
-      outline-color: transparent;
-    }
-
+  .MuiInputBase-input:focus {
+    outline: none;
+    outline-color: transparent;
   }
+}
+
+.reply-to-wrap{
+  padding-bottom: 6px;
+  color: #888;
+  font-size: 14px;
 }

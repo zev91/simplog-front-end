@@ -5,9 +5,9 @@ function onSuccess({ type, result }) {
 }
 
 function onError({ type, error }) {
-  var document;
-  if(document){
+  if(window){
     if (error.response) {
+
       Toast.error(error.response.data && (error.response.data.message || error.response.data.resultMsg || '服务端错误'))
     } else {
       if (error.data) {

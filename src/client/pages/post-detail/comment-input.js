@@ -4,7 +4,7 @@ import Button from '@material-ui/core/Button';
 import Collapse from '@material-ui/core/Collapse';
 import Toast from 'src/componentCommon/toast'
 
-export default ({type, createComment, getComment,id}) => {
+export default ({createComment, getComment,id}) => {
   const [value, setValue] = useState('');
   const [visible, setVisible] = useState(false);
 
@@ -21,15 +21,8 @@ export default ({type, createComment, getComment,id}) => {
     }
   }
 
-  function getClassName (){
-    if(type !== 'post' ) return 'op-btns-wrap btns-visible';
-    if(visible) return 'op-btns-wrap btns-visible';
 
-    return 'op-btns-wrap';
-  }
-
-  return type === 'post' 
-    ? 
+  return (
     <div className='add-comments-content'>
       <TextField
         className='comment-input'
@@ -42,7 +35,7 @@ export default ({type, createComment, getComment,id}) => {
         onChange={e => setValue(e.target.value)}
         onFocus={handlerTextFocus}
       />
-      <Collapse in={getClassName() === 'op-btns-wrap btns-visible'}>
+      <Collapse in={visible}>
 
   
       <div className='comment-btns-wrap'>
@@ -51,8 +44,7 @@ export default ({type, createComment, getComment,id}) => {
       </div>
       </Collapse>
     </div>
-    :
-    ''
+   )
 }
 
   

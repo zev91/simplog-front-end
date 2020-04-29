@@ -1,0 +1,21 @@
+.confirm-delete-wrap{
+  padding: 0 24px 12px; 
+  .confirm-header{
+    padding: 18px 0;
+    display: flex;
+
+    svg{
+      margin-right: 4px;
+    }
+  }
+
+  .delete-op-wrap{
+    text-align: right;
+
+    .MuiButtonBase-root{
+      min-width: 44px;
+      padding: 0;
+      border-radius: 0;
+    }
+  }
+}

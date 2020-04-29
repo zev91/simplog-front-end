@@ -9,7 +9,7 @@ import composeHOC from 'src/utils/composeHOC';
 import marked from 'marked';
 import hljs from 'highlight.js';
 import languageList from 'src/componentCommon/editor/language-list';
-import Comments from './comments';
+import AddCommentInput from './add-comment-input';
 import CommentsLists from './comments-lists';
 
 import css from './style.scss';
@@ -95,7 +95,8 @@ class PostDetail extends React.Component {
           </div>
         </div>
 
-      <Comments 
+      <AddCommentInput 
+        currentUser={this.props.currentUser}
         comments={comments}
         createComment={this.props.createComment}
         getComment={this.props.getComment}
@@ -103,6 +104,11 @@ class PostDetail extends React.Component {
 
       <CommentsLists 
         comments={comments}
+        currentUser={this.props.currentUser}
+        createComment={this.props.createComment}
+        deleteComment={this.props.deleteComment}
+        getComment={this.props.getComment}
+        match={this.props.match}
       />
     </div>
 
@@ -111,6 +117,7 @@ class PostDetail extends React.Component {
 }
 
 const mapStateToProps = state => ({
+  currentUser: state.userInfo,
   initialData: state.postDetailPage,
   post: state.postDetailPage.post,
   comments: state.postDetailPage.comments

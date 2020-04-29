@@ -25,9 +25,9 @@ class Editor extends Component {
 
     this.state = {
       saveTips: '文章将会被保存至',
-      title: props.initialData.post.title,
+      title: props.initialData.post.title || '',
       headerBg: props.initialData.post.headerBg,
-      code: props.initialData.post.body,
+      code: props.initialData.post.body || '',
       tags: props.initialData.post.tags,
       category: props.initialData.post.category
     };
@@ -122,16 +122,15 @@ class Editor extends Component {
   }
 
   publishPost = async () => {
-    try {
       const { match, history } = this.props;
       const { title, code, headerBg, tags, category } = this.state;
 
       const res = await this.props.publishPost({ id: match.params.id, title, body: code, headerBg, tags, category });
-      Toast.success(res.data.message);
-      history.push('/post/'+match.params.id)
-    }catch(error){
-      Toast.error(res.message);
-    } 
+      if(res && res.success){
+        Toast.success(res.data.message);
+        history.push('/post/'+match.params.id)
+      }
+
   }
 
   render() {

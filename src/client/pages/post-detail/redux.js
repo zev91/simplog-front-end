@@ -82,6 +82,19 @@ export const actions = {
     }
   },reducerHandler),
 
+  deleteComment: action({
+    type: 'postDetailPage.deleteComment',
+    action: (commentId,http) => {
+      return http.post(`/api/deleteComment/${commentId}`)
+    },
+    handler: (state, result) => {
+
+      return {
+        ...state,
+      }
+    }
+  },reducerHandler),
+
 };
 
 const inintState = {
