@@ -98,7 +98,6 @@ export default async (req) => {
   
     return { html, template, context, store }
   }catch(error){
-    console.log(error.message)
     throw Error(error.message);
   }
   

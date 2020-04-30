@@ -49,9 +49,6 @@ class PublishPost extends Component {
       return;
     }
     this.props.publishPost();
-
-
-    console.log({tags, category})
   }
   render() {
     const { tagInputValue, pubText } = this.state;

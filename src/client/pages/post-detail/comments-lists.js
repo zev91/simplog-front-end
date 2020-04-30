@@ -24,7 +24,7 @@ const Commentitem = ({ setVisible, setPid, parentId, _id, likeCount, fromUser, r
     <div className='comment-cell-item'>
       <Avatar>{fromUser.username[0].toUpperCase()}</Avatar>
       <div className='comment-content'>
-        <div className='auth-info'>{fromUser.username} {isAuthor ? <span className='is-auther'>作者</span> : ''} {replyToUser && replyToUser.username ? <span>回复 <Link>{replyToUser.username}</Link>:</span> : ''}</div>
+        <div className='auth-info'>{fromUser.username} {isAuthor ? <span className='is-author'>作者</span> : ''} {replyToUser && replyToUser.username ? <span>回复 <Link>{replyToUser.username}</Link>:</span> : ''}</div>
         <div className='comment-date'>{moment(createdAt).format("YYYY.MM.DD HH:mm:ss")}</div>
         <div className='comment-body'>{body}</div>
         <div className='comment-op-wrap'>

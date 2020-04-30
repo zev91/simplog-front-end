@@ -20,14 +20,13 @@ class Header extends Component {
   }
 
   componentDidMount() {
-    console.log('componentDidMount')
     if(this.props.userInfo['userInfo.getInitialData.pending'] !== false){
       this.props.getInitialData();
     }
   }
 
   componentWillReceiveProps(nextProps){
-    console.log(this.props,nextProps)
+    // console.log(this.props,nextProps)
   }
   goToDraft = () => {
     if(this.props.userInfo.username){
@@ -45,7 +44,6 @@ class Header extends Component {
 
   render() {
     const { userInfo } = this.props;
-    console.log(userInfo.username)
     return (
       <AppBar className="app-header">
         <Toolbar className='tool-bar'>

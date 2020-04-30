@@ -13,6 +13,8 @@ export const actions = {
       const resPost = await dispatch(actions.getPost(postId));
       const resComment = await dispatch(actions.getComment(postId));
       const resLikers = await dispatch(actions.getPostLikers(postId));
+      const resCollectioned = await dispatch(actions.getCollectioned(postId));
+      const resFollowedauthor = await dispatch(actions.hasFollowedAuthor(postId));
       const page = {
         tdk: {
           title: '',
@@ -24,6 +26,10 @@ export const actions = {
       const post = resPost.data.post;
       const comments = resComment.data.comments;
       const likers = resLikers.data.likers;
+      const hasCollectioned = resCollectioned.data.hasCollectioned;
+      const hasFollowedAuthor = resFollowedauthor.data.hasFollowed;
+
+      console.log({hasFollowedAuthor})
 
       page.tdk.title = post.title;
       page.tdk.keywords = post.tags .join(',');
@@ -33,6 +39,8 @@ export const actions = {
         post,
         comments,
         likers,
+        hasCollectioned,
+        hasFollowedAuthor,
         page
       })
     },
@@ -117,7 +125,6 @@ export const actions = {
       return http.get(`/api/getPostLikers/${postId}`)
     },
     handler: (state, result) => {
-   console.log({result})
       return {
         ...state,
         ...result.data
@@ -125,8 +132,55 @@ export const actions = {
     }
   },reducerHandler),
 
+  collectionPost: action({
+    type: 'postDetailPage.collectionPost',
+    action: (postId,http) => {
+      return http.post(`/api/collectionPost/${postId}`)
+    },
+    handler: (state, result) => {
+      return {
+        ...state,
+      }
+    }
+  },reducerHandler),
 
+  getCollectioned: action({
+    type: 'postDetailPage.getCollectioned',
+    action: (postId,http) => {
+      return http.get(`/api/hasCollectioned/${postId}`)
+    },
+    handler: (state, result) => {
+      return {
+        ...state,
+        ...result.data
+      }
+    }
+  },reducerHandler),
 
+  followauthor: action({
+    type: 'postDetailPage.followauthor',
+    action: (userId,http) => {
+      return http.post(`/api/follow/${userId}`)
+    },
+    handler: (state, result) => {
+      return {
+        ...state,
+      }
+    }
+  },reducerHandler),
+
+  hasFollowedAuthor: action({
+    type: 'postDetailPage.hasFollowedAuthor',
+    action: (postId,http) => {
+      return http.get(`/api/hasFollowedAuthor/${postId}`)
+    },
+    handler: (state, result) => {
+      return {
+        ...state,
+        ...result.data
+      }
+    }
+  },reducerHandler),
 };
 
 const inintState = {
@@ -136,6 +190,8 @@ const inintState = {
     tags:[]
   },
   likers: [],
+  hasCollectioned:false,
+  hasFollowed: false,
   comments:[],
   page:{}
 }
