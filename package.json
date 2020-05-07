@@ -83,6 +83,7 @@
     "react-dom": "^16.13.0",
     "react-helmet": "^5.2.1",
     "react-hook-form": "^5.4.1",
+    "react-infinite-scroller": "^1.2.4",
     "react-redux": "^7.2.0",
     "react-router": "^5.1.2",
     "react-router-dom": "^5.1.2",

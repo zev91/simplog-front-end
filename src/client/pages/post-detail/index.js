@@ -13,7 +13,7 @@ import { Avatar } from '@material-ui/core';
 import languageList from 'src/componentCommon/editor/language-list';
 import AddCommentInput from './add-comment-input';
 import CommentsLists from './comments-lists';
-import FavoriteIcon from '@material-ui/icons/Favorite';
+import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import Toast from 'src/componentCommon/toast';
 
@@ -49,7 +49,7 @@ class PostDetail extends React.Component {
   }
 
   onScoll = () => {
-    const height = document.getElementsByClassName('post-detail-header')[0].getBoundingClientRect().height;
+    const height = this.headerRef.current.getBoundingClientRect().height;
     const scrollTop = document.getElementById('root').scrollTop;
 
     if (scrollTop > height) {
@@ -70,13 +70,13 @@ class PostDetail extends React.Component {
     this.sideAuthInfo = document.getElementsByClassName('side-auth-info')[0];
     this.getSidePosition();
 
-    document.getElementById('root').addEventListener('scroll', this.onScoll.bind(this));
+    document.getElementById('root').addEventListener('scroll', this.onScoll);
 
     window.addEventListener('resize', this.getSidePosition);
   }
   componentWillUnmount() {
     this.appHeader.classList.remove('header-visible');
-    document.getElementById('root').removeEventListener('scroll', this.onScoll.bind(this));
+    document.getElementById('root').removeEventListener('scroll', this.onScoll);
     window.removeEventListener('resize', this.getSidePosition);
   }
 
@@ -167,7 +167,7 @@ class PostDetail extends React.Component {
         <div className={`hover-bars-wrap`} style={{ left: this.state.hoverBarsLeft + 'px' }}>
           <div className={likers.find(liker => liker._id === currentUser._id) ? 'liked' : ''}>
             <Fab size="small">
-              <FavoriteIcon size="small" color='disabled' onClick={this.handlerLike} />
+              <ThumbUpIcon size="small" color='disabled' onClick={this.handlerLike} />
             </Fab>
             <div className='like-num'>{likers.length}赞</div>
           </div>
@@ -200,7 +200,7 @@ class PostDetail extends React.Component {
               post.author && post.author.totalLikes 
               ?
               <div className='active-info'>
-                <span><FavoriteIcon fontSize='small' color='primary' /> </span>
+                <span><ThumbUpIcon fontSize='small' color='primary' /> </span>
               获得点赞 {post.author.totalLikes}
               </div>
               :
@@ -220,10 +220,10 @@ class PostDetail extends React.Component {
           </div>
         </div>
         <div
-          // ref={this.headerRef}
+          ref={this.headerRef} 
           className='post-detail-header'
           style={{
-            background: `#808080 url(${post.headerBg + '?x-oss-process=style/post-header-bg'}) center no-repeat`,
+            background: post.headerBg ? `url(${post.headerBg + '?x-oss-process=style/post-header-bg'}) center no-repeat`: '#808080',
             backgroundSize: 'cover'
           }}
         >

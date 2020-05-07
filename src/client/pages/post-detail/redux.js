@@ -29,8 +29,6 @@ export const actions = {
       const hasCollectioned = resCollectioned.data.hasCollectioned;
       const hasFollowedAuthor = resFollowedauthor.data.hasFollowed;
 
-      console.log({hasFollowedAuthor})
-
       page.tdk.title = post.title;
       page.tdk.keywords = post.tags .join(',');
       page.tdk.description = post.title;

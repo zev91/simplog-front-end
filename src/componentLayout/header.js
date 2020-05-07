@@ -10,6 +10,7 @@ import AcUnitIcon from '@material-ui/icons/AcUnit';
 import composeHOC from 'src/utils/composeHOC';
 import css from './style.scss';
 import Toast from 'src/componentCommon/toast';
+import UserMenu from './user-menu';
 import logo from 'src/assets/logo.png';
 
 
@@ -38,7 +39,7 @@ class Header extends Component {
   }
 
   goToHomePage = () => {
-    this.props.history.push('/list');
+    this.props.history.push('/');
     // console.log(this.props)
   }
 
@@ -58,13 +59,11 @@ class Header extends Component {
                   <Button onClick={() => this.props.history.push('/login')}>登录</Button>
                   <Button onClick={() => this.props.history.push('/register')} color="inherit" variant="outlined">注册</Button>
                 </div>
-              ) : <Avatar className='user-avater'>{userInfo.username[0]}</Avatar>
+              ) : <UserMenu userInfo={userInfo}/>
             }
             <Button
-              // variant="contained"
               color="secondary"
               disableElevation
-              // className={classes.button}
               onClick={this.goToDraft}
               startIcon={<CreateIcon />}
             >

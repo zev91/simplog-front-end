@@ -68,10 +68,41 @@
   h6 {
     margin-top: -90px;
     padding: 100px 0 0;
-    font-weight: 400;
+    font-weight: 500;
+  }
+
+  h1,h2,h3{
+    margin-bottom: 10px;
   }
 
   p {
+    color: #333;
     margin: 0 0 20px;
+    font-size: 16px;
+  }
+
+  a{
+    color: #099da6;
+    text-decoration: none;
+    &:focus{
+      color: #099da6;
+    }
+  }
+
+
+  
+  ul,li{
+    text-decoration: none;
+    // list-style: none;
+  }
+
+  ul{
+    padding-left: 20px;
+  }
+
+  li{
+    color: #333;
+    font-size: 16px;
+    line-height: 1.6;
   }
 }
