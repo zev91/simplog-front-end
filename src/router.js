@@ -37,6 +37,11 @@ const routeList = [
     path: '/post/:id',
     component: AsyncLoader(() => import('./client/pages/post-detail/')),
     exact: true
+  },
+  {
+    path: '/user/:id/menu',
+    component: AsyncLoader(() => import('./client/pages/user-center/')),
+    exact: true
   }
 ]
 

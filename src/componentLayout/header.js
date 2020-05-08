@@ -59,7 +59,7 @@ class Header extends Component {
                   <Button onClick={() => this.props.history.push('/login')}>登录</Button>
                   <Button onClick={() => this.props.history.push('/register')} color="inherit" variant="outlined">注册</Button>
                 </div>
-              ) : <UserMenu userInfo={userInfo}/>
+              ) : <UserMenu userInfo={userInfo} history={this.props.history}/>
             }
             <Button
               color="secondary"

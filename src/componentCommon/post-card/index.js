@@ -13,7 +13,7 @@ export default ({ toDetail, item }) => {
             <span className='split-point'>&#8901;</span>
           </span>
           <span>{timeTransfor(new Date(item.createdAt))}
-          <span className='split-point'>&#8901;</span>
+            <span className='split-point'>&#8901;</span>
           </span>
           <span>{item.category+'/'+item.tags.join('/')}</span>
         </div>

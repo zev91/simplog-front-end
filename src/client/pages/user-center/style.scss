@@ -1,0 +1,297 @@
+.user-center-page{
+  height: calc(100vh - 64px);
+  background: #f4f5f5;
+
+  main{
+    position: relative;
+    margin: 0 auto;
+    width: 100%; 
+    max-width: 960px;
+
+    .user-view{
+      display: flex;
+      // margin-top: 1.767rem;
+      // margin-bottom: 6rem;
+
+      .major-area{
+        flex: 1 1 auto;
+        min-width: 0;
+
+        height: calc(100vh - 64px);
+        overflow-y: auto;
+
+        .major-content{
+          margin-top: 12px;
+        }
+
+        .itemscope{
+          display: flex;
+          padding: 14px 34px;
+  
+          .user-avater{
+            width: 100px;
+            height: 100px;
+            margin-right: 24px;
+            border-radius: 50%;
+            background: #fff;
+            line-height: 124px;
+            text-align: center;
+            color: #888;
+            background: #eee;
+          }
+  
+          .user-info-box{
+            flex: 1 1 auto;
+            margin-right: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+  
+            h1{
+              margin: 0;
+              padding: 0;
+              padding-bottom: 16px;
+              font-size: 24px;
+              font-weight: 400;
+              line-height: 1.2;
+              color: #000;
+            }
+  
+            span{
+              display: flex;
+              font-size: 14px;
+              color: #72777b;
+  
+              .MuiSvgIcon-root{
+                width: 0.7em;
+                height: 0.7em;
+                margin-right: 8px;
+              }
+            }
+          }
+  
+          .user-action-box{
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+          }
+        }
+
+        .list-block {
+          margin-top: 12px;
+          background: #fff;
+
+          .MuiTabs-root {
+            border-bottom: 1px solid #f0f0f1;
+
+            &.position-status{
+              position: absolute;
+              left: 0;
+              top: 0;
+              right: 0;
+              background: #fff;
+              z-index: 9;
+            }
+          }
+
+          .block-item {
+            padding: 20px;
+          }
+        }
+      }
+
+      .minor-area{
+        flex: 0 0 auto;
+        margin-left: 12px;
+        margin-top: 12px;
+        width: 240px;
+        line-height: 1.2;
+
+        .stat-block{
+          margin-bottom: 12px;
+
+          .block-title{
+            padding: 16px;
+            font-size: 18px;
+            font-weight: 600;
+            color: #31445b;
+            border-bottom: 1px solid rgba(230,230,231,.5);
+          }
+
+          .block-body{
+            padding: 12px;
+            font-size: 15px;
+          }
+
+          .stat-item{
+            display: flex;
+            padding: 5px 0;
+
+            & > span{
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              width: 20px;
+              height: 20px;
+              margin-right: 6px;
+              background: #defdff;
+              border-radius: 50%;
+
+              & > svg {
+                width: 0.7em;
+                height: 0.7em;
+              }
+            }
+          }
+        }
+
+        .follow-block{
+          display: flex;
+          position: relative;
+          margin-bottom: 1rem;
+
+          &::after{
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 1px;
+            height: 50%;
+            background-color: #f3f3f4;
+            transform: translate(-50%,-50%);
+          }
+
+          .follow-item{
+            flex: 1 1 auto;
+            padding: 1.333rem 0;
+            text-align: center;
+            color: #31445b;
+          }
+
+          .item-title{
+            font-size: 16px;
+            font-weight: 500;
+          }
+          .item-count{
+            margin-top: .5rem;
+            font-size: 15px;
+            font-weight: 600;
+          }
+        }
+
+        .more-block{
+          .more-item {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(230,230,231,.5);
+            padding: 14px 6px;
+            font-size: 14px;
+            color: #000;
+            border-top: 1px solid rgba(230,230,231,.5);
+          }
+        }
+      }
+
+      
+    }
+  }
+}
+
+.my-posts-wrap{
+  .my-post-block {
+
+    padding-bottom: 2px;
+    border-bottom: 1px solid #eee;
+
+    .block-header{
+      display: flex;
+      align-items: center;
+      padding: 6px 0 16px;
+      color: #555;
+      font-size: 14px;
+
+      .MuiAvatar-root{
+        width: 28px;
+        height: 28px;
+        margin-right: 12px;
+      }
+
+      .split-point{
+        margin: 0 4px;
+      }
+    }
+
+    .post-header-bg{
+      padding-bottom: 22px;
+      border-radius: 3px;
+    }
+    
+    .block-content{
+      header{
+        margin-bottom: 8px;
+        color: #909090;
+        font-size: 22px;
+      }
+
+      .post-main{
+        color: #8b8b8b;
+        font-size: 14px;
+
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+
+    .post-bottom-block{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 12px;
+
+      .post-active-info{
+        display: flex;
+        height: 22px;
+      
+  
+        & > span{
+          display: flex;
+          align-items: center;
+          padding: 0 6px;
+          color: #b2bac2;
+          border: 1px solid #eee;
+          border-left: none;
+  
+          &:first-child{
+            border-left: 1px solid #eee;
+          }
+  
+          .MuiSvgIcon-root {
+            width: 0.5em;
+            height: 0.5em;
+            margin-right: 4px;
+          }
+        }
+      }
+
+
+      .more-op{
+        min-width: 1px;
+        height: 40.8px;
+        .MuiSvgIcon-root{
+          width: 0.7em;
+          height: 0.7em;
+        }
+      }
+      
+    }
+    
+
+  }
+}
+
+#more-menu-popup{
+  .MuiMenuItem-root{
+    font-size: 14px;
+  }
+}

@@ -7,7 +7,6 @@ import withInitialData from 'src/componentHOC/with-initial-data';
 import withStyles from 'isomorphic-style-loader/withStyles';
 import composeHOC from 'src/utils/composeHOC';
 import PostCard from 'src/componentCommon/post-card/';
-import InfiniteScroll from 'react-infinite-scroller';
 import css from './style.scss';
 
 //组件
@@ -57,12 +56,6 @@ class List extends React.Component {
         this.setState({loading:false})
       });
     }
-
-    // const { postData } = this.props.initialData;
-    // if(postData.datas.length < 15) return;
-
-    // this.props.getMorePosts({pageNO: postData.page.nextPage});
-    
   }
 
   render() {
