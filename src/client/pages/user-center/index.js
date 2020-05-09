@@ -15,6 +15,7 @@ import composeHOC from 'src/utils/composeHOC';
 import emitter from 'src/utils/events';
 import moment from 'moment';
 import MyPost from './my-post';
+import MyActivites from './my-activites';
 
 import css from './style.scss';
 
@@ -125,7 +126,7 @@ class UserCenter extends React.Component {
                       <MyPost />
                     </TabPanel>
                     <TabPanel value='active' menuValue={menuValue}>
-                      动态
+                      <MyActivites />
                     </TabPanel>
                     <TabPanel value='follow' menuValue={menuValue}>
                       关注

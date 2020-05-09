@@ -21,13 +21,14 @@ const HocWrap = SourceComponent => {
 
     async componentDidMount() {
       this.getDatas(1);
+      emitter.addListener('scrollToBottom', this.loadMore);
+    }
 
-      this.eventEmitter = emitter.addListener('scrollToBottom', () => {
-        const { page } = this.state.datas;
-        if(!page.nextPage) return;
+    loadMore = () => {
+      const { page } = this.state.datas;
+      if(!page.nextPage) return;
 
-        this.getDatas(page.nextPage);
-      });
+      this.getDatas(page.nextPage);
     }
 
     getDatas = async pageNo => {
@@ -43,8 +44,16 @@ const HocWrap = SourceComponent => {
       });
     };
 
+    refreshDatas = async () => {
+      const { params } = this.props.match;
+      const res = await this.props[SourceComponent.method]({id:params.id,pageNo:1});
+      this.setState({
+        datas: res.data
+      });
+    }
+
     componentWillUnmount() {
-      console.log('componentWillUnmount')
+      emitter.removeListener('scrollToBottom',this.loadMore);
     }
     render() {
       const { datas, loading } = this.state;
@@ -63,7 +72,7 @@ const HocWrap = SourceComponent => {
           <Skeleton variant="text" width={132} height={32}  />
         </div>
         :
-        <SourceComponent {...this.props} {...datas} />
+        <SourceComponent {...this.props} {...datas} refreshDatas={this.refreshDatas}/>
       )
     }
   }

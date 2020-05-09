@@ -38,6 +38,7 @@ class EditorPost extends React.Component {
 
 const mapStateToProps = state => ({
   initialData: state.editPostPage,
+  userInfo: state.userInfo
 });
 
 //将获取数据的方法也做为 props传递给组件

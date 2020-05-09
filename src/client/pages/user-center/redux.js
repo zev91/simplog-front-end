@@ -67,7 +67,20 @@ export const actions = {
     type: 'postDetailPage.getUserPosts',
     action: (params,http) => {
       const { id, pageNo } = params;
-      return http.get(`/api/user-posts/${id}?pageNo=${pageNo}`)
+      return http.get(`/api/userPosts/${id}?pageNo=${pageNo}`)
+    },
+    handler: (state, result) => {
+      return {
+        ...state
+      }
+    }
+  },reducerHandler),
+
+  getActivites: action({
+    type: 'postDetailPage.getActivites',
+    action: (params,http) => {
+      const { id, pageNo } = params;
+      return http.get(`/api/getActivites/${id}?pageNo=${pageNo}`)
     },
     handler: (state, result) => {
       return {

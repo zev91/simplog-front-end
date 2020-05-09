@@ -67,6 +67,7 @@ const RenderComments = ({ comment, currentUser, createComment, deleteComment, ge
           ?
           comment.children.map(item => (
             <Commentitem
+              key={item._id}
               {...item}
               setVisible={setVisible}
               setPid={setPid}
@@ -107,7 +108,7 @@ class CommentsLists extends Component {
       <div className='comments-lists-wrap'>
         <h3 className='comments-lists-header'>全部评论</h3>
         {
-          comments.map(comment => <RenderComments {...this.props} comment={comment} />)
+          comments.map(comment => <RenderComments key={comment._id} {...this.props} comment={comment} />)
         }
       </div>
     )

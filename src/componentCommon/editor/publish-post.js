@@ -76,7 +76,7 @@ class PublishPost extends Component {
                   <header>分类</header>
                   <div className='category-btn-wrap'>
                     {
-                      postCategorys.map(postCategory => (
+                      postCategorys.map((postCategory) => (
                         <Button key={postCategory} variant='outlined' color={category === postCategory ? 'primary' : 'default'} size="small" onClick={this.selectCategory.bind(this,postCategory)}>
                         {postCategory}
                       </Button>

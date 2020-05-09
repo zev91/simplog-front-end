@@ -57,7 +57,7 @@ class Notification extends Component {
     const { notices } = this.state
     return (
       <TransitionGroup className="toast-notification">
-        {notices.map(notice => (
+        {notices.map((notice) => (
           <CSSTransition
             key={notice.key}
             classNames="toast-notice-wrapper notice"

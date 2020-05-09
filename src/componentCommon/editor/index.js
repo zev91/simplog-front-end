@@ -4,7 +4,7 @@ import PreviewContent from './preview-content';
 import { IconButton, Button, Avatar } from '@material-ui/core';
 import ImageIcon from '@material-ui/icons/Image';
 import PublishIcon from '@material-ui/icons/Publish';
-import { debounce } from 'src/utils/helper';
+import { debounce, openInNewTab } from 'src/utils/helper';
 import UploadHeaderImage from './upload-header-image';
 import PublishPost from './publish-post';
 import css from './style.scss';
@@ -128,9 +128,10 @@ class Editor extends Component {
       const res = await this.props.publishPost({ id: match.params.id, title, body: code, headerBg, tags, category });
       if(res && res.success){
         Toast.success(res.data.message);
-        history.push('/post/'+match.params.id)
+        setTimeout(() => {
+          location.replace('/post/'+match.params.id);
+        },1000);
       }
-
   }
 
   render() {
@@ -165,7 +166,7 @@ class Editor extends Component {
             publishPost={this.publishPost}
             published={this.props.published}
           />
-          <Avatar className='user-avater'>{userInfo.username[0]}</Avatar>
+          <Avatar className='user-avater'>{userInfo.username ? userInfo.username[0] : ''}</Avatar>
 
         </div>
       </header>,
