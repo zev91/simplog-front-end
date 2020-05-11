@@ -1,0 +1,45 @@
+.svg-wrap{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: 0.6;
+}
+
+.tips-text{
+  padding-top: 6px;
+  text-align: center;
+}
+.empty-img-default{
+  max-height: 100px;
+}
+
+.empty-img-default-ellipse {
+  fill-opacity: .8;
+  fill: #f5f5f5;
+}
+
+.empty-img-default-path-1 {
+  fill: #aeb8c2;
+}
+
+.empty-img-default-path-2 {
+  fill: url(#linearGradient-1);
+}
+
+.empty-img-default-path-3 {
+  fill: #f5f5f7;
+}
+
+.empty-img-default-path-4 {
+  fill: #dce0e6;
+}
+
+.empty-img-default-path-5 {
+  fill: #dce0e6;
+}
+
+.empty-img-default-g {
+  fill: #fff;
+}
+    

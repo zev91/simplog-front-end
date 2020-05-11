@@ -181,16 +181,7 @@ class PostDetail extends React.Component {
           </div>
           <div className='auth-info-content'>
             <div className='avater-work'>
-              {
-                post.author && post.author.avator
-                  ?
-                  <Avatar className='user-avater' src={post.author && post.author.avator} />
-                  :
-                  <Avatar className='user-avater'>
-                    {post.author && post.author.username[0].toUpperCase()}
-                  </Avatar>
-              }
-
+              <Avatar className='user-avater' src={post.author && post.author.avatar} />
               <div className='auth-info-work'>
                 <div>{post.author && post.author.username}</div>
                 <div>{post.author && post.author.jobTitle}</div>

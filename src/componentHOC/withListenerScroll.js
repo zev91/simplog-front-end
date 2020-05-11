@@ -5,6 +5,7 @@ import composeHOC from 'src/utils/composeHOC';
 import emitter from 'src/utils/events';
 import { actions } from 'src/client/pages/user-center/redux';
 import Skeleton from '@material-ui/lab/Skeleton';
+import Empty from 'src/componentCommon/empty';
 
 const HocWrap = SourceComponent => {
   return class HocComponent extends Component {
@@ -65,14 +66,14 @@ const HocWrap = SourceComponent => {
             <Skeleton variant="circle" width={32} height={32} />
             <Skeleton variant="text" width='calc(100% - 42px)' height={28}/>
           </div>
-
           <Skeleton variant="text" width={200} height={28}/>
           
           <Skeleton variant="rect" width='100%' height={128} />
           <Skeleton variant="text" width={132} height={32}  />
         </div>
         :
-        <SourceComponent {...this.props} {...datas} refreshDatas={this.refreshDatas}/>
+        (datas.datas.length ? <SourceComponent {...this.props} {...datas} refreshDatas={this.refreshDatas}/> : <Empty/>)
+        
       )
     }
   }

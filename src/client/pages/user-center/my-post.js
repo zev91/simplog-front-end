@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import Avatar from '@material-ui/core/Avatar';
-import PersonIcon from '@material-ui/icons/Person';
+
 import { timeTransfor, openInNewTab } from 'src/utils/helper';
 import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
 import ThumbUpIcon from '@material-ui/icons/ThumbUp';
@@ -44,7 +44,7 @@ class MyPost extends Component {
           datas.map(post => (
             <div key={post._id} className='my-post-block' onClick={this.switchDetail.bind(null,post._id)}>
               <div className='block-header'>
-                {post.author.avatar ? <Avatar alt="avatar" src={post.author.avatar} /> : <Avatar><PersonIcon /></Avatar>}
+               <Avatar alt="avatar" src={post.author.avatar} />
                 {post.author.username}
                 <span className='split-point'>&#8901;</span>
                 <span>{timeTransfor(new Date(post.createdAt))}</span>

@@ -39,7 +39,7 @@ const routeList = [
     exact: true
   },
   {
-    path: '/user/:id/menu',
+    path: '/user/:id',
     component: AsyncLoader(() => import('./client/pages/user-center/')),
     exact: true
   }

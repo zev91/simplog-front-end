@@ -13,19 +13,23 @@ class AddCommentInput extends Component {
     this.state = {}
   }
 
+  getAvatar = () => {
+    if(!this.props.currentUser.avatar) return 'https://simplog.oss-cn-beijing.aliyuncs.com/system/unlogin-avatar.svg';
+    return this.props.currentUser.avatar;
+  }
+
   render() {
+    console.log(this.props.currentUser)
     return (
       <div className='post-comments'>
         <div className='main-comment-input-wrap'>
-          <Avatar>
-            {this.props.currentUser.username ? this.props.currentUser.username[0].toUpperCase() : <PersonIcon></PersonIcon>}
-          </Avatar>
-            <CommentInput 
-              currentUser={this.props.currentUser}
-              createComment={this.props.createComment}
-              getComment={this.props.getComment}
-              id={this.props.match.params.id}
-            />
+          <Avatar src={this.getAvatar()}/>
+          <CommentInput 
+            currentUser={this.props.currentUser}
+            createComment={this.props.createComment}
+            getComment={this.props.getComment}
+            id={this.props.match.params.id}
+          />
         </div>
       </div>
     )

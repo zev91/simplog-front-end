@@ -10,7 +10,7 @@ export const actions = {
 
       const path = __SERVER__ ? global.REQUEST_PATH : location.pathname;
       const urlInfo = path.split('/');
-      const userId = urlInfo[urlInfo.length-2];
+      const userId = urlInfo[urlInfo.length-1];
       const page = {
         tdk: {
           title: '',

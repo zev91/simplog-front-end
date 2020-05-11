@@ -17,12 +17,14 @@ const Commentitem = ({ setVisible, setPid, parentId, _id, likeCount, fromUser, r
     }
     setPid(parentId || _id);
     setVisible(true);
-    setReply(parentId ? { id: fromUser._id, name: fromUser.username } : {});
+    // setReply(parentId ? { id: fromUser._id, name: fromUser.username } : {});
+    setReply({ id: fromUser._id, name: fromUser.username });
+
   }
 
   return (
     <div className='comment-cell-item'>
-      <Avatar>{fromUser.username[0].toUpperCase()}</Avatar>
+      <Avatar alt='avatar' src={fromUser.avatar}/>
       <div className='comment-content'>
         <div className='auth-info'>{fromUser.username} {isAuthor ? <span className='is-author'>作者</span> : ''} {replyToUser && replyToUser.username ? <span>回复 <Link>{replyToUser.username}</Link>:</span> : ''}</div>
         <div className='comment-date'>{moment(createdAt).format("YYYY.MM.DD HH:mm:ss")}</div>

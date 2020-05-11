@@ -94,7 +94,9 @@ class UserCenter extends React.Component {
               <div className='major-area' onScroll={this.handlerTabChange} >
                 <div className='major-content' ref={ref => this.majorContent = ref}>
                   <div className='itemscope shadow block'>
-                    <div className='user-avater'>{userInfo.avatar ? <img src="userInfo.avatar" /> : <PersonIcon style={{ fontSize: 40 }} />}</div>
+                    <div className='user-avater'>
+                      <img src="userInfo.avatar" src={userInfo.avatar}/> 
+                    </div>
                     <div className='user-info-box'>
                       <h1>{userInfo.username}</h1>
                       <span><WorkIcon />{userInfo.jobTitle || '无'}</span>
@@ -105,7 +107,7 @@ class UserCenter extends React.Component {
                   </div>
 
                   <div className='list-block block shadow'>
-                    <div style={{ minHeight: 49 }}>
+                    <div style={{ minHeight: 49, background: '#fff' }}>
                       <Tabs
                         value={menuValue}
                         indicatorColor="primary"

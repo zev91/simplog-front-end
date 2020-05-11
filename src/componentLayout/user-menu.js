@@ -18,14 +18,14 @@ export default ({userInfo,history}) => {
     <PopupState variant="popover" popupId="user-menu-popup">
       {(popupState) => (
         <React.Fragment>
-          <Avatar className='user-avater' {...bindTrigger(popupState)}>{userInfo.username[0]}</Avatar>
+          <Avatar className='user-avater' {...bindTrigger(popupState)} src={userInfo.avatar} />
           <Menu
             {...bindMenu(popupState)}
             getContentAnchorEl={null}
             anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
             transformOrigin={{ vertical: 'top', horizontal: 'left' }}
           >
-            <MenuItem onClick={switchPage.bind(null,popupState,'/user/5e96d4c268240036fe98505f/menu')}><PersonIcon/>我的主页</MenuItem>
+            <MenuItem onClick={switchPage.bind(null,popupState,'/user/'+userInfo._id)}><PersonIcon/>我的主页</MenuItem>
             <MenuItem onClick={switchPage}><BookmarkIcon/>收藏的文章</MenuItem>
             <MenuItem onClick={switchPage}><DraftsIcon/>草稿</MenuItem>
             <MenuItem onClick={switchPage}><SettingsIcon/>设置</MenuItem>

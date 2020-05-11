@@ -166,7 +166,7 @@ class Editor extends Component {
             publishPost={this.publishPost}
             published={this.props.published}
           />
-          <Avatar className='user-avater'>{userInfo.username ? userInfo.username[0] : ''}</Avatar>
+          <Avatar className='user-avater' src={userInfo.avatar} />
 
         </div>
       </header>,

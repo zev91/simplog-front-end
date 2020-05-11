@@ -12,6 +12,8 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import Comfirm from 'src/componentCommon/confirm';
 import PopupState, { bindTrigger, bindMenu } from 'material-ui-popup-state';
+import { LikePostItem, CommentItem, PublishPostItem, CollectionPostItem, FollowAuthorItem } from './activity-items';
+
 import withListenerScroll from 'src/componentHOC/withListenerScroll';
 
 class MyActivities extends Component {
@@ -41,11 +43,13 @@ class MyActivities extends Component {
     return (
       <div className='my-activites-wrap'>
         {
-          datas.map(data => (
-            <div key={data._id} className='my-activites-block'>
-              list
-            </div>
-          ))
+          datas.map(data => {
+            if(data.activeType === 'LIKE_POST') return <LikePostItem data={data}/>;
+            if(data.activeType === 'COMMENT') return <CommentItem data={data}/>;
+            if(data.activeType === 'PUBLISH') return <PublishPostItem data={data}/>;
+            if(data.activeType === 'COLLECTION') return <CollectionPostItem data={data}/>;
+            if(data.activeType === 'FOLLOW') return <FollowAuthorItem data={data}/>;
+          })
         }
       </div>
     )
