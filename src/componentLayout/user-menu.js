@@ -8,12 +8,19 @@ import BookmarkIcon from '@material-ui/icons/Bookmark';
 import DraftsIcon from '@material-ui/icons/Drafts';
 import SettingsIcon from '@material-ui/icons/Settings';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import Cookie from 'js-cookie';
 
 export default ({userInfo,history}) => {
   const switchPage = (popupState,path) => {
     history.push(path);
     popupState.close();
   }
+
+  const logout = (popupState) => {
+    Cookie.set('token','');
+    switchPage(popupState,'/login');
+  }
+
   return (
     <PopupState variant="popover" popupId="user-menu-popup">
       {(popupState) => (
@@ -26,10 +33,9 @@ export default ({userInfo,history}) => {
             transformOrigin={{ vertical: 'top', horizontal: 'left' }}
           >
             <MenuItem onClick={switchPage.bind(null,popupState,'/user/'+userInfo._id)}><PersonIcon/>我的主页</MenuItem>
-            <MenuItem onClick={switchPage}><BookmarkIcon/>收藏的文章</MenuItem>
-            <MenuItem onClick={switchPage}><DraftsIcon/>草稿</MenuItem>
-            <MenuItem onClick={switchPage}><SettingsIcon/>设置</MenuItem>
-            <MenuItem onClick={switchPage}><ExitToAppIcon/>退出</MenuItem>
+            <MenuItem onClick={switchPage.bind(null,popupState,'/editor/draft')}><DraftsIcon/>草稿</MenuItem>
+            <MenuItem onClick={switchPage.bind(null,popupState,'/users/setting')}><SettingsIcon/>设置</MenuItem>
+            <MenuItem onClick={logout.bind(null,popupState)}><ExitToAppIcon/>退出登录</MenuItem>
           </Menu>
         </React.Fragment>
       )}

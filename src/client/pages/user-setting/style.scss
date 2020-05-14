@@ -1,0 +1,101 @@
+.user-setting-page {
+  height: calc(100vh - 64px);
+  overflow-y: auto;
+  background: #f8f8f8;
+
+  .setting-block {
+    max-width: 920px;
+    margin: 20px auto 0;
+    padding: 0 12px;
+
+
+    position: relative;
+    padding: 32px 48px 84px;
+    background-color: #fff;
+
+    header{
+      margin: 16px 0;
+      font-size: 24px;
+      font-weight: 700;
+    }
+
+    .upload-avatar{
+      display: flex;
+      padding: 12px 0;
+      border-top: 1px solid #eee;
+
+      label.item-label{
+        line-height: 72px;
+      }
+
+      .avater-content{
+        display: flex;
+        & > img{
+          width: 72px;
+          height: 72px;
+        }
+
+        .upload-block{
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          margin-left: 24px;
+
+          .upload-tips{
+            color: #909090;
+            font-size: 12px;
+            margin-bottom: 10px;
+          }
+          .MuiButtonBase-root{
+            border-radius: 0;
+          }
+
+          .upload-item{
+            input{
+              display: none;
+            }
+        }
+        }
+      }
+    }
+
+    .other-info{
+      display: flex;
+      padding: 12px 0;
+      border-top: 1px solid #eee;
+
+      &:last-child{
+        border-bottom: 1px solid #eee;
+      }
+
+      .change-input{
+        width: calc(100% - 200px);
+        border: none;
+        line-height: 16px;
+        
+        &:focus{
+          outline: none;
+        }
+      }
+
+      .op-bars{
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        width: 100px;
+        text-align: right;
+
+        & > a{
+          margin-left: 4px;
+        }
+      }
+    }
+
+    label.item-label{
+      width: 100px;
+      line-height: 44px;
+      font-size: 14.4px;
+      color: #333;
+    }
+  }
+}

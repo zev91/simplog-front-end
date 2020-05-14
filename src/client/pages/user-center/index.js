@@ -5,7 +5,6 @@ import { actions } from './redux';
 import { Button } from '@material-ui/core';
 import withInitialData from 'src/componentHOC/with-initial-data';
 import withStyles from 'isomorphic-style-loader/withStyles';
-import PersonIcon from '@material-ui/icons/Person';
 import WorkIcon from '@material-ui/icons/Work';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import ThumbUpIcon from '@material-ui/icons/ThumbUp';
@@ -16,6 +15,10 @@ import emitter from 'src/utils/events';
 import moment from 'moment';
 import MyPost from './my-post';
 import MyActivites from './my-activites';
+import Follow from './follow';
+import Collection from './collection';
+import { openInNewTab } from 'src/utils/helper';
+import Toast from 'src/componentCommon/toast';
 
 import css from './style.scss';
 
@@ -65,6 +68,22 @@ class UserCenter extends React.Component {
     return store.dispatch(actions.getInitialData());
   }
 
+  handerFollow = async () => {
+    const { currentUser, initialData } = this.props;
+    // const { id } = this.props.match.params;
+    const { _id } = initialData.userInfo;
+
+    if (!currentUser._id) {
+      Toast.error('请先登录！');
+      return;
+    }
+    const res = await this.props.followauthor(_id);
+    if (res && res.success) {
+      this.props.getOtherUserInfo(_id);
+      Toast.success(res.data.message);
+    }
+  }
+
   handlerTabChange = () => {
     const contentPosition = this.majorContent.getBoundingClientRect();
     const userViewPosition = this.userView.getBoundingClientRect();
@@ -81,6 +100,23 @@ class UserCenter extends React.Component {
     }
   }
 
+  ifFollowAuthor = () => {
+    const { currentUser, initialData } = this.props;
+    return initialData.userInfo.totalFollowTo && initialData.userInfo.totalFollowTo.findIndex(item => item.followFrom === currentUser._id) > -1;
+  }
+
+  handlerBtn = () => {
+    const { currentUser, initialData } = this.props;
+    if(currentUser._id === initialData.userInfo._id){
+      return <Button variant="outlined" color="secondary" onClick={() => openInNewTab('/users/setting',true)}>编辑个人资料</Button>
+    }
+
+    if(this.ifFollowAuthor()){
+      return <Button variant="outlined" color="secondary" onClick={this.handerFollow}>已关注</Button>
+    }
+
+    return <Button variant="outlined" color="secondary"  onClick={this.handerFollow}>加关注</Button> 
+  }
 
   render() {
     const { userInfo } = this.props.initialData;
@@ -102,7 +138,7 @@ class UserCenter extends React.Component {
                       <span><WorkIcon />{userInfo.jobTitle || '无'}</span>
                     </div>
                     <div className='user-action-box'>
-                      <Button variant="outlined" color="secondary">编辑个人资料</Button>
+                      {this.handlerBtn()}
                     </div>
                   </div>
 
@@ -131,10 +167,10 @@ class UserCenter extends React.Component {
                       <MyActivites />
                     </TabPanel>
                     <TabPanel value='follow' menuValue={menuValue}>
-                      关注
+                      <Follow/>
                     </TabPanel>
                     <TabPanel value='collection' menuValue={menuValue}>
-                      收藏
+                      <Collection/>
                     </TabPanel>
                   </div>
                 </div>
@@ -185,6 +221,7 @@ class UserCenter extends React.Component {
 
 const mapStateToProps = state => ({
   initialData: state.userCenterPage,
+  currentUser: state.userInfo
 });
 
 //将获取数据的方法也做为 props传递给组件

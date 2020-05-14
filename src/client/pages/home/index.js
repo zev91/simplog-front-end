@@ -34,13 +34,8 @@ class List extends React.Component {
     return store.dispatch(actions.getInitialData());
   }
 
-  handlerClick = () => {
-    console.log(this.props)
-  }
-
   toDetail = id => {
     this.props.history.push('/post/' + id);
-    console.log(id, this.props)
   }
 
   getMore = () => {

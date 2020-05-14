@@ -39,6 +39,16 @@ const routeList = [
     exact: true
   },
   {
+    path: '/editor/draft',
+    component: AsyncLoader(() => import('./client/pages/draft-list/')),
+    exact: true
+  },
+  {
+    path: '/users/setting',
+    component: AsyncLoader(() => import('./client/pages/user-setting/')),
+    exact: true
+  },
+  {
     path: '/user/:id',
     component: AsyncLoader(() => import('./client/pages/user-center/')),
     exact: true

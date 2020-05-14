@@ -11,12 +11,14 @@ const HocWrap = SourceComponent => {
   return class HocComponent extends Component {
     constructor(props) {
       super(props);
+
       this.state = {
         datas: {
           datas: [],
           page: {}
         },
-        loading: true
+        loading: true,
+        followType: ''
       }
     }
 
@@ -24,6 +26,17 @@ const HocWrap = SourceComponent => {
       this.getDatas(1);
       emitter.addListener('scrollToBottom', this.loadMore);
     }
+
+    changeFollowType = followType => {
+      this.setState({
+        datas: {
+          datas: [],
+          page: {}
+        },
+        loading: true,
+        followType
+    },() => this.getDatas(1))
+  }
 
     loadMore = () => {
       const { page } = this.state.datas;
@@ -35,7 +48,13 @@ const HocWrap = SourceComponent => {
     getDatas = async pageNo => {
       const { params } = this.props.match;
       const { datas } = this.state.datas;
-      const res = await this.props[SourceComponent.method]({id:params.id,pageNo});
+      const { followType } = this.state;
+      const queryData = {id:params.id,pageNo};
+
+      if(followType) {
+        queryData['followType'] = followType;
+      }
+      const res = await this.props[SourceComponent.method](queryData);
       this.setState({
         datas: {
           datas:[...datas,...res.data.datas],
@@ -57,11 +76,11 @@ const HocWrap = SourceComponent => {
       emitter.removeListener('scrollToBottom',this.loadMore);
     }
     render() {
-      const { datas, loading } = this.state;
+      const { datas, loading, followType } = this.state;
       return (
         loading
         ? 
-        <div>
+        <div className='user-center-skeleton-wrap' style={{padding:'12px 14px',background: '#fff'}}>
           <div style={{display:'flex', alinItems:'center',justifyContent:'space-between',paddingBottom:10}}>
             <Skeleton variant="circle" width={32} height={32} />
             <Skeleton variant="text" width='calc(100% - 42px)' height={28}/>
@@ -72,7 +91,7 @@ const HocWrap = SourceComponent => {
           <Skeleton variant="text" width={132} height={32}  />
         </div>
         :
-        (datas.datas.length ? <SourceComponent {...this.props} {...datas} refreshDatas={this.refreshDatas}/> : <Empty/>)
+        (datas.datas.length ? <SourceComponent {...this.props} {...datas} changeFollowType={this.changeFollowType} followType={followType} refreshDatas={this.refreshDatas}/> : <Empty/>)
         
       )
     }

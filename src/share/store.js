@@ -21,7 +21,7 @@ export const axios = axiosCreater({
   },
   failMiddleware: (error) => {
     // console.log('error.response====>>>',error.response.status);
-  console.log('没有登录====>>>>',error)
+  // console.log('没有登录====>>>>',error)
 
 
     if(!error.response ){

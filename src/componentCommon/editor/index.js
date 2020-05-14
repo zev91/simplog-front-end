@@ -65,9 +65,11 @@ class Editor extends Component {
   }
 
   uploadFileChange = async e => {
+    const { match } = this.props;
     const formData = new FormData();
     const image = e.target.files[0];
     formData.append('images', image);
+    formData.append('postId', match.params.id);
     // Toast.loading('上传中');
     const res = await this.props.uploadImage(formData);
 
@@ -102,7 +104,7 @@ class Editor extends Component {
       const { match, history } = this.props;
       const { title, code, headerBg, tags, category } = this.state;
       this.setState({
-        saving: true,
+        saving: true, 
         saveTips: '已保存至'
       });
 
@@ -136,7 +138,7 @@ class Editor extends Component {
 
   render() {
     const { fold, code, title, preContent, saving, saveTips, headerBg, tags, category } = this.state;
-    const { userInfo } =this.props;
+    const { userInfo, match } =this.props;
     return [
       <header key='header' className='editor-header'>
         <input

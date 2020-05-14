@@ -5,7 +5,7 @@ const reducerHandler = createReducer();
 export const actions = {
 
   getInitialData: action({
-    type: 'listPage.getInitialData',
+    type: 'userCenterPage.getInitialData',
     action: async (http,dispatch) => {
 
       const path = __SERVER__ ? global.REQUEST_PATH : location.pathname;
@@ -34,7 +34,7 @@ export const actions = {
   },reducerHandler),
 
   getPage: action({
-    type: 'listPage.getPage',
+    type: 'userCenterPage.getPage',
     action: () => ({
       tdk: {
         title: '个人主页',
@@ -49,9 +49,23 @@ export const actions = {
     }
   },reducerHandler),
 
+  followauthor: action({
+    type: 'userCenterPage.followauthor',
+    action: (userId,http) => {
+      return http.post(`/api/follow/${userId}`)
+    },
+    handler: (state, result) => {
+      return {
+        ...state,
+      }
+    }
+  },reducerHandler),
+
   getOtherUserInfo: action({
-    type: 'postDetailPage.getOtherUserInfo',
+    type: 'userCenterPage.getOtherUserInfo',
     action: (id,http) => {
+
+      console.log('getgetget===>>>>>>')
       return http.get(`/api/getOtherUserInfo/${id}`)
     },
     handler: (state, result) => {
@@ -64,7 +78,7 @@ export const actions = {
   },reducerHandler),
 
   getUserPosts: action({
-    type: 'postDetailPage.getUserPosts',
+    type: 'userCenterPage.getUserPosts',
     action: (params,http) => {
       const { id, pageNo } = params;
       return http.get(`/api/userPosts/${id}?pageNo=${pageNo}`)
@@ -77,7 +91,7 @@ export const actions = {
   },reducerHandler),
 
   getActivites: action({
-    type: 'postDetailPage.getActivites',
+    type: 'userCenterPage.getActivites',
     action: (params,http) => {
       const { id, pageNo } = params;
       return http.get(`/api/getActivites/${id}?pageNo=${pageNo}`)
@@ -90,9 +104,39 @@ export const actions = {
   },reducerHandler),
 
   deletePost: action({
-    type: 'postDetailPage.deletePost',
+    type: 'userCenterPage.deletePost',
     action: (id,http) => {
       return http.delete(`/api/posts/${id}`)
+    },
+    handler: (state, result) => {
+      return {
+        ...state
+      }
+    }
+  },reducerHandler),
+
+  getFollowedUsers: action({
+    type: 'userCenterPage.getFollowedUsers',
+    action: (params,http) => {
+      if(!params.followType){
+        params['followType'] = 'FOLLOW_TO'
+      }
+      const { id, pageNo, followType } = params;
+      
+      return http.get(`/api/getFollowedUsers/${id}?pageNo=${pageNo}&followType=${followType}`)
+    },
+    handler: (state, result) => {
+      return {
+        ...state
+      }
+    }
+  },reducerHandler),
+
+  getUserCollections: action({
+    type: 'userCenterPage.getActivites',
+    action: (params,http) => {
+      const { id, pageNo } = params;
+      return http.get(`/api/getUserCollections/${id}?pageNo=${pageNo}`)
     },
     handler: (state, result) => {
       return {

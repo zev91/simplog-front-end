@@ -183,6 +183,7 @@ export const actions = {
 
 const inintState = {
   post: {
+    author: {},
     body:'',
     headerBg:'',
     tags:[]

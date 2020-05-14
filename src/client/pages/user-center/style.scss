@@ -67,6 +67,7 @@
 
             span {
               display: flex;
+              align-items: center;
               font-size: 14px;
               color: #72777b;
 
@@ -208,7 +209,7 @@
 
 .my-posts-wrap {
   .my-post-block {
-
+    margin-top: 12px;
     padding: 20px;
     border-bottom: 1px solid #eee;
     background: #fff;
@@ -349,7 +350,7 @@
     }
 
     .reference-post-mian {
-      // padding-left: 50px;
+      cursor: pointer;
 
       header {
         margin: 0;
@@ -370,6 +371,7 @@
           color: #5c6066;
           line-height: 1.53;
           flex: 1 1 auto;
+          word-break: break-word;
         }
 
         img {
@@ -448,5 +450,69 @@
       color: #8a9aa9;
       cursor: default;
     }
+  }
+}
+
+.follow-author-list-wrap{
+  .follow-type-switch{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 10px 12px;
+    background: #fff;
+
+    & > span {
+      color: #72777b;
+      cursor: pointer;
+      &.active{
+        color: #000;
+      }
+    }
+    
+    .MuiDivider-root{
+      height: 14px;
+      margin: 0 4px;
+      background-color: rgba(0, 0, 0, 0.32)
+    }
+  }
+
+  .follow-author-list-item{
+    margin-top: 12px;
+    padding: 12px;
+    background: #fff;
+
+    .list-left{
+      display: flex;
+      cursor: pointer;
+    }
+    .reference-author-info{
+      display: flex;
+      flex-direction: column;
+      margin-left: 20px;
+  
+        .user-name{
+          font-size: 16px;
+          font-weight: 600;
+          color: #2e3135;
+        }
+
+        .job-title{
+          margin-top: 2px;
+          font-size: 12px;
+          font-weight: 500;
+          color: #b9c0c8;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+      
+    }
+    
+  }
+}
+
+.my-collection-wrap {
+  .reference-post-block{
+    opacity: 1;
   }
 }

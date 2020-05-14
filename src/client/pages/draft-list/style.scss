@@ -1,0 +1,50 @@
+.draft-page {
+  height: calc(100vh - 64px);
+  overflow-y: auto;
+  background: #f8f8f8;
+
+  .draft-list-block {
+    max-width: 920px;
+    margin: 20px auto 0;
+    padding: 0 12px;
+    background: #fff;
+    box-shadow: 7px 12px 18px #00000008;
+
+    .draft-list-item{
+      padding: 24px 0 14px;
+      border-top: 1px solid rgba(0,0,0,.05);
+
+      &:first-child{
+        border: none;
+      }
+
+      header{
+        font-size: 16px;
+        font-weight: 700;
+        line-height: 2;
+        text-decoration: none;
+        color: #333;
+        cursor: pointer;
+      }
+
+      .info-box{
+        display: flex;
+        align-items: center;
+        margin: 3.6px 0;
+        font-size: 14.4px;
+        color: #909090;
+        cursor: default;
+
+        .MuiIconButton-root{
+          padding: 8px;
+          margin-left: 12px;
+        }
+
+        .MuiSvgIcon-root{
+          width: 0.7em;
+          height: 0.7em;
+        }
+      }
+    }
+  }
+}

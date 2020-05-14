@@ -5,6 +5,9 @@ function onSuccess({ type, result }) {
 }
 
 function onError({ type, error }) {
+  if (typeof window === 'undefined') {
+    global.window = null
+  }
   if(window){
     if (error.response) {
 

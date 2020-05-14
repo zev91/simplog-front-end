@@ -9,7 +9,7 @@ import Comfirm from 'src/componentCommon/confirm';
 import Toast from 'src/componentCommon/toast'
 import css from './comments-lists.scss';
 
-const Commentitem = ({ setVisible, setPid, parentId, _id, likeCount, fromUser, replyToUser, currentUser, isAuthor, body, createdAt, setReply, deleteComment, getComment, match }) => {
+const Commentitem = ({ setVisible, setPid, parentId, _id, postAuthor, parentAuthor,  fromUser, replyToUser, currentUser, isAuthor, body, createdAt, setReply, deleteComment, getComment, match }) => {
   function handlerReply() {
     if(!currentUser._id){
       Toast.error('请先登录!');
@@ -19,7 +19,6 @@ const Commentitem = ({ setVisible, setPid, parentId, _id, likeCount, fromUser, r
     setVisible(true);
     // setReply(parentId ? { id: fromUser._id, name: fromUser.username } : {});
     setReply({ id: fromUser._id, name: fromUser.username });
-
   }
 
   return (
@@ -33,7 +32,7 @@ const Commentitem = ({ setVisible, setPid, parentId, _id, likeCount, fromUser, r
           <span onClick={handlerReply}><ChatBubbleIcon />回复</span>
 
           {
-            currentUser._id === fromUser._id
+            currentUser._id && (currentUser._id === fromUser._id || currentUser._id === postAuthor ||  currentUser._id === parentAuthor)
             &&
             <Comfirm header={`确定删除该条评论？`} click={deleteComment.bind(null,_id)} successCb={() => getComment(match.params.id)}>
               <span className='delete-op'><DeleteIcon />删除</span>
@@ -45,12 +44,11 @@ const Commentitem = ({ setVisible, setPid, parentId, _id, likeCount, fromUser, r
   )
 }
 
-const RenderComments = ({ comment, currentUser, createComment, deleteComment, getComment, match }) => {
+const RenderComments = ({ comment, currentUser, postAuthor, createComment, deleteComment, getComment, match }) => {
 
   const [visible, setVisible] = useState(false);
   const [pid, setPid] = useState('');
   const [reply, setReply] = useState({});
-
 
   return (
     <div className='comment-cell'>
@@ -60,6 +58,7 @@ const RenderComments = ({ comment, currentUser, createComment, deleteComment, ge
         setPid={setPid}
         setReply={setReply}
         currentUser={currentUser}
+        postAuthor={postAuthor}
         deleteComment={deleteComment}
         getComment={getComment}
         match={match}
@@ -75,6 +74,8 @@ const RenderComments = ({ comment, currentUser, createComment, deleteComment, ge
               setPid={setPid}
               setReply={setReply}
               currentUser={currentUser}
+              postAuthor={postAuthor}
+              parentAuthor={comment.fromUser._id}
               deleteComment={deleteComment}
               getComment={getComment}
               match={match}

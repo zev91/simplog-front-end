@@ -32,7 +32,8 @@ class MyPost extends Component {
   }
 
   editPost = (id) => {
-    openInNewTab('/editor/post/'+id,true);
+    this.props.history.push('/editor/post/'+id);
+    // openInNewTab('/editor/post/'+id,true);
   }
 
   render() {

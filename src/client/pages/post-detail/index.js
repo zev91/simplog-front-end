@@ -5,6 +5,7 @@ import { actions } from './redux';
 import withInitialData from 'src/componentHOC/with-initial-data';
 import withStyles from 'isomorphic-style-loader/withStyles';
 import moment from 'moment';
+import { openInNewTab } from 'src/utils/helper';
 import composeHOC from 'src/utils/composeHOC';
 import marked from 'marked';
 import hljs from 'highlight.js';
@@ -99,21 +100,6 @@ class PostDetail extends React.Component {
     });
   }
 
-  // getSideAuthInfoRight = () => {
-  //   const clientWidth = document.body.clientWidth;
-  //   let left = 0;
-  //   if(clientWidth <= 1112){
-  //     left = 20;
-  //   };
-  //   if(clientWidth > 1112 ){
-  //     left = (clientWidth - 920)/2 - 76;
-  //   };
-
-  //   this.setState({
-  //     hoverBarsLeft: left
-  //   });
-  // }
-
   handlerLike = async () => {
     const { currentUser } = this.props;
     const { id } = this.props.match.params
@@ -179,7 +165,7 @@ class PostDetail extends React.Component {
             <span>关于作者</span>
             <span className={`follow-author ${hasFollowed ? 'followed' : ''}`} onClick={this.handerFollow}>{hasFollowed ? '已关注' : '关注'}</span>
           </div>
-          <div className='auth-info-content'>
+          <div className='auth-info-content' onClick={() => openInNewTab('/user/'+post.author._id,true)}>
             <div className='avater-work'>
               <Avatar className='user-avater' src={post.author && post.author.avatar} />
               <div className='auth-info-work'>
@@ -255,6 +241,7 @@ class PostDetail extends React.Component {
           deleteComment={this.props.deleteComment}
           getComment={this.props.getComment}
           match={this.props.match}
+          postAuthor={post.author._id}
         />
       </div>
 

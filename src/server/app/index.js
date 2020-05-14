@@ -19,6 +19,7 @@ const render = async function(req,res){
   
     res.send(htmlStr);
   }catch(error){
+    console.log(error.message)
     if(error.message === '没有登录'){
       res.redirect(302, '/login');
     }
