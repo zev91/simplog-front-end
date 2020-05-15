@@ -131,7 +131,7 @@ class UserCenter extends React.Component {
                 <div className='major-content' ref={ref => this.majorContent = ref}>
                   <div className='itemscope shadow block'>
                     <div className='user-avater'>
-                      <img src="userInfo.avatar" src={userInfo.avatar}/> 
+                      <img src="userInfo.avatar" src={userInfo.avatar+'?x-oss-process=style/user-center-avatar'}/> 
                     </div>
                     <div className='user-info-box'>
                       <h1>{userInfo.username}</h1>

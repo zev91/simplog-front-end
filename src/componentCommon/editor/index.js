@@ -61,7 +61,7 @@ class Editor extends Component {
     })
   }
   insertContent = (url) => {
-    this.leftEditorRef.current.editor.replaceSelection(`![](${url})`);
+    this.leftEditorRef.current.editor.replaceSelection(`![](${url}?x-oss-process=style/image-in-post)`);
   }
 
   uploadFileChange = async e => {

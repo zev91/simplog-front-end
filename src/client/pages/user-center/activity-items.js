@@ -23,7 +23,9 @@ const CommonCard = post => (
       <header>{post.title}</header>
       <div className='post-text-content'>
         <p>{post.main.length <= 120 ? post.main : post.main.substr(0, 120)}...</p>
-        <img src={post.headerBg + '?x-oss-process=style/list-bg'} />
+        {
+          post.headerBg ? <img src={post.headerBg + '?x-oss-process=style/list-bg'} /> : ''
+        }
       </div>
     </div>
 

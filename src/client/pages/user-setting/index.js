@@ -122,7 +122,7 @@ class UserSetting extends React.Component {
           <div className='upload-avatar'>
             <label className='item-label'>头像</label>
             <div className='avater-content'>
-              <img src={avatar}/>
+              <img src={avatar+'?x-oss-process=style/user-center-avatar'}/>
               <div className='upload-block'>
                 <span className='upload-tips'>支持 jpg、png 格式大小 5M 以内的图片</span>
                 <div className='upload-item'>

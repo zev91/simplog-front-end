@@ -25,7 +25,7 @@ export default ({userInfo,history}) => {
     <PopupState variant="popover" popupId="user-menu-popup">
       {(popupState) => (
         <React.Fragment>
-          <Avatar className='user-avater' {...bindTrigger(popupState)} src={userInfo.avatar} />
+          <Avatar className='user-avater' {...bindTrigger(popupState)} src={userInfo.avatar+'?x-oss-process=style/user-center-avatar'} />
           <Menu
             {...bindMenu(popupState)}
             getContentAnchorEl={null}

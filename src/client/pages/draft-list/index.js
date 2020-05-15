@@ -12,6 +12,7 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import Comfirm from 'src/componentCommon/confirm';
 import PopupState, { bindTrigger, bindMenu } from 'material-ui-popup-state';
+import Empty from 'src/componentCommon/empty';
 
 import moment from 'moment';
 import css from './style.scss';
@@ -77,7 +78,7 @@ class DraftList extends React.Component {
         ref={(ref) => this.scrolWrap = ref}
       >
         {!draftData || !draftData.datas || !draftData.datas.length ?
-          '暂无数据'
+          <Empty/>
           :
           <ul className='draft-list-block' ref={(ref) => this.scrolContent = ref}>
             {draftData.datas.map((item, idx) => (
