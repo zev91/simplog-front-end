@@ -55,12 +55,12 @@ const killChild = () => {
 
 //主进程关闭退出子进程
 process.on('close', (code) => {
-  console.log('main process  close', code);
+  console.log('main process close', code);
   killChild();
 });
 //主进程关闭退出子进程
 process.on('exit', (code) => {
-  console.log('main process  exit', code);
+  console.log('main process exit', code);
   killChild();
 });
 

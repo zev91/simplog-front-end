@@ -25,5 +25,10 @@ module.exports = merge(baseCongig, {
         '__IS_PROD__':isProd,
         '__SERVER__': true
     })
-  ]
+  ],
+  devServer: {
+    contentBase: path.resolve(__dirname, 'dist/static')
+
+  
+  }
 })

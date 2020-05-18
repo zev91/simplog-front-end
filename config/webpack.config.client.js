@@ -16,7 +16,9 @@ module.exports = merge(baseCongig, {
   output: {
     filename: '[name].js',
     path: resolvePath('../dist/static'),
-    publicPath: 'http://localhost:' + proConfig.wdsPort + '/'
+    // publicPath: 'http://localhost:' + proConfig.wdsPort + '/'
+    publicPath: '/source/'
+
   },
   resolve: {
     alias: {
@@ -52,6 +54,17 @@ module.exports = merge(baseCongig, {
     }
   },
   devServer: {
+    // proxy: {
+    //   '/source/': {
+    //     changeOrigin: true,
+    //     target: 'http://localhost:' + proConfig.wdsPort + '/',
+    //     pathRewrite: {
+    //       '^/source': ''
+    //     }
+    //   }
+    //   },
     contentBase: path.resolve(__dirname, 'dist/static')
+
+  
   }
 }) 

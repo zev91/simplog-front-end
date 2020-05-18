@@ -50,7 +50,9 @@ module.exports = {
             loader: 'file-loader',
             options: {
               name: 'images/[name].[ext]',
-              publicPath: 'http://localhost:' + proConfig.wdsPort + '/'
+              publicPath: '/source/'
+
+              // publicPath: 'http://localhost:' + proConfig.wdsPort + '/'
             }
           }]
       },

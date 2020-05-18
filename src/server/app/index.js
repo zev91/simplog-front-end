@@ -30,13 +30,13 @@ const render = async function(req,res){
   
 }
 
-const proxyOption = {
-  target: 'http://localhost:9999',
-  changeOrigoin:true
-};
+// const proxyOption = {
+//   target: 'http://localhost:9999',
+//   changeOrigoin:true
+// };
 app.use(cookieParser());
 
-app.use('/api', createProxyMiddleware(proxyOption));
+// app.use('/api', createProxyMiddleware(proxyOption));
 app.use(express.static('dist/static'));
 app.use(express.static('static'));
 app.use(timeout(TIME_OUT));
