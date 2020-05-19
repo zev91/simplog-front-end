@@ -12,6 +12,9 @@ const resolvePath = (pathstr) => path.resolve(__dirname, pathstr);
 process.env.BABEL_ENV = 'development';//指定 babel 编译环境
 
 module.exports = merge(baseCongig,{
+  performance: {
+    hints: false
+  },
   mode: 'production',
   devtool: 'cheap-module-source-map',
   entry: {

@@ -10,8 +10,8 @@
     "wds:watch": "cross-env BABEL_ENV=development node ./server/scripts/wds-start.js",
     
     "build": "cross-env NODE_ENV=production npm run build:client && npm run build:server",
-    "build:client": "cross-env NODE_ENV=production webpack --config  ./config/webpack.config.prod.js",
-    "build:server": "cross-env NODE_ENV=production webpack --config  ./config/webpack.config.server.js",
+    "build:client": "cross-env NODE_ENV=production webpack --config ./config/webpack.config.prod.js",
+    "build:server": "cross-env NODE_ENV=production webpack --config ./config/webpack.config.server.js",
     "analyz": "NODE_ENV=production npm_config_report=true npm run build"
   },
   "keywords": [],
