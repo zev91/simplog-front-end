@@ -64,8 +64,6 @@ export const actions = {
   getOtherUserInfo: action({
     type: 'userCenterPage.getOtherUserInfo',
     action: (id,http) => {
-
-      console.log('getgetget===>>>>>>')
       return http.get(`/api/getOtherUserInfo/${id}`)
     },
     handler: (state, result) => {

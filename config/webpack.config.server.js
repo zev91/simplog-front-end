@@ -12,7 +12,7 @@ const isProd = process.env.NODE_ENV === 'production';
 
 module.exports = merge(baseCongig, {
   target: 'node',
-  mode: 'development',
+  mode: process.env.NODE_ENV,
   entry: resolvePath('../src/server/app/index.js'),
   output: {
     filename: 'app.js',
@@ -28,7 +28,5 @@ module.exports = merge(baseCongig, {
   ],
   devServer: {
     contentBase: path.resolve(__dirname, 'dist/static')
-
-  
   }
 })

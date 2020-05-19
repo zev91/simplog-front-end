@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { actions } from './redux';
-import { Button } from '@material-ui/core';
+import { openInNewTab } from 'src/utils/helper';
 import withInitialData from 'src/componentHOC/with-initial-data';
 import withStyles from 'isomorphic-style-loader/withStyles';
 import composeHOC from 'src/utils/composeHOC';
@@ -35,7 +35,7 @@ class List extends React.Component {
   }
 
   toDetail = id => {
-    this.props.history.push('/post/' + id);
+    openInNewTab('/post/' + id,true);
   }
 
   getMore = () => {

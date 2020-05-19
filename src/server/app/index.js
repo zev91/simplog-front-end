@@ -19,7 +19,6 @@ const render = async function(req,res){
   
     res.send(htmlStr);
   }catch(error){
-    console.log(error.message)
     if(error.message === '没有登录'){
       res.redirect(302, '/login');
     }
@@ -30,15 +29,21 @@ const render = async function(req,res){
   
 }
 
-// const proxyOption = {
-//   target: 'http://localhost:9999',
-//   changeOrigoin:true
-// };
+const proxyOption = {
+  target: 'http://localhost:9999',
+  changeOrigoin:true
+};
+
 app.use(cookieParser());
 
-// app.use('/api', createProxyMiddleware(proxyOption));
+if(process.env.BABEL_ENV !== 'production'){
+  app.use('/api', createProxyMiddleware(proxyOption));
+}
+
 app.use(express.static('dist/static'));
 app.use(express.static('static'));
+
+// app.use('/static', express.static(__dirname + '/dist/static'));
 app.use(timeout(TIME_OUT));
 app.use((req, res, next) => {
   if (!req.timedout) next();

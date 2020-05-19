@@ -1,5 +1,5 @@
 {
-  "name": "ssr-juejin",
+  "name": "simplog-front",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -8,6 +8,7 @@
     "client:watch": "webpack-dev-server --config ./config/webpack.config.client.js --open",
     "server:watch": "node ./server/scripts/svr-code-watch",
     "wds:watch": "cross-env BABEL_ENV=development node ./server/scripts/wds-start.js",
+    
     "build": "cross-env NODE_ENV=production npm run build:client && npm run build:server",
     "build:client": "cross-env NODE_ENV=production webpack --config  ./config/webpack.config.prod.js",
     "build:server": "cross-env NODE_ENV=production webpack --config  ./config/webpack.config.server.js",

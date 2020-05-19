@@ -6,7 +6,6 @@ import { Grid,  Button, Divider,Link } from '@material-ui/core';
 import withInitialData from 'src/componentHOC/with-initial-data';
 import composeHOC from 'src/utils/composeHOC';
 import createForm, { InputFormItem } from 'src/componentHOC/form-create';
-import logo from 'src/assets/logo.png'
 import { actions } from './redux';
 import css from './style.scss';
 
@@ -71,7 +70,7 @@ class Register extends React.Component {
     return (
       <div className='register-page-wrap'>
         <div className='form-wrap'>
-          <img src={logo} className='register-logo' />
+          <img src='https://simplog.oss-cn-beijing.aliyuncs.com/system/logo.png' className='register-logo' />
           <div className='op-title'>
             <header>注册</header>
             <Divider />

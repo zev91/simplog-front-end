@@ -11,7 +11,6 @@ import composeHOC from 'src/utils/composeHOC';
 import css from './style.scss';
 import Toast from 'src/componentCommon/toast';
 import UserMenu from './user-menu';
-import logo from 'src/assets/logo.png';
 
 
 class Header extends Component {
@@ -49,7 +48,7 @@ class Header extends Component {
       <AppBar className="app-header">
         <Toolbar className='tool-bar'>
           <Typography variant="h6" className='logo-wrap' onClick={this.goToHomePage}>
-            <img src={logo} />
+            <img src='https://simplog.oss-cn-beijing.aliyuncs.com/system/logo.png' />
           </Typography>
 
           <div className='right-tool-wrap'>

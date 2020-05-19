@@ -1,10 +1,8 @@
 const path = require('path')
 const webpack = require('webpack');
 const merge = require('webpack-merge');
-// const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TerserPlugin = require('terser-webpack-plugin')
 const ManifestPlugin = require('webpack-manifest-plugin');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const baseCongig = require('./webpack.config.base');
@@ -14,8 +12,8 @@ const resolvePath = (pathstr) => path.resolve(__dirname, pathstr);
 process.env.BABEL_ENV = 'development';//指定 babel 编译环境
 
 module.exports = merge(baseCongig,{
-  mode: 'none',
-  devtool: 'source-map',
+  mode: 'production',
+  devtool: 'cheap-module-source-map',
   entry: {
     main: [resolvePath('../src/client/client-entry.js')]
   },
@@ -78,23 +76,6 @@ module.exports = merge(baseCongig,{
   optimization: {
     minimize: true,
     minimizer: [
-      // new UglifyJsPlugin({
-      //   uglifyOptions: {
-      //     compress: {
-      //       drop_console: true,
-      //       drop_debugger: true
-      //     },
-      //     warnings: false,
-      //     ie8: true,
-      //     output: {
-      //       comments: false,
-      //     },
-      //   },
-      //   cache: true,
-      //   parallel: true,
-      //   sourceMap: false
-      // }),
-  
       new TerserPlugin({
         test: /\.js(\?.*)?$/i,
       }),
@@ -110,5 +91,4 @@ module.exports = merge(baseCongig,{
       }
     },
   },
-  
 })

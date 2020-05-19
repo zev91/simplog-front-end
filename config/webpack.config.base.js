@@ -3,8 +3,6 @@ const webpack = require('webpack');
 const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
 const resolvePath = (pathstr) => path.resolve(__dirname, pathstr);
 
-const proConfig = require('../src/share/pro-config');
-
 module.exports = {
   mode: 'development',
   devtool: "eval-source-map",
@@ -49,10 +47,7 @@ module.exports = {
           {
             loader: 'file-loader',
             options: {
-              name: 'images/[name].[ext]',
-              publicPath: '/source/'
-
-              // publicPath: 'http://localhost:' + proConfig.wdsPort + '/'
+              name: 'images/[name].[ext]'
             }
           }]
       },

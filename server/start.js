@@ -26,12 +26,8 @@ const startNodeServer = () => {
   catch(error){
     console.error(error)
   }
-
-  
   nodeServerProcess.stdout.on('data', print);
 }
-
-
 
 function print(data){
   let str = data.toString();
@@ -50,8 +46,6 @@ const killChild = () => {
   feCodeWatchProcess && feCodeWatchProcess.kill();
   svrCodeWatchProcess && svrCodeWatchProcess.kill();
 }
-
-
 
 //主进程关闭退出子进程
 process.on('close', (code) => {

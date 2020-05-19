@@ -22,10 +22,6 @@ class Index extends React.Component {
     return store.dispatch(actions.getInitialData());
   }
 
-  handlerClick() {
-    console.log('点击事件测试=======>>>> click');
-  }
-
   render() {
     return (
       <div className='notfound-page-wrap'>

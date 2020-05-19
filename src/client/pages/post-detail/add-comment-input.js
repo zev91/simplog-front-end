@@ -19,7 +19,6 @@ class AddCommentInput extends Component {
   }
 
   render() {
-    console.log(this.props.currentUser)
     return (
       <div className='post-comments'>
         <div className='main-comment-input-wrap'>
