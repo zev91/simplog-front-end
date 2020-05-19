@@ -2,6 +2,7 @@ const path = require('path')
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 // const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const TerserPlugin = require('terser-webpack-plugin')
 const ManifestPlugin = require('webpack-manifest-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
@@ -70,10 +71,12 @@ module.exports = merge(baseCongig,{
         statsOptions: null,
         logLevel: 'info'
       }
-  )
+  ),
+  // new UglifyJsPlugin(),
   ],
 
   optimization: {
+    minimize: true,
     minimizer: [
       // new UglifyJsPlugin({
       //   uglifyOptions: {
@@ -91,6 +94,10 @@ module.exports = merge(baseCongig,{
       //   parallel: true,
       //   sourceMap: false
       // }),
+  
+      new TerserPlugin({
+        test: /\.js(\?.*)?$/i,
+      }),
       new OptimizeCSSAssetsPlugin()
     ],
     splitChunks: {
