@@ -1,7 +1,7 @@
 const path = require('path')
 const webpack = require('webpack');
 const merge = require('webpack-merge');
-const TerserPlugin = require('terser-webpack-plugin')
+const TerserPlugin = require('terser-webpack-plugin');
 const ManifestPlugin = require('webpack-manifest-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
@@ -23,7 +23,7 @@ module.exports = merge(baseCongig,{
   output: {
     filename: 'js/[name].[chunkhash:8].js',
     path: resolvePath('../dist/static'),
-    publicPath: '/'
+    publicPath: '/blog-cdn/'
   },
   module: {
     rules: [{

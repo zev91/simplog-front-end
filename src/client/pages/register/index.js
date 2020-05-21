@@ -58,7 +58,12 @@ class Register extends React.Component {
   handleSubmit = () => {
     const { data, valid } = this.props.handleSubmit();
     if(!valid) return;
-    this.props.fetchRegister(data);
+    this.props.fetchRegister(data).then(res => {
+      if(res && res.success){
+        this.props.getUserInfo();
+        this.props.history.push('/')
+      }
+    });
   }
 
   getVerifyCode = () => {

@@ -50,7 +50,7 @@ class Login extends React.Component {
             <InputFormItem required={true} fullWidth={true} name='password' type='password' label='密码' {...this.props} />
 
             <Button variant="contained" color="primary" fullWidth={true} size="large" onClick={this.handleSubmit}>
-               登录
+              登录
             </Button>
 
             <div className='switch-op'>还没账户? <Link onClick={() =>this.props.history.push('/register')}>去注册</Link></div>
