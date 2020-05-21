@@ -7,6 +7,7 @@ import withInitialData from 'src/componentHOC/with-initial-data';
 import composeHOC from 'src/utils/composeHOC';
 import createForm, { InputFormItem } from 'src/componentHOC/form-create';
 import { actions } from './redux';
+import { actions as getUserInfo } from 'src/componentLayout/redux';
 import css from './style.scss';
 
 class Register extends React.Component {
@@ -14,7 +15,7 @@ class Register extends React.Component {
     super(props);
     this.state = {
       btnText:'获取验证码',
-      seconds: 5, //称数初始化
+      seconds: 60, //称数初始化
       liked: true //获取验证码文案
     }
   }
@@ -36,7 +37,7 @@ class Register extends React.Component {
       if (this.state.seconds <= 0) {
         this.setState({
         liked: true,
-        seconds: 5
+        seconds: 60
       });
       clearInterval(this.siv);
       this.siv = null;
@@ -118,5 +119,5 @@ export default composeHOC(
   withRouter,
   withStyles(css),
   withInitialData,
-  connect(mapStateToProps, actions, null)
+  connect(mapStateToProps, {...actions,getUserInfo:getUserInfo.getInitialData}, null)
 )(Register); 

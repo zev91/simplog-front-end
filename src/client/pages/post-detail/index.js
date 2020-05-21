@@ -200,7 +200,7 @@ class PostDetail extends React.Component {
           ref={this.headerRef} 
           className='post-detail-header'
           style={{
-            background: post.headerBg ? `url(${post.headerBg + '?x-oss-process=style/post-header-bg'}) center no-repeat`: '#808080',
+            background: post.headerBg ? `#808080 url(${post.headerBg + '?x-oss-process=style/post-header-bg'}) center no-repeat`: '#808080',
             backgroundSize: 'cover'
           }}
         >

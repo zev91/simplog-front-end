@@ -6,6 +6,9 @@ import ImageIcon from '@material-ui/icons/Image';
 import PublishIcon from '@material-ui/icons/Publish';
 import { debounce, openInNewTab } from 'src/utils/helper';
 import UploadHeaderImage from './upload-header-image';
+
+import Backdrop from '@material-ui/core/Backdrop';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import PublishPost from './publish-post';
 import css from './style.scss';
 import Toast from 'src/componentCommon/toast'
@@ -25,6 +28,7 @@ class Editor extends Component {
 
     this.state = {
       saveTips: '文章将会被保存至',
+      uploading: false,
       title: props.initialData.post.title || '',
       headerBg: props.initialData.post.headerBg,
       code: props.initialData.post.body || '',
@@ -65,16 +69,21 @@ class Editor extends Component {
   }
 
   uploadFileChange = async e => {
-    const { match } = this.props;
-    const formData = new FormData();
-    const image = e.target.files[0];
-    formData.append('images', image);
-    formData.append('postId', match.params.id);
-    // Toast.loading('上传中');
-    const res = await this.props.uploadImage(formData);
+    try{
+      const { match } = this.props;
+      const formData = new FormData();
+      const image = e.target.files[0];
+      formData.append('images', image);
+      formData.append('postId', match.params.id);
+      this.setState({uploading:true})
+      const res = await this.props.uploadImage(formData);
+  
+      if (res && res.success) {
+        this.insertContent(res.data.url);
+      }
 
-    if (res && res.success) {
-      this.insertContent(res.data.url);
+    }finally{
+      this.setState({uploading:false});
     }
   }
 
@@ -84,7 +93,7 @@ class Editor extends Component {
   }
 
   handlerTitleChange = e => {
-    document.title = `${this.props.published ? '写文章' : '草稿' }-${e.target.value}`;
+    document.title = `${this.props.published ? '写文章' : '草稿'}-${e.target.value}`;
     this.setState({ title: e.target.value })
     this.debounceSavePost();
   }
@@ -104,7 +113,7 @@ class Editor extends Component {
       const { match, history } = this.props;
       const { title, code, headerBg, tags, category } = this.state;
       this.setState({
-        saving: true, 
+        saving: true,
         saveTips: '已保存至'
       });
 
@@ -124,21 +133,23 @@ class Editor extends Component {
   }
 
   publishPost = async () => {
-      const { match, history } = this.props;
-      const { title, code, headerBg, tags, category } = this.state;
+    const { match, history } = this.props;
+    const { title, code, headerBg, tags, category } = this.state;
 
-      const res = await this.props.publishPost({ id: match.params.id, title, body: code, headerBg, tags, category });
-      if(res && res.success){
-        Toast.success(res.data.message);
-        setTimeout(() => {
-          location.replace('/post/'+match.params.id);
-        },1000);
-      }
+    const res = await this.props.publishPost({ id: match.params.id, title, body: code, headerBg, tags, category });
+    if (res && res.success) {
+      Toast.success(res.data.message);
+      setTimeout(() => {
+        location.replace('/post/' + match.params.id);
+      }, 1000);
+    }
   }
 
   render() {
-    const { fold, code, title, preContent, saving, saveTips, headerBg, tags, category } = this.state;
-    const { userInfo, match } =this.props;
+    const { uploading, fold, code, title, preContent, saving, saveTips, headerBg, tags, category } = this.state;
+    const { userInfo, match } = this.props;
+
+    console.log(match.params.id === 'new')
     return [
       <header key='header' className='editor-header'>
         <input
@@ -170,6 +181,12 @@ class Editor extends Component {
           />
           <Avatar className='user-avater' src={userInfo.avatar} />
 
+          <Backdrop className='async-loading' open={uploading} >
+            <CircularProgress color="primary" />
+            <span className='loading-tips'>图片上传中...</span>
+          </Backdrop>
+          
+
         </div>
       </header>,
       <div key='main' className='editor-main'>
@@ -199,6 +216,9 @@ class Editor extends Component {
 
           <div className={`bottom-tool-bar editor-tool-bar ${fold ? 'toLeft' : 'toRight'}`}>
             <div className='upload-content'>
+              {
+                match.params.id === 'new' && <div style={{width: 40,height: '100%',position: 'absolute',zIndex: 9,cursor:'not-allowed'}}></div>
+              }
               <input accept="image/*" id="image-button-file" type="file" onChange={this.uploadFileChange} />
               <label htmlFor="image-button-file">
                 <IconButton color="primary" aria-label="upload picture" component="span">
