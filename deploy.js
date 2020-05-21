@@ -26,8 +26,7 @@ const publicPath = path.resolve(__dirname, './dist/static')
 const ossPath = 'blog-cdn'
 async function run(proPath = '') {
   const oldFiles = await client.list(({
-    prefix: ossPath,
-    delimiter: '/'
+    prefix: 'bcdn-'
   }));
 
   if(oldFiles.objects){
@@ -48,7 +47,6 @@ async function run(proPath = '') {
       await run(`${proPath}/${dir[i]}`)
     }
   }
-
 }
 
 run()
