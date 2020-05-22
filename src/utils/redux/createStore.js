@@ -6,7 +6,8 @@ export const createStore = (reducer, initialState, middlewares = []) => {
   const middls = [ thunk, ...middlewares ];
   let composeEnhancers = compose;
 
-  if (!__SERVER__) {
+
+  if (!__SERVER__ && !__IS_PROD__) {
     const composeWithDevToolsExtension = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
     if (typeof composeWithDevToolsExtension === 'function') {
       composeEnhancers = composeWithDevToolsExtension;
