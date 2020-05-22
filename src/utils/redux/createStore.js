@@ -5,9 +5,8 @@ import { makeRootReducer } from './reducer';
 export const createStore = (reducer, initialState, middlewares = []) => {
   const middls = [ thunk, ...middlewares ];
   let composeEnhancers = compose;
-
-
-  if (!__SERVER__ && !__IS_PROD__) {
+  
+  if (typeof(window) !== 'undefined' && !__IS_PROD__) {
     const composeWithDevToolsExtension = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
     if (typeof composeWithDevToolsExtension === 'function') {
       composeEnhancers = composeWithDevToolsExtension;
@@ -16,12 +15,12 @@ export const createStore = (reducer, initialState, middlewares = []) => {
 
   const store = _createStore(
     makeRootReducer(reducer),
-    initialState,
+    {},
     composeEnhancers(
       applyMiddleware(...middls),
     )
   );
-  store.asyncReducers = {};
 
+  store.asyncReducers = {};
   return store;
 }

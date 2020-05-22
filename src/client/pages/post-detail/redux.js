@@ -1,4 +1,5 @@
 import * as enRedux from 'utils/redux';
+import { getInitState } from 'utils/helper';
 const { action, createReducer, injectReducer } = enRedux.default;
 
 const reducerHandler = createReducer();
@@ -181,7 +182,7 @@ export const actions = {
   },reducerHandler),
 };
 
-const inintState = {
+const inintStates = {
   post: {
     author: {},
     body:'',
@@ -194,7 +195,14 @@ const inintState = {
   comments:[],
   page:{}
 }
-injectReducer({ key: 'postDetailPage', reducer: reducerHandler(inintState)});
+
+let initState = {
+  key: 'postDetailPage',
+  state: inintStates
+};
+
+injectReducer({ key: initState.key, reducer: reducerHandler(getInitState(initState))});
+
 
 
 

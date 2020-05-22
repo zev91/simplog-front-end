@@ -11,10 +11,9 @@ import { decrypt } from '../utils/helper';
 import proConfig from '../share/pro-config';
 import { Provider } from 'react-redux';
 import getStore from '../share/store';
-
-let initialData = JSON.parse(decrypt(JSON.parse(document.getElementById('ssrTextInitData').value).initialData));
 let targetRoute = matchRoute(document.location.pathname);
 
+let initialData = JSON.parse(decrypt(JSON.parse(document.getElementById('ssrTextInitData').value).initialData));
 window.__INITIAL_DATA__ = initialData;
 
 function renderDom() {

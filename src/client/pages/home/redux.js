@@ -1,4 +1,5 @@
 import * as enRedux from 'utils/redux';
+import { getInitState } from 'utils/helper';
 const { action, createReducer, injectReducer } = enRedux.default;
 
 const reducerHandler = createReducer();
@@ -65,8 +66,28 @@ export const actions = {
       }
     }
   },reducerHandler),
+
+  initCompoentReduxFromServer: action({
+    type: 'listPage.initCompoentReduxFromServer',
+    action: async (params) => {
+      console.log(params);
+
+      return 
+    },
+    handler: (state, result) => {
+      return {
+        ...state,
+        // ...result
+      }
+    }
+  },reducerHandler),
 };
 
-injectReducer({ key: 'listPage', reducer: reducerHandler({postData:{datas:[],page:{}},page:{}})});
+let initState = {
+  key: 'listPage',
+  state: {postData:{datas:[],page:{}},page:{}}
+};
+
+injectReducer({ key: initState.key, reducer: reducerHandler(getInitState(initState))});
 
 

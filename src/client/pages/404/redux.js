@@ -1,4 +1,5 @@
 import * as enRedux from 'utils/redux';
+import { getInitState } from 'utils/helper';
 const { action, createReducer, injectReducer } = enRedux.default;
 
 const reducerHandler = createReducer();
@@ -25,7 +26,13 @@ export const actions = {
   },reducerHandler),
 };
 
-injectReducer({ key: 'notFoundPage', reducer: reducerHandler({page:{}})});
+let initState = {
+  key: 'notFoundPage',
+  state: {page:{}}
+};
+
+injectReducer({ key: initState.key, reducer: reducerHandler(getInitState(initState))});
+
 
 
 

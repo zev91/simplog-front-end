@@ -1,4 +1,5 @@
 import * as enRedux from 'utils/redux';
+import { getInitState } from 'utils/helper';
 const { action, createReducer, injectReducer } = enRedux.default;
 
 const reducerHandler = createReducer();
@@ -103,7 +104,13 @@ export const actions = {
   },reducerHandler),
 };
 
-injectReducer({ key: 'editPostPage', reducer: reducerHandler({post:{},page:{}})});
+let initState = {
+  key: 'editPostPage',
+  state: {post:{},page:{}}
+};
+
+injectReducer({ key: initState.key, reducer: reducerHandler(getInitState(initState))});
+
 
 
 

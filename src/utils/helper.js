@@ -125,6 +125,18 @@ const openInNewTab = (href, blank) => {
   a.click();
 }
 
+const getInitState = ({key,state}) => {
+
+  if(typeof(window) === 'undefined' || !window.__INITIAL_DATA__) return state;
+
+  if(key === 'userInfo' ){
+    const { userInfo } = JSON.parse(decrypt(JSON.parse(document.getElementById('ssrTextInitData').value).initialData));
+    return userInfo
+  }
+
+  return __INITIAL_DATA__[key];
+}
+
 export {
   asyncWrap,
   deepCopy,
@@ -134,5 +146,6 @@ export {
   debounce,
   throttle,
   timeTransfor,
-  openInNewTab
+  openInNewTab,
+  getInitState
 }

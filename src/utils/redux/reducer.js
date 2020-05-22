@@ -48,13 +48,22 @@ export let InjectReducerManager = {
   create: (store) => ({ key, reducer, ...reducers }) => {
     if (has(store.asyncReducers, key)) return
     if (!key) {
+     
       Object.keys(reducers).forEach(key => {
         set(store.asyncReducers, key, reducers[key])
       })
     } else {
+
       set(store.asyncReducers, key, reducer)
     }
-    store.replaceReducer(combineReducersRecurse({ ...initReducers, ...store.asyncReducers }))
+    store.replaceReducer(combineReducersRecurse({ ...initReducers, ...store.asyncReducers }));
+
+    // console.log(reducer)
+    // if(key === 'listPage'){
+    //   if(!__SERVER__){
+    //     reducer(__INITIAL_DATA__.listPage,{type:'listPage.initCompoentReduxFromServer',result:__INITIAL_DATA__.listPage})
+    //   }
+    // }
   },
   injectReducer: function ({ key, reducer, ...reducers }) {
     this.loadReducer.push({ key, reducer, ...reducers });

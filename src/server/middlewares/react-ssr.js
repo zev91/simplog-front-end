@@ -50,6 +50,7 @@ export default async (req) => {
     if (page && page.tdk) {
       tdk = page.tdk;
     }
+
     const context = {
       initialData: encrypt(store.getState())
     };
@@ -98,6 +99,7 @@ export default async (req) => {
   
     return { html, template, context, store }
   }catch(error){
+    console.log(error)
     throw Error(error.message);
   }
   

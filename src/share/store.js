@@ -74,7 +74,10 @@ const middlewares = [asyncMiddleware({
 })]
 
 export default (initialState) => {
+  // console.log(initialState)
   const store = createStore(null, initialState, middlewares);
+  // console.log(store.getState());
+
   InjectReducerManager.with(store);
   return store;
 }

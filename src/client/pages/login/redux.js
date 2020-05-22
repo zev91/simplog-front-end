@@ -1,4 +1,5 @@
 import * as enRedux from 'utils/redux';
+import { getInitState } from 'utils/helper';
 const { action, createReducer, injectReducer } = enRedux.default;
 import Cookie from 'js-cookie';
 
@@ -40,10 +41,15 @@ export const actions = {
       }
     }
   },reducerHandler),
-
 };
 
-injectReducer({ key: 'loginPage', reducer: reducerHandler({page:{}})});
+let initState = {
+  key: 'loginPage',
+  state: {page:{}}
+};
+
+injectReducer({ key: initState.key, reducer: reducerHandler(getInitState(initState))});
+
 
 
 

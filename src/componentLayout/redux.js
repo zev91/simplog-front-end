@@ -1,4 +1,5 @@
 import * as enRedux from 'utils/redux';
+import { getInitState } from 'utils/helper';
 const { action, createReducer, injectReducer } = enRedux.default;
 
 const reducerHandler = createReducer();
@@ -18,6 +19,12 @@ export const actions = {
   },reducerHandler),
 };
 
-injectReducer({ key: 'userInfo', reducer: reducerHandler({})});
+let initState = {
+  key: 'userInfo',
+  state: {}
+};
+
+injectReducer({ key: initState.key, reducer: reducerHandler(getInitState(initState))});
+
 
 

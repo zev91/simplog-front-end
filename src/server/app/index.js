@@ -16,7 +16,6 @@ const render = async function(req,res){
   try{
     const data = await reactSsr(req);
     const { html,template,context } = data;
-    
     let htmlStr = template.replace("<!--react-ssr-outlet-->", `<div id='root'>${html}</div><textarea id="ssrTextInitData" style="display:none;"> ${JSON.stringify(context)}</textarea>`);
   
     res.send(htmlStr);
