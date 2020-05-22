@@ -1,4 +1,5 @@
 const express = require('express');
+const compression = require('compression')
 const timeout = require('connect-timeout');
 const { createProxyMiddleware } = require('http-proxy-middleware');
 const cookieParser = require('cookie-parser') ;
@@ -6,6 +7,7 @@ const { asyncWrap } = require('src/utils/helper');
 const reactSsr  = require('src/server/middlewares/react-ssr').default;
 
 const app = express();
+app.use(compression());
 const TIME_OUT = 30 * 1e3;
 
 const render = async function(req,res){

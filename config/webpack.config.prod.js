@@ -7,6 +7,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const baseCongig = require('./webpack.config.base');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const CompressionPlugin = require("compression-webpack-plugin");
 
 const resolvePath = (pathstr) => path.resolve(__dirname, pathstr);
 process.env.BABEL_ENV = 'development';//指定 babel 编译环境
@@ -73,6 +74,13 @@ module.exports = merge(baseCongig,{
         logLevel: 'info'
       }
   ),
+  new CompressionPlugin({
+    filename: "[path].gz[query]",
+    algorithm: "gzip",
+    test: /\.js$|\.html$/,
+    threshold: 10240,
+    minRatio: 0.8
+})
   // new UglifyJsPlugin(),
   ],
 
