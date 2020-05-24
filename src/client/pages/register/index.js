@@ -8,6 +8,7 @@ import composeHOC from 'src/utils/composeHOC';
 import createForm, { InputFormItem } from 'src/componentHOC/form-create';
 import { actions } from './redux';
 import { actions as getUserInfo } from 'src/componentLayout/redux';
+import Toast from 'src/componentCommon/toast';
 import css from './style.scss';
 
 class Register extends React.Component {
@@ -50,6 +51,7 @@ class Register extends React.Component {
     if(!validFields('email')) return;
     const email  = getFieldValues('email');
     this.props.sendVerifyCode({email}).then(res => {
+      Toast.success(res.message);
       this.startCountDown();
       this.siv = setInterval(this.startCountDown,1000);
     })
@@ -98,7 +100,7 @@ class Register extends React.Component {
             </Grid>
 
             <Button variant="contained" color="primary" fullWidth={true} size="large" onClick={this.handleSubmit}>
-               注册
+                注册
             </Button>
 
             <div className='switch-op'>已有账户? <Link onClick={() => this.props.history.push('/login')}>去登录</Link></div>

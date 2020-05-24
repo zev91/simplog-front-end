@@ -10,6 +10,9 @@ import IconButton from '@material-ui/core/IconButton';
 import EditIcon from '@material-ui/icons/Edit';
 import Link from '@material-ui/core/Link';
 
+import Backdrop from '@material-ui/core/Backdrop';
+import CircularProgress from '@material-ui/core/CircularProgress';
+
 import Button from '@material-ui/core/Button';
 import Toast from 'src/componentCommon/toast';
 
@@ -91,15 +94,18 @@ class UserSetting extends React.Component {
   }
 
   handerUploadHeaderImage = async (e) => {
-    const { avatar } = this.props.userInfo;
-    const formData = new FormData();
-    const image = e.target.files[0];
-    formData.append('images', image);
-    // Toast.loading('上传中');
-    const res = await this.props.uploadAvatar(formData);
-    if (res && res.success) {
-
-      this.updateUserInfo({avatar: res.data.url})
+    try{
+      const { avatar } = this.props.userInfo;
+      const formData = new FormData();
+      const image = e.target.files[0];
+      this.setState({uploading: true});
+      formData.append('images', image);
+      const res = await this.props.uploadAvatar(formData);
+      if (res && res.success) {
+        this.updateUserInfo({avatar: res.data.url})
+      }
+    }finally{
+      this.setState({uploading: false});
     }
   }
 
@@ -114,9 +120,14 @@ class UserSetting extends React.Component {
   }
 
   render() {
-    const { avatar, username, company, jobTitle, selfDescription } = this.props.userInfo;
+    const { avatar } = this.props.userInfo;
+    const { uploading } =this.state;
     return (
       <div className='user-setting-page'>
+        <Backdrop className='async-loading' open={uploading} >
+          <CircularProgress color="primary" />
+          <span className='loading-tips'>头像上传中...</span>
+        </Backdrop>
         <div className='setting-block block shadow'>
           <header>用户设置</header>
           <div className='upload-avatar'>
@@ -173,6 +184,7 @@ class UserSetting extends React.Component {
           />
 
         </div>
+     
       </div>
     )
   }

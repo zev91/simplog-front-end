@@ -1,6 +1,3 @@
-
-
-
 const { spawn } = require('child_process');
 const constantCode = require('./scripts/constant');
 const chalk = require('chalk'); //为控制台输出的信息增加点色彩
