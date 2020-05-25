@@ -8,7 +8,7 @@ import css from './upload-header-image.scss';
 
 class UploadHeaderImage extends Component {
 
-  constructor(props){
+  constructor(props) {
     super(props);
   }
   handerUploadHeaderImage = async (e) => {
@@ -18,20 +18,20 @@ class UploadHeaderImage extends Component {
     // Toast.loading('上传中');
     const res = await this.props.uploadHeaderImage(formData);
     if (res && res.success) {
-      this.props.updatePostAndCb({headerBg: res.data.url});
+      this.props.updatePostAndCb({ headerBg: res.data.url });
     }
   }
 
   handlerDeleteHeaderImage = () => {
-    this.props.updatePostAndCb({headerBg:''});
+    this.props.updatePostAndCb({ headerBg: '' });
   }
   render() {
-    const { headerBg } =this.props;
+    const { headerBg } = this.props;
     return (
       <PopupState variant="popover" popupId="upload-header-img-popup-popover">
         {(popupState) => (
           <div>
-            <IconButton color={headerBg ? 'primary': ''} {...bindTrigger(popupState)}>
+            <IconButton color={headerBg ? 'primary' : ''} {...bindTrigger(popupState)}>
               <ImageIcon />
             </IconButton>
             <Popover
@@ -48,37 +48,33 @@ class UploadHeaderImage extends Component {
               <div className='upload-content'>
                 <div className='title'>添加封面大图</div>
                 {
-                    headerBg
+                  headerBg
                     ?
                     <div className='image-content'>
                       <IconButton aria-label="delete" onClick={this.handlerDeleteHeaderImage} className='delete-header-image' size="small">
                         <DeleteIcon />
                       </IconButton>
-                      <img src={headerBg+'?x-oss-process=style/header-image-review'}/>
+                      <img src={headerBg + '?x-oss-process=style/header-image-review'} />
                     </div>
-                    
                     :
                     <div>
-                    <input
-                      accept="image/*"
-                      id="upload-header-image"
-                      type="file"
-                      onChange = {this.handerUploadHeaderImage}
-                    />
-                    <label htmlFor="upload-header-image">
-                      <ButtonBase
-                        component="span"
-                        key={'upload'}
-                        className='upload-header-btn'
-                      >
-                        点击此处添加图片
-                      </ButtonBase> 
-                    </label>
+                      <input
+                        accept="image/*"
+                        id="upload-header-image"
+                        type="file"
+                        onChange={this.handerUploadHeaderImage}
+                      />
+                      <label htmlFor="upload-header-image">
+                        <ButtonBase
+                          component="span"
+                          key={'upload'}
+                          className='upload-header-btn'
+                        >
+                          点击此处添加图片
+                      </ButtonBase>
+                      </label>
                     </div>
-                    
-                  }
-                
-                
+                }
               </div>
             </Popover>
           </div>
@@ -88,4 +84,4 @@ class UploadHeaderImage extends Component {
   }
 }
 
-export default  withStyles(css)(UploadHeaderImage)
+export default withStyles(css)(UploadHeaderImage)

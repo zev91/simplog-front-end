@@ -52,7 +52,6 @@ export const actions = {
       }
     }
   },reducerHandler),
-
 };
 
 let initState = {

@@ -1,4 +1,3 @@
-
 module.exports = function (port) {
   if (process.platform && process.platform !== 'win32') {
       //mac linux等

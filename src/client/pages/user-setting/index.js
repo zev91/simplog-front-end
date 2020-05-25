@@ -9,25 +9,20 @@ import composeHOC from 'src/utils/composeHOC';
 import IconButton from '@material-ui/core/IconButton';
 import EditIcon from '@material-ui/icons/Edit';
 import Link from '@material-ui/core/Link';
-
 import Backdrop from '@material-ui/core/Backdrop';
 import CircularProgress from '@material-ui/core/CircularProgress';
-
 import Button from '@material-ui/core/Button';
 import Toast from 'src/componentCommon/toast';
-
 import css from './style.scss';
 
 const ChangeItem = ({label,placeholder,name,userInfo, updateUserInfo}) => {
   const [status, setStatus] = useState('blur');
   const [value, setValue] = useState(userInfo[name]);
   const inputRef = React.createRef();
-
   const handlerEdit = () => {
     setStatus('focus');
     inputRef.current.focus();
   }
-
   const handlerBlur = () => {
     setStatus('blur');
     inputRef.current.bliur();
@@ -36,7 +31,6 @@ const ChangeItem = ({label,placeholder,name,userInfo, updateUserInfo}) => {
     e.stopPropagation();
     updateUserInfo({[name]:value})
   }
-
 
   return (
     <div className='other-info'>
@@ -150,7 +144,6 @@ class UserSetting extends React.Component {
                   </Button>
                   </label>
                 </div>
-
               </div>
             </div>
           </div>
@@ -182,9 +175,7 @@ class UserSetting extends React.Component {
             userInfo={this.props.userInfo}
             updateUserInfo={this.updateUserInfo}
           />
-
         </div>
-     
       </div>
     )
   }

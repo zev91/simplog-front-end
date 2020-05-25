@@ -18,8 +18,6 @@ const startNodeServer = () => {
     // nodeServerProcess = spawn('node',['-v'],{shell: process.platform === 'win32'});
     nodeServerProcess = spawn('node',['./server/scripts/svr-dev-server.js'],{shell: process.platform === 'win32'});
   }
-
-
   catch(error){
     console.error(error)
   }
@@ -58,7 +56,7 @@ process.on('exit', (code) => {
 //非正常退出情况
 process.on('SIGINT', function () {
   svrCodeWatchProcess.stdin.write('exit', (error) => {
-      console.log('svr code watcher process exit!');
+    console.log('svr code watcher process exit!');
   });
   killChild();
 });

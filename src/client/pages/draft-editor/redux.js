@@ -1,8 +1,9 @@
 import * as enRedux from 'utils/redux';
 import { getInitState } from 'utils/helper';
-const { action, createReducer, injectReducer } = enRedux.default;
 
+const { action, createReducer, injectReducer } = enRedux.default;
 const reducerHandler = createReducer();
+
 export const actions = {
   getInitialData: action({
     type: 'editorDraftPage.getInitialData',

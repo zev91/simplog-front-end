@@ -2,15 +2,12 @@
 const proConfig = require('src/share/pro-config');
 module.exports = function () {
   let devHost =   'http://localhost:'+proConfig.wdsPort;
-
   let jsFiles = ['libs.js', 'main.js'];
   let cssFiles = ['main.css'];
-
   const assets = {
     js: [],
     css: []
   };
-
 
   if (!__IS_PROD__) {//开发环境
   // if (!isProd) {//开发环境

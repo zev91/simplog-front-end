@@ -1,15 +1,15 @@
 import * as enRedux from 'utils/redux';
 import { getInitState } from 'utils/helper';
-const { action, createReducer, injectReducer } = enRedux.default;
 
+const { action, createReducer, injectReducer } = enRedux.default;
 const reducerHandler = createReducer();
 export const actions = {
   getInitialData: action({
     type: 'editPostPage.getInitialData',
-    action: async (http,dispatch) => {
+    action: async (http, dispatch) => {
       const path = __SERVER__ ? global.REQUEST_PATH : location.pathname;
       const urlInfo = path.split('/');
-      const postId = urlInfo[urlInfo.length-1];
+      const postId = urlInfo[urlInfo.length - 1];
 
       const res = await dispatch(actions.getPost(postId));
       const page = {
@@ -22,8 +22,8 @@ export const actions = {
 
       const post = res.data.post;
 
-      page.tdk.title = '写文章-'+ (post.title || '');
-      page.tdk.keywords = post.tags ? post.tags .join(',') : '';
+      page.tdk.title = '写文章-' + (post.title || '');
+      page.tdk.keywords = post.tags ? post.tags.join(',') : '';
       page.tdk.description = post.title || '';
 
       return ({
@@ -37,11 +37,11 @@ export const actions = {
         ...result
       }
     }
-  },reducerHandler),
+  }, reducerHandler),
 
   getPost: action({
     type: 'editPostPage.getPost',
-    action: (id,http) => {
+    action: (id, http) => {
       return http.get(`/api/getEditPost/${id}`)
     },
     handler: (state, result) => {
@@ -49,70 +49,64 @@ export const actions = {
         ...state
       }
     }
-  },reducerHandler),
+  }, reducerHandler),
 
   updatePost: action({
     type: 'editPostPage.updatePost',
-    action: (params,http) => {
+    action: (params, http) => {
       const { id } = params;
       delete params.id;
-      return http.put(`/api/posts/${id}`,params)
+      return http.put(`/api/posts/${id}`, params)
     },
     handler: (state, result) => {
       return {
         ...state
       }
     }
-  },reducerHandler),
+  }, reducerHandler),
 
   publishPost: action({
     type: 'editPostPage.publishPost',
-    action: (params,http) => {
+    action: (params, http) => {
       const { id } = params;
       delete params.id;
-      return http.post(`/api/publishPost/${id}`,params)
+      return http.post(`/api/publishPost/${id}`, params)
     },
     handler: (state, result) => {
       return {
         ...state
       }
     }
-  },reducerHandler),
+  }, reducerHandler),
 
   uploadImage: action({
     type: 'editPostPage.uploadImage',
-    action: (params,http) => {
-      return http.post('/api/upload/post',params)
+    action: (params, http) => {
+      return http.post('/api/upload/post', params)
     },
     handler: (state, result) => {
       return {
         ...state
       }
     }
-  },reducerHandler),
+  }, reducerHandler),
 
   uploadHeaderImage: action({
     type: 'editPostPage.uploadHeaderImage',
-    action: (params,http) => {
-      return http.post('/api/upload/header',params)
+    action: (params, http) => {
+      return http.post('/api/upload/header', params)
     },
     handler: (state, result) => {
       return {
         ...state
       }
     }
-  },reducerHandler),
+  }, reducerHandler),
 };
 
 let initState = {
   key: 'editPostPage',
-  state: {post:{},page:{}}
+  state: { post: {}, page: {} }
 };
 
-injectReducer({ key: initState.key, reducer: reducerHandler(getInitState(initState))});
-
-
-
-
-
-
+injectReducer({ key: initState.key, reducer: reducerHandler(getInitState(initState)) });

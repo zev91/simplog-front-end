@@ -1,17 +1,17 @@
 import * as enRedux from 'utils/redux';
 import { getInitState } from 'utils/helper';
+
 const { action, createReducer, injectReducer } = enRedux.default;
-
 const reducerHandler = createReducer();
-export const actions = {
 
+export const actions = {
   getInitialData: action({
     type: 'userCenterPage.getInitialData',
-    action: async (http,dispatch) => {
+    action: async (http, dispatch) => {
 
       const path = __SERVER__ ? global.REQUEST_PATH : location.pathname;
       const urlInfo = path.split('/');
-      const userId = urlInfo[urlInfo.length-1];
+      const userId = urlInfo[urlInfo.length - 1];
       const page = {
         tdk: {
           title: '',
@@ -21,7 +21,7 @@ export const actions = {
       }
 
       const resUserInfo = await dispatch(actions.getOtherUserInfo(userId));
-      page.tdk.title = resUserInfo.data.user.username+'的主页';
+      page.tdk.title = resUserInfo.data.user.username + '的主页';
       return ({
         page
       })
@@ -32,7 +32,7 @@ export const actions = {
         ...result
       }
     }
-  },reducerHandler),
+  }, reducerHandler),
 
   getPage: action({
     type: 'userCenterPage.getPage',
@@ -48,11 +48,11 @@ export const actions = {
         ...state
       }
     }
-  },reducerHandler),
+  }, reducerHandler),
 
   followauthor: action({
     type: 'userCenterPage.followauthor',
-    action: (userId,http) => {
+    action: (userId, http) => {
       return http.post(`/api/follow/${userId}`)
     },
     handler: (state, result) => {
@@ -60,25 +60,24 @@ export const actions = {
         ...state,
       }
     }
-  },reducerHandler),
+  }, reducerHandler),
 
   getOtherUserInfo: action({
     type: 'userCenterPage.getOtherUserInfo',
-    action: (id,http) => {
+    action: (id, http) => {
       return http.get(`/api/getOtherUserInfo/${id}`)
     },
     handler: (state, result) => {
-      
       return {
         ...state,
-        userInfo:result.data.user
+        userInfo: result.data.user
       }
     }
-  },reducerHandler),
+  }, reducerHandler),
 
   getUserPosts: action({
     type: 'userCenterPage.getUserPosts',
-    action: (params,http) => {
+    action: (params, http) => {
       const { id, pageNo } = params;
       return http.get(`/api/userPosts/${id}?pageNo=${pageNo}`)
     },
@@ -87,11 +86,11 @@ export const actions = {
         ...state
       }
     }
-  },reducerHandler),
+  }, reducerHandler),
 
   getActivites: action({
     type: 'userCenterPage.getActivites',
-    action: (params,http) => {
+    action: (params, http) => {
       const { id, pageNo } = params;
       return http.get(`/api/getActivites/${id}?pageNo=${pageNo}`)
     },
@@ -100,11 +99,11 @@ export const actions = {
         ...state
       }
     }
-  },reducerHandler),
+  }, reducerHandler),
 
   deletePost: action({
     type: 'userCenterPage.deletePost',
-    action: (id,http) => {
+    action: (id, http) => {
       return http.delete(`/api/posts/${id}`)
     },
     handler: (state, result) => {
@@ -112,16 +111,16 @@ export const actions = {
         ...state
       }
     }
-  },reducerHandler),
+  }, reducerHandler),
 
   getFollowedUsers: action({
     type: 'userCenterPage.getFollowedUsers',
-    action: (params,http) => {
-      if(!params.followType){
+    action: (params, http) => {
+      if (!params.followType) {
         params['followType'] = 'FOLLOW_TO'
       }
       const { id, pageNo, followType } = params;
-      
+
       return http.get(`/api/getFollowedUsers/${id}?pageNo=${pageNo}&followType=${followType}`)
     },
     handler: (state, result) => {
@@ -129,11 +128,11 @@ export const actions = {
         ...state
       }
     }
-  },reducerHandler),
+  }, reducerHandler),
 
   getUserCollections: action({
     type: 'userCenterPage.getActivites',
-    action: (params,http) => {
+    action: (params, http) => {
       const { id, pageNo } = params;
       return http.get(`/api/getUserCollections/${id}?pageNo=${pageNo}`)
     },
@@ -142,15 +141,12 @@ export const actions = {
         ...state
       }
     }
-  },reducerHandler),
+  }, reducerHandler),
 };
 
 let initState = {
   key: 'userCenterPage',
-  state:{userInfo:{},page:{}}
+  state: { userInfo: {}, page: {} }
 };
 
-injectReducer({ key: initState.key, reducer: reducerHandler(getInitState(initState))});
-
-
-
+injectReducer({ key: initState.key, reducer: reducerHandler(getInitState(initState)) });

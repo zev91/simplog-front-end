@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-
 import Avatar from '@material-ui/core/Avatar';
-
 import { timeTransfor, openInNewTab } from 'src/utils/helper';
 import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
 import ThumbUpIcon from '@material-ui/icons/ThumbUp';
@@ -18,6 +16,7 @@ class MyPost extends Component {
   constructor(props) {
     super(props);
   }
+
   static method = 'getUserPosts';
 
   deletePost = async (popupState, id) => {
@@ -28,12 +27,11 @@ class MyPost extends Component {
   }
 
   switchDetail = (id) => {
-    openInNewTab('/post/'+id,true);
+    openInNewTab('/post/' + id, true);
   }
 
   editPost = (id) => {
-    this.props.history.push('/editor/post/'+id);
-    // openInNewTab('/editor/post/'+id,true);
+    this.props.history.push('/editor/post/' + id);
   }
 
   render() {
@@ -43,9 +41,9 @@ class MyPost extends Component {
       <div className='my-posts-wrap'>
         {
           datas.map(post => (
-            <div key={post._id} className='my-post-block' onClick={this.switchDetail.bind(null,post._id)}>
+            <div key={post._id} className='my-post-block' onClick={this.switchDetail.bind(null, post._id)}>
               <div className='block-header'>
-               <Avatar alt="avatar" src={post.author.avatar} />
+                <Avatar alt="avatar" src={post.author.avatar} />
                 {post.author.username}
                 <span className='split-point'>&#8901;</span>
                 <span>{timeTransfor(new Date(post.createdAt))}</span>
@@ -80,7 +78,7 @@ class MyPost extends Component {
                             anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
                             transformOrigin={{ vertical: 'top', horizontal: 'left' }}
                           >
-                            <MenuItem onClick={this.editPost.bind(null,post.id)}>编辑</MenuItem>
+                            <MenuItem onClick={this.editPost.bind(null, post.id)}>编辑</MenuItem>
                             <Comfirm header={`确定删除该文章？`} click={this.deletePost.bind(null, popupState, post.id)} successCb={this.getPost}>
                               <MenuItem >删除</MenuItem>
                             </Comfirm>
@@ -99,6 +97,5 @@ class MyPost extends Component {
     )
   }
 }
-
 
 export default withListenerScroll(MyPost);

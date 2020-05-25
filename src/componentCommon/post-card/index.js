@@ -26,7 +26,6 @@ export default ({ toDetail, item }) => {
           <span><ChatBubbleIcon/>{item.comments}</span>
         </div>
       </div>
-
       <div className='post-header-bg'>
         {item.headerBg ? <img src={`${item.headerBg}?x-oss-process=style/list-bg`}/> : <div className='no-bg'></div>}
       </div>

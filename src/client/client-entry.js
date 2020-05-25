@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDom from 'react-dom';
-
 import { BrowserRouter } from 'react-router-dom';
 import StyleContext from 'isomorphic-style-loader/StyleContext';
 import App from './app';
@@ -11,9 +10,10 @@ import { decrypt } from '../utils/helper';
 import proConfig from '../share/pro-config';
 import { Provider } from 'react-redux';
 import getStore from '../share/store';
-let targetRoute = matchRoute(document.location.pathname);
 
+let targetRoute = matchRoute(document.location.pathname);
 let initialData = JSON.parse(decrypt(JSON.parse(document.getElementById('ssrTextInitData').value).initialData));
+
 window.__INITIAL_DATA__ = initialData;
 
 function renderDom() {
@@ -32,20 +32,20 @@ function renderDom() {
         jssStyles.parentElement.removeChild(jssStyles);
       }
     }, []);
-  
+
     return (
       <ThemeProvider theme={theme}>
         <Provider store={store}>
-        <StyleContext.Provider value={{ insertCss }}>
-          <BrowserRouter>
-            <App routeList={routeList} />
-          </BrowserRouter>
-        </StyleContext.Provider>
-      </Provider>
+          <StyleContext.Provider value={{ insertCss }}>
+            <BrowserRouter>
+              <App routeList={routeList} />
+            </BrowserRouter>
+          </StyleContext.Provider>
+        </Provider>
       </ThemeProvider>
     );
   }
-  ReactDom.hydrate(<Main/>,document.getElementById('root'));
+  ReactDom.hydrate(<Main />, document.getElementById('root'));
 }
 
 if (targetRoute) {
@@ -62,4 +62,3 @@ if (targetRoute) {
 if (process.env.NODE_ENV === 'development' && module.hot) {
   module.hot.accept();
 }
-

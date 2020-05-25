@@ -18,7 +18,6 @@ class AsyncLoader extends Component {
     }
   }
 
-
   load(props) {
     this.setState({
       COMPT: null

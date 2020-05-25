@@ -19,11 +19,9 @@ import Follow from './follow';
 import Collection from './collection';
 import { openInNewTab } from 'src/utils/helper';
 import Toast from 'src/componentCommon/toast';
-
 import css from './style.scss';
 
 function TabPanel({ menuValue, value, children }) {
-
   return (
     <div
       className='block-item'
@@ -70,14 +68,15 @@ class UserCenter extends React.Component {
 
   handerFollow = async () => {
     const { currentUser, initialData } = this.props;
-    // const { id } = this.props.match.params;
     const { _id } = initialData.userInfo;
 
     if (!currentUser._id) {
       Toast.error('请先登录！');
       return;
     }
+
     const res = await this.props.followauthor(_id);
+
     if (res && res.success) {
       this.props.getOtherUserInfo(_id);
       Toast.success(res.data.message);
@@ -107,15 +106,15 @@ class UserCenter extends React.Component {
 
   handlerBtn = () => {
     const { currentUser, initialData } = this.props;
-    if(currentUser._id === initialData.userInfo._id){
-      return <Button variant="outlined" color="secondary" onClick={() => openInNewTab('/users/setting',true)}>编辑个人资料</Button>
+    if (currentUser._id === initialData.userInfo._id) {
+      return <Button variant="outlined" color="secondary" onClick={() => openInNewTab('/users/setting', true)}>编辑个人资料</Button>
     }
 
-    if(this.ifFollowAuthor()){
+    if (this.ifFollowAuthor()) {
       return <Button variant="outlined" color="secondary" onClick={this.handerFollow}>已关注</Button>
     }
 
-    return <Button variant="outlined" color="secondary"  onClick={this.handerFollow}>加关注</Button> 
+    return <Button variant="outlined" color="secondary" onClick={this.handerFollow}>加关注</Button>
   }
 
   render() {
@@ -131,7 +130,7 @@ class UserCenter extends React.Component {
                 <div className='major-content' ref={ref => this.majorContent = ref}>
                   <div className='itemscope shadow block'>
                     <div className='user-avater'>
-                      <img src="userInfo.avatar" src={userInfo.avatar+'?x-oss-process=style/user-center-avatar'}/> 
+                      <img src="userInfo.avatar" src={userInfo.avatar + '?x-oss-process=style/user-center-avatar'} />
                     </div>
                     <div className='user-info-box'>
                       <h1>{userInfo.username}</h1>
@@ -167,10 +166,10 @@ class UserCenter extends React.Component {
                       <MyActivites />
                     </TabPanel>
                     <TabPanel value='follow' menuValue={menuValue}>
-                      <Follow/>
+                      <Follow />
                     </TabPanel>
                     <TabPanel value='collection' menuValue={menuValue}>
-                      <Collection/>
+                      <Collection />
                     </TabPanel>
                   </div>
                 </div>
@@ -185,7 +184,6 @@ class UserCenter extends React.Component {
                     <span><VisibilityIcon fontSize='small' color='primary' /> </span>
                     文章被阅读 {userInfo.totalReads}
                   </div>
-
                   <div className='stat-item'>
                     <span><ThumbUpIcon fontSize='small' color='primary' /> </span>
                     获得点赞 {userInfo.totalLikes}
@@ -202,7 +200,6 @@ class UserCenter extends React.Component {
                   <div className='item-count'>{userInfo.totalFollowTo ? userInfo.totalFollowTo.length : 0}</div>
                 </div>
               </div>
-
               <div className='more-block'>
                 <div className='more-item'>
                   <div className='item-title'>加入于</div>
@@ -212,12 +209,10 @@ class UserCenter extends React.Component {
             </div>
           </div>
         </main>
-
       </div>
     )
   }
 }
-
 
 const mapStateToProps = state => ({
   initialData: state.userCenterPage,

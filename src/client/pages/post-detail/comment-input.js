@@ -40,15 +40,11 @@ export default ({createComment, getComment,id, currentUser}) => {
         onFocus={handlerTextFocus}
       />
       <Collapse in={visible}>
-
-  
       <div className='comment-btns-wrap'>
         <Button size='small' variant="outlined" color="primary" onClick={() => setVisible(false)}>取消</Button>
         <Button size='small' variant="contained" color="primary" disableElevation disabled={!value} onClick={submitComment}>提交</Button>
       </div>
       </Collapse>
     </div>
-   )
+  )
 }
-
-  

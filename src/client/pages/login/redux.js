@@ -1,12 +1,11 @@
 import * as enRedux from 'utils/redux';
 import { getInitState } from 'utils/helper';
-const { action, createReducer, injectReducer } = enRedux.default;
 import Cookie from 'js-cookie';
 
+const { action, createReducer, injectReducer } = enRedux.default;
 const reducerHandler = createReducer();
 
 export const actions = {
-  
   getInitialData: action({
     type: 'loginPage.getPage',
     action: () => ({

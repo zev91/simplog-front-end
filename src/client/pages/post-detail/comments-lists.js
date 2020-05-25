@@ -9,9 +9,9 @@ import Comfirm from 'src/componentCommon/confirm';
 import Toast from 'src/componentCommon/toast'
 import css from './comments-lists.scss';
 
-const Commentitem = ({ setVisible, setPid, parentId, _id, postAuthor, parentAuthor,  fromUser, replyToUser, currentUser, isAuthor, body, createdAt, setReply, deleteComment, getComment, match }) => {
+const Commentitem = ({ setVisible, setPid, parentId, _id, postAuthor, parentAuthor, fromUser, replyToUser, currentUser, isAuthor, body, createdAt, setReply, deleteComment, getComment, match }) => {
   function handlerReply() {
-    if(!currentUser._id){
+    if (!currentUser._id) {
       Toast.error('请先登录!');
       return;
     }
@@ -23,18 +23,17 @@ const Commentitem = ({ setVisible, setPid, parentId, _id, postAuthor, parentAuth
 
   return (
     <div className='comment-cell-item'>
-      <Avatar alt='avatar' src={fromUser.avatar}/>
+      <Avatar alt='avatar' src={fromUser.avatar} />
       <div className='comment-content'>
         <div className='auth-info'>{fromUser.username} {isAuthor ? <span className='is-author'>作者</span> : ''} {replyToUser && replyToUser.username ? <span>回复 <Link>{replyToUser.username}</Link>:</span> : ''}</div>
         <div className='comment-date'>{moment(createdAt).format("YYYY.MM.DD HH:mm:ss")}</div>
         <div className='comment-body'>{body}</div>
         <div className='comment-op-wrap'>
           <span onClick={handlerReply}><ChatBubbleIcon />回复</span>
-
           {
-            currentUser._id && (currentUser._id === fromUser._id || currentUser._id === postAuthor ||  currentUser._id === parentAuthor)
+            currentUser._id && (currentUser._id === fromUser._id || currentUser._id === postAuthor || currentUser._id === parentAuthor)
             &&
-            <Comfirm header={`确定删除该条评论？`} click={deleteComment.bind(null,_id)} successCb={() => getComment(match.params.id)}>
+            <Comfirm header={`确定删除该条评论？`} click={deleteComment.bind(null, _id)} successCb={() => getComment(match.params.id)}>
               <span className='delete-op'><DeleteIcon />删除</span>
             </Comfirm>
           }
@@ -44,8 +43,7 @@ const Commentitem = ({ setVisible, setPid, parentId, _id, postAuthor, parentAuth
   )
 }
 
-const RenderComments = ({ comment, currentUser, postAuthor, createComment, deleteComment, getComment, match }) => {
-
+  const RenderComments = ({ comment, currentUser, postAuthor, createComment, deleteComment, getComment, match }) => {
   const [visible, setVisible] = useState(false);
   const [pid, setPid] = useState('');
   const [reply, setReply] = useState({});

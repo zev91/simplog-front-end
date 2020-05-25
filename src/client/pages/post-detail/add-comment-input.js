@@ -7,7 +7,6 @@ import CommentInput from './comment-input';
 import css from './comments.scss';
 
 class AddCommentInput extends Component {
-
   constructor(props) {
     super(props);
     this.state = {}

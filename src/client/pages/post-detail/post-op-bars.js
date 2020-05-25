@@ -7,7 +7,6 @@ import CheckIcon from '@material-ui/icons/Check';
 import PopupState, { bindTrigger, bindMenu } from 'material-ui-popup-state';
 
 export default ({handlerCollection, hasCollectioned}) => {
-console.log({handlerCollection,hasCollectioned})
   
   return (
     <PopupState variant="popover" popupId="post-op-popup-menu">

@@ -4,7 +4,6 @@ const freePort = require('./free-port');
 const WebpackDevServer = require('webpack-dev-server');
 const open = require('./open-browser');
 const proConfig = require('../../src/share/pro-config');
-
 const clientConfig = require('../../config/webpack.config.client');
 
 //wds 配置
@@ -29,12 +28,10 @@ function createWdsServer(port) {
   compiler.hooks.done.tap('done',function(data){
     console.log('\n wds server compile done'); //编译完成的时候 
   });
-
   if (compilationTime===0){//第一次编译完成的时，自动打开浏览器
     open(`http://localhost:${NODE_SERVER_PORT}/`);
   }
   compilationTime+=1;
-
   return new WebpackDevServer(compiler,getWdsConfig(port,clientConfig.output.publicPath));
 }
 
@@ -44,7 +41,6 @@ function runWdsServer() {
     if(err){
       return console.log(err);
     }
-
     console.log(chalk.cyan('🚀 Starting the development node server,please wait....\n'))
   })
 }

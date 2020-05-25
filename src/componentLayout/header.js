@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { actions } from './redux';
 import { withRouter } from "react-router-dom";
 import withStyles from 'isomorphic-style-loader/withStyles';
-
 import { AppBar, Toolbar, Typography, Button, Avatar } from '@material-ui/core';
 import CreateIcon from '@material-ui/icons/Create';
 import AcUnitIcon from '@material-ui/icons/AcUnit';
@@ -12,7 +11,6 @@ import css from './style.scss';
 import Toast from 'src/componentCommon/toast';
 import UserMenu from './user-menu';
 
-
 class Header extends Component {
 
   static async getInitialProps({ store }) {
@@ -20,18 +18,15 @@ class Header extends Component {
   }
 
   componentDidMount() {
-    if(this.props.userInfo['userInfo.getInitialData.pending'] !== false){
+    if (this.props.userInfo['userInfo.getInitialData.pending'] !== false) {
       this.props.getInitialData();
     }
   }
 
-  componentWillReceiveProps(nextProps){
-    // console.log(this.props,nextProps)
-  }
   goToDraft = () => {
-    if(this.props.userInfo.username){
+    if (this.props.userInfo.username) {
       this.props.history.push('/editor/draft/new');
-    }else{
+    } else {
       Toast.error('请先登录！')
       this.props.history.push('/login');
     }
@@ -39,7 +34,6 @@ class Header extends Component {
 
   goToHomePage = () => {
     this.props.history.push('/');
-    // console.log(this.props)
   }
 
   render() {
@@ -50,7 +44,6 @@ class Header extends Component {
           <Typography variant="h6" className='logo-wrap' onClick={this.goToHomePage}>
             <img src='https://simplog.oss-cn-beijing.aliyuncs.com/system/logo.png' />
           </Typography>
-
           <div className='right-tool-wrap'>
             {
               !userInfo.username ? (
@@ -58,7 +51,7 @@ class Header extends Component {
                   <Button onClick={() => this.props.history.push('/login')}>登录</Button>
                   <Button onClick={() => this.props.history.push('/register')} color="inherit" variant="outlined">注册</Button>
                 </div>
-              ) : <UserMenu userInfo={userInfo} history={this.props.history}/>
+              ) : <UserMenu userInfo={userInfo} history={this.props.history} />
             }
             <Button
               color="secondary"
@@ -69,7 +62,6 @@ class Header extends Component {
               写文章
           </Button>
           </div>
-
         </Toolbar>
       </AppBar>
     )

@@ -1,10 +1,10 @@
 import * as enRedux from 'utils/redux';
 import { getInitState } from 'utils/helper';
+
 const { action, createReducer, injectReducer } = enRedux.default;
-
 const reducerHandler = createReducer();
-export const actions = {
 
+export const actions = {
   getDraftLists: action({
     type: 'draftPage.getPosts',
     action: (http,dispatch,getstate) => {
@@ -71,8 +71,6 @@ export const actions = {
       }
     }
   },reducerHandler),
-
-
 
   getInitialData: action({
     type: 'draftPage.getInitialData',

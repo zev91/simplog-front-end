@@ -17,11 +17,8 @@ import CommentsLists from './comments-lists';
 import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import Toast from 'src/componentCommon/toast';
-
 import PostOpBars from './post-op-bars';
-
 import css from './style.scss';
-
 
 marked.setOptions({
   langPrefix: "hljs language-",
@@ -43,7 +40,6 @@ class PostDetail extends React.Component {
       { page: {} }
     )
   }
-
 
   static async getInitialProps({ store }) {
     return store.dispatch(actions.getInitialData());
@@ -72,7 +68,6 @@ class PostDetail extends React.Component {
     this.getSidePosition();
 
     document.getElementById('root').addEventListener('scroll', this.onScoll);
-
     window.addEventListener('resize', this.getSidePosition);
   }
   componentWillUnmount() {
@@ -108,7 +103,9 @@ class PostDetail extends React.Component {
       Toast.error('请先登录！');
       return;
     }
+
     const res = await this.props.likePost(id);
+
     if (res && res.success) {
       this.props.getPostLikers(id);
     }
@@ -159,13 +156,12 @@ class PostDetail extends React.Component {
           </div>
           <PostOpBars hasCollectioned={hasCollectioned} handlerCollection={this.handlerCollection} />
         </div>
-
         <div className='side-auth-info' style={{ right: this.state.sideAuthInfoRight + 'px' }}>
           <div className='title'>
             <span>关于作者</span>
             <span className={`follow-author ${hasFollowed ? 'followed' : ''}`} onClick={this.handerFollow}>{hasFollowed ? '已关注' : '关注'}</span>
           </div>
-          <div className='auth-info-content' onClick={() => openInNewTab('/user/'+post.author._id,true)}>
+          <div className='auth-info-content' onClick={() => openInNewTab('/user/' + post.author._id, true)}>
             <div className='avater-work'>
               <Avatar className='user-avater' src={post.author && post.author.avatar} />
               <div className='auth-info-work'>
@@ -174,33 +170,32 @@ class PostDetail extends React.Component {
               </div>
             </div>
             {
-              post.author && post.author.totalLikes 
-              ?
-              <div className='active-info'>
-                <span><ThumbUpIcon fontSize='small' color='primary' /> </span>
+              post.author && post.author.totalLikes
+                ?
+                <div className='active-info'>
+                  <span><ThumbUpIcon fontSize='small' color='primary' /> </span>
               获得点赞 {post.author.totalLikes}
-              </div>
-              :
-              ''
+                </div>
+                :
+                ''
             }
-
             {
               post.author && post.author.totalReads
-              ?
-              <div className='active-info'>
-                <span><VisibilityIcon fontSize='small' color='primary' /> </span>
+                ?
+                <div className='active-info'>
+                  <span><VisibilityIcon fontSize='small' color='primary' /> </span>
                 文章被阅读 {post.author.totalReads}
-              </div>
-              :
-              ''
+                </div>
+                :
+                ''
             }
           </div>
         </div>
         <div
-          ref={this.headerRef} 
+          ref={this.headerRef}
           className='post-detail-header'
           style={{
-            background: post.headerBg ? `#808080 url(${post.headerBg + '?x-oss-process=style/post-header-bg'}) center no-repeat`: '#808080',
+            background: post.headerBg ? `#808080 url(${post.headerBg + '?x-oss-process=style/post-header-bg'}) center no-repeat` : '#808080',
             backgroundSize: 'cover'
           }}
         >
@@ -212,7 +207,6 @@ class PostDetail extends React.Component {
                 <span>日期 {moment(post.createdAt).format("YYYY-MM-DD")}</span>
                 <span>阅读 {post.read && post.read.toString().replace(/(\d)(?=(?:\d{3})+$)/g, '$1,')}</span>
               </span>
-
               <div className='post-tags'>
                 {
                   post.tags.map((tag, idx) => <span key={tag + idx} className='tag-item'>{tag}</span>)
@@ -233,7 +227,6 @@ class PostDetail extends React.Component {
           createComment={this.props.createComment}
           getComment={this.props.getComment}
         />
-
         <CommentsLists
           comments={comments}
           currentUser={this.props.currentUser}
@@ -244,7 +237,6 @@ class PostDetail extends React.Component {
           postAuthor={post.author._id}
         />
       </div>
-
     )
   }
 }

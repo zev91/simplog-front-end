@@ -9,7 +9,6 @@ const Empty = () => (
     </div>
     <div className='tips-text'>暂无数据</div>
   </div>
-
 )
 
 export default withStyles(css)(Empty)

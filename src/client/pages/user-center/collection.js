@@ -1,16 +1,13 @@
 import React, { Component } from 'react';
 import { openInNewTab } from 'src/utils/helper';
-import { LikePostItem, CommentItem, PublishPostItem, CollectionPostItem, FollowAuthorItem } from './activity-items';
-
 import withListenerScroll from 'src/componentHOC/withListenerScroll';
 import { CommonCard } from './activity-items';
+
 class MyCollection extends Component {
   constructor(props) {
     super(props);
   }
   static method = 'getUserCollections';
-
-
 
   switchDetail = (id) => {
     openInNewTab('/post/'+id,true);
@@ -22,7 +19,6 @@ class MyCollection extends Component {
 
   render() {
     const { userInfo, datas } = this.props;
-
     return (
       <div className='my-collection-wrap'>
         {
@@ -32,6 +28,5 @@ class MyCollection extends Component {
     )
   }
 }
-
 
 export default withListenerScroll(MyCollection);

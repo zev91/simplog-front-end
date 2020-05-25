@@ -23,18 +23,18 @@ export default SourceComponent => {
       }
     }
 
-    static async getInitialProps(props){
-        return SourceComponent.getInitialProps ? await SourceComponent.getInitialProps(props):{};
+    static async getInitialProps(props) {
+      return SourceComponent.getInitialProps ? await SourceComponent.getInitialProps(props) : {};
     }
 
     async getInitialProps() {
       const props = this.props;
       // const store = window.__STORE__;//从全局得到 store 
 
-      const initialData = props.getInitialData ? await props.getInitialData(): (
+      const initialData = props.getInitialData ? await props.getInitialData() : (
         SourceComponent.getInitialProps ? await SourceComponent.getInitialProps() : {}
       );
-      
+
       this.setState({
         initialData,
         canClientFetch: true
@@ -47,18 +47,17 @@ export default SourceComponent => {
       const canClientFetch = this.props.history && (this.props.history.action === 'PUSH');//路由跳转的时候可以异步请求数据
       if (canClientFetch) {
         //如果是 history PUSH 操作 则更新数据
-        try{
-          this.setState({loading:true});
+        try {
+          this.setState({ loading: true });
           await this.getInitialProps();
-        }finally{
-          this.setState({loading:false});
+        } finally {
+          this.setState({ loading: false });
         }
-        
       }
     }
 
     render() {
-      const { loading } =this.state;
+      const { loading } = this.state;
       const props = {
         initialData: {},
         ...this.props
@@ -77,15 +76,15 @@ export default SourceComponent => {
       }
       return (
         loading ?
-        <Backdrop className='async-loading' open={true} >
-          <CircularProgress color="primary" />
-          <span className='loading-tips'>数据加载中...</span>
-        </Backdrop>
-        :
-        <div>
-          <Tdk {...props.initialData.page.tdk} />
-          <SourceComponent  {...props}></SourceComponent>
-        </div>
+          <Backdrop className='async-loading' open={true} >
+            <CircularProgress color="primary" />
+            <span className='loading-tips'>数据加载中...</span>
+          </Backdrop>
+          :
+          <div>
+            <Tdk {...props.initialData.page.tdk} />
+            <SourceComponent  {...props}></SourceComponent>
+          </div>
       )
     }
   }

@@ -19,7 +19,7 @@ const CommonCard = post => (
         </span>
       </div>
     </div>
-    <div className='reference-post-mian' onClick={() => openInNewTab('/post/'+post._id,true)}>
+    <div className='reference-post-mian' onClick={() => openInNewTab('/post/' + post._id, true)}>
       <header>{post.title}</header>
       <div className='post-text-content'>
         <p>{post.main.length <= 120 ? post.main : post.main.substr(0, 120)}...</p>
@@ -48,9 +48,8 @@ const CommentItem = ({ data }) => (
   <div className='comment-post-block common-post-block'>
     <div className='comment-activty-header-block common-activty-header-block'>
       <header><span>{data.user.username}</span>评论了这篇文章</header>
-      <div className='comment-content'>“{data.addComment.replyToUser && <Link onClick={() => openInNewTab('/user/'+data.addComment.replyToUser._id,true)}>@{data.addComment.replyToUser.username}</Link>} {data.addComment.body}”</div>
+      <div className='comment-content'>“{data.addComment.replyToUser && <Link onClick={() => openInNewTab('/user/' + data.addComment.replyToUser._id, true)}>@{data.addComment.replyToUser.username}</Link>} {data.addComment.body}”</div>
     </div>
-
     {CommonCard(data.addComment.post)}
   </div>
 )
@@ -73,7 +72,7 @@ const FollowAuthorItem = ({ data }) => (
   <div className='follow-author-block'>
     <Avatar className='follow-from-user-avater' src={data.user.avatar} />
     <div className='follow-details-block'>
-      <span className='follow-info'>{data.user.username} <span>关注了</span> <Link onClick={() => openInNewTab('/user/'+data.followAuthor._id,true) }>{data.followAuthor.username}</Link></span>
+      <span className='follow-info'>{data.user.username} <span>关注了</span> <Link onClick={() => openInNewTab('/user/' + data.followAuthor._id, true)}>{data.followAuthor.username}</Link></span>
       <span className='user-job'>{'无'}</span>
     </div>
   </div>

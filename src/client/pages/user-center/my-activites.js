@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { openInNewTab } from 'src/utils/helper';
 import { LikePostItem, CommentItem, PublishPostItem, CollectionPostItem, FollowAuthorItem } from './activity-items';
-
 import withListenerScroll from 'src/componentHOC/withListenerScroll';
 
 class MyActivities extends Component {
@@ -43,6 +42,5 @@ class MyActivities extends Component {
     )
   }
 }
-
 
 export default withListenerScroll(MyActivities);

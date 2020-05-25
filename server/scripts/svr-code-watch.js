@@ -27,11 +27,9 @@ const watching = compiler.watch({
   try{
     console.log(constantCode.SVRCODECOMPLETED)
   }
-
   catch(error){
     console.log(error)
   }
-  
 });
 
 compiler.hooks.done.tap('done',function(data){
@@ -42,6 +40,6 @@ compiler.hooks.done.tap('done',function(data){
 //收到退出信号 退出自身进程
 process.stdin.on('data', function (data) {
   if (data.toString() === 'exit') {
-      process.exit();
+    process.exit();
   }
 });

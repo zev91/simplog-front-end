@@ -111,11 +111,6 @@ export default WrappedComponent =>
       return validResult;
     }
 
-    // valid = (validAll) => {
-    //   console.log(validAll)
-    //   // const { validation } = this.state;
-    // }
-
     handleSubmit = () => {
       return ({
         data: this.state.fields,

@@ -16,7 +16,6 @@ export default ({visible, setVisible, createComment, getComment, id, parentId,re
     }
   }
 
-
   return (
     <Collapse in={visible}>
       {reply.name ? <div className='reply-to-wrap'>回复 {reply.name } :</div> : ''}
@@ -37,7 +36,5 @@ export default ({visible, setVisible, createComment, getComment, id, parentId,re
       </div>
     </div>
     </Collapse>
-   )
+  )
 }
-
-  

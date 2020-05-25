@@ -13,7 +13,6 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Comfirm from 'src/componentCommon/confirm';
 import PopupState, { bindTrigger, bindMenu } from 'material-ui-popup-state';
 import Empty from 'src/componentCommon/empty';
-
 import moment from 'moment';
 import css from './style.scss';
 
@@ -44,10 +43,10 @@ class DraftList extends React.Component {
 
   editPost = (popupState, id) => {
     popupState && popupState.close();
-    openInNewTab('/editor/draft/'+id,true);
+    openInNewTab('/editor/draft/' + id, true);
   }
 
-  deletePost = async (popupState,id) => {
+  deletePost = async (popupState, id) => {
     popupState.close();
     await this.props.deletePost(id);
     this.props.updateListt(id);
@@ -58,12 +57,12 @@ class DraftList extends React.Component {
     const wrapBottom = this.scrolWrap.getBoundingClientRect().bottom;
     const contentBottom = this.scrolContent.getBoundingClientRect().bottom;
 
-    if(wrapBottom >= contentBottom){
-      if(draftData.page.pageCount === draftData.page.currentPage) return;
-      if(this.state.loading) return;
-      this.setState({loading:true})
-      this.props.getMoreDrafts({pageNO: draftData.page.nextPage}).then(res => {
-        this.setState({loading:false})
+    if (wrapBottom >= contentBottom) {
+      if (draftData.page.pageCount === draftData.page.currentPage) return;
+      if (this.state.loading) return;
+      this.setState({ loading: true })
+      this.props.getMoreDrafts({ pageNO: draftData.page.nextPage }).then(res => {
+        this.setState({ loading: false })
       });
     }
   }
@@ -72,41 +71,40 @@ class DraftList extends React.Component {
     const { draftData } = this.props.initialData;
     const { loading } = this.state;
     return (
-
-      <div className='draft-page' 
+      <div className='draft-page'
         onScroll={this.getMore}
         ref={(ref) => this.scrolWrap = ref}
       >
         {!draftData || !draftData.datas || !draftData.datas.length ?
-          <Empty/>
+          <Empty />
           :
           <ul className='draft-list-block' ref={(ref) => this.scrolContent = ref}>
             {draftData.datas.map((item, idx) => (
               <li className='draft-list-item' key={item.id}>
-                <header onClick={this.editPost.bind(null,null,item.id)}>{item.title || '无标题'}</header>
+                <header onClick={this.editPost.bind(null, null, item.id)}>{item.title || '无标题'}</header>
                 <div className='info-box'>
                   <span>{moment(item.createdAt).format("YYYY-MM-DD HH:mm")}</span>
                   <PopupState variant="popover" popupId="more-menu-popup">
-                      {(popupState) => (
-                        <React.Fragment>
-                          <IconButton aria-label='more' {...bindTrigger(popupState)}>
-                            <MoreVertIcon size='small' />
-                          </IconButton>
+                    {(popupState) => (
+                      <React.Fragment>
+                        <IconButton aria-label='more' {...bindTrigger(popupState)}>
+                          <MoreVertIcon size='small' />
+                        </IconButton>
 
-                          <Menu
-                            {...bindMenu(popupState)}
-                            getContentAnchorEl={null}
-                            anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
-                            transformOrigin={{ vertical: 'top', horizontal: 'left' }}
-                          >
-                            <MenuItem onClick={this.editPost.bind(null,popupState,item.id)}>编辑</MenuItem>
-                            <Comfirm header={`确定删除该草稿？`} click={this.deletePost.bind(null, popupState, item.id)} successCb={this.getPost}>
-                              <MenuItem >删除</MenuItem>
-                            </Comfirm>
-                          </Menu>
-                        </React.Fragment>
-                      )}
-                    </PopupState>
+                        <Menu
+                          {...bindMenu(popupState)}
+                          getContentAnchorEl={null}
+                          anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+                          transformOrigin={{ vertical: 'top', horizontal: 'left' }}
+                        >
+                          <MenuItem onClick={this.editPost.bind(null, popupState, item.id)}>编辑</MenuItem>
+                          <Comfirm header={`确定删除该草稿？`} click={this.deletePost.bind(null, popupState, item.id)} successCb={this.getPost}>
+                            <MenuItem >删除</MenuItem>
+                          </Comfirm>
+                        </Menu>
+                      </React.Fragment>
+                    )}
+                  </PopupState>
                 </div>
               </li>
             ))}
@@ -117,7 +115,6 @@ class DraftList extends React.Component {
     )
   }
 }
-
 
 const mapStateToProps = state => ({
   initialData: state.draftPage,

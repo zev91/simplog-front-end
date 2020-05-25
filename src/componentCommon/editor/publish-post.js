@@ -1,4 +1,4 @@
-import React, { Component,createRef } from 'react';
+import React, { Component, createRef } from 'react';
 import withStyles from 'isomorphic-style-loader/withStyles';
 import { IconButton, Button, Popover, ButtonBase, Input, Chip, Divider } from '@material-ui/core';
 import ArrowDropDown from '@material-ui/icons/ArrowDropDown';
@@ -13,38 +13,38 @@ class PublishPost extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      tagInputValue:'',
-      pubText : props.published ? '更新' : '发布'
+      tagInputValue: '',
+      pubText: props.published ? '更新' : '发布'
     }
     this.tagInput = createRef();
   }
   handleDelete = deleTag => {
     const { tags } = this.props;
-    this.props.updatePostAndCb({tags: tags.filter(tag => tag !== deleTag)});
+    this.props.updatePostAndCb({ tags: tags.filter(tag => tag !== deleTag) });
   }
 
   handlerAddTag = e => {
-    if(e.nativeEvent.keyCode === 13){ //e.nativeEvent获取原生的事件对像
-      const { tagInputValue } =this.state;
-      const { tags } =this.props;
+    if (e.nativeEvent.keyCode === 13) { //e.nativeEvent获取原生的事件对像
+      const { tagInputValue } = this.state;
+      const { tags } = this.props;
 
-      this.props.updatePostAndCb({tags: Array.from(new Set([...tags,tagInputValue]))});
-      this.setState({tagInputValue:''});
+      this.props.updatePostAndCb({ tags: Array.from(new Set([...tags, tagInputValue])) });
+      this.setState({ tagInputValue: '' });
     }
   }
 
   selectCategory = category => {
-    this.props.updatePostAndCb({category});
+    this.props.updatePostAndCb({ category });
   }
 
   submitPublish = () => {
     const { tags, category } = this.props;
-    if(!category){
+    if (!category) {
       Toast.error('请选择文章分类！');
       return;
     }
 
-    if(!tags.length){
+    if (!tags.length) {
       Toast.error('请至少添加一个标签！');
       return;
     }
@@ -77,39 +77,39 @@ class PublishPost extends Component {
                   <div className='category-btn-wrap'>
                     {
                       postCategorys.map((postCategory) => (
-                        <Button key={postCategory} variant='outlined' color={category === postCategory ? 'primary' : 'default'} size="small" onClick={this.selectCategory.bind(this,postCategory)}>
-                        {postCategory}
-                      </Button>
+                        <Button key={postCategory} variant='outlined' color={category === postCategory ? 'primary' : 'default'} size="small" onClick={this.selectCategory.bind(this, postCategory)}>
+                          {postCategory}
+                        </Button>
                       ))
                     }
                   </div>
                 </div>
                 <div className='tags-wrap content-wraps'>
                   <header>标签</header>
-                  <Input 
+                  <Input
                     ref={this.tagInput}
                     size='small'
-                    placeholder='输入内容 按下回车以添加标签' 
-                    fullWidth  
-                    disabled={tags && tags.length >=10}
-                    inputProps={{ 'aria-label': 'description' }} 
+                    placeholder='输入内容 按下回车以添加标签'
+                    fullWidth
+                    disabled={tags && tags.length >= 10}
+                    inputProps={{ 'aria-label': 'description' }}
                     onChange={e => {
-                      this.setState({tagInputValue: e.target.value})
+                      this.setState({ tagInputValue: e.target.value })
                     }}
                     value={tagInputValue}
                     onKeyUp={this.handlerAddTag}
-                    />
+                  />
                   <div className='tags-list'>
                     {
-                      tags.map(tag => <Chip key={tag} label={tag} variant="outlined" onDelete={this.handleDelete.bind(this,tag)} color="primary" />)
+                      tags.map(tag => <Chip key={tag} label={tag} variant="outlined" onDelete={this.handleDelete.bind(this, tag)} color="primary" />)
                     }
                   </div>
                 </div>
                 <div className='post-submit-content'>
-                <Button  disabled={saving} variant="contained" color="primary" disableElevation onClick={this.submitPublish}>
-                  确定并{pubText}
-                </Button>
-              </div>
+                  <Button disabled={saving} variant="contained" color="primary" disableElevation onClick={this.submitPublish}>
+                    确定并{pubText}
+                  </Button>
+                </div>
               </div>
             </Popover>
           </div>

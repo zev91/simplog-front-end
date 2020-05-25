@@ -1,8 +1,9 @@
 import * as enRedux from 'utils/redux';
 import { getInitState } from 'utils/helper';
-const { action, createReducer, injectReducer } = enRedux.default;
 
+const { action, createReducer, injectReducer } = enRedux.default;
 const reducerHandler = createReducer();
+
 export const actions = {
   getPage: action({
     type: 'userSettingPage.getPage',
@@ -18,35 +19,35 @@ export const actions = {
         ...state
       }
     }
-  },reducerHandler),
+  }, reducerHandler),
 
   uploadAvatar: action({
     type: 'userSettingPage.uploadAvatar',
-    action: (params,http) => {
-      return http.post('/api/upload/avatar',params)
+    action: (params, http) => {
+      return http.post('/api/upload/avatar', params)
     },
     handler: (state, result) => {
       return {
         ...state
       }
     }
-  },reducerHandler),
+  }, reducerHandler),
 
   updateUserInfo: action({
     type: 'userSettingPage.uploadAvatar',
-    action: (params,http) => {
-      return http.put('/api/userinfo',params)
+    action: (params, http) => {
+      return http.put('/api/userinfo', params)
     },
     handler: (state, result) => {
       return {
         ...state
       }
     }
-  },reducerHandler),
+  }, reducerHandler),
 
   getInitialData: action({
     type: 'userSettingPage.getInitialData',
-    action: async (http,dispatch) => {
+    action: async (http, dispatch) => {
       const page = await dispatch(actions.getPage());
       return ({
         page
@@ -58,16 +59,12 @@ export const actions = {
         ...result
       }
     }
-  },reducerHandler),
+  }, reducerHandler),
 };
-
 
 let initState = {
   key: 'userSettingPage',
-  state: {page:{}}
+  state: { page: {} }
 };
 
-injectReducer({ key: initState.key, reducer: reducerHandler(getInitState(initState))});
-
-
-
+injectReducer({ key: initState.key, reducer: reducerHandler(getInitState(initState)) });

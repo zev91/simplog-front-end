@@ -5,7 +5,6 @@ import { Button, Popover } from '@material-ui/core';
 import ErrorIcon from '@material-ui/icons/Error';
 import css from './style.scss';
 
-
 class CustConfirm extends Component {
   constructor(props) {
     super(props);
@@ -16,9 +15,9 @@ class CustConfirm extends Component {
     return (
       <PopupState variant="popover" popupId="confirm-popup-popover">
         {(popupState) => {
-          const handlerClick = async () =>{
+          const handlerClick = async () => {
             const res = await click();
-            if(res){
+            if (res) {
               popupState.close();
               successCb && successCb();
             }
@@ -41,15 +40,13 @@ class CustConfirm extends Component {
               >
                 <div className='confirm-delete-wrap'>
                   <div className='confirm-header'>
-                    <ErrorIcon color='error' fontSize='small'/> {header}
+                    <ErrorIcon color='error' fontSize='small' /> {header}
                   </div>
                   <div className='delete-op-wrap'>
-
                     <Button size="small" onClick={popupState.close}>取消</Button>
                     <Button size="small" variant="outlined" color="primary" onClick={handlerClick}>确定</Button>
                   </div>
                 </div>
-
               </Popover>
             </div>
           )
