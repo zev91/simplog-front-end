@@ -25,12 +25,12 @@ const client = new OSS({
 const publicPath = path.resolve(__dirname, './dist/static')
 const ossPath = 'blog-cdn'
 async function run(proPath = '') {
-  const oldFiles = await client.list(({
-    prefix: 'bcdn-'
-  }));
+  const oldFiles = await client.list({
+  marker: 'blog-cdn'
+});
 
   if(oldFiles.objects){
-    const oldFileLists = oldFiles.objects.map(file => file.name);
+   const oldFileLists = oldFiles.objects.map(file => file.name);
     await client.deleteMulti(oldFileLists);
   }
 
