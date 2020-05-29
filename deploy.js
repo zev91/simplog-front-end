@@ -26,13 +26,8 @@ const publicPath = path.resolve(__dirname, './dist/static')
 const ossPath = 'blog-cdn'
 async function run(proPath = '') {
   const oldFiles = await client.list({
-  marker: 'blog-cdn'
-});
-
-  if(oldFiles.objects){
-   const oldFileLists = oldFiles.objects.map(file => file.name);
-    await client.deleteMulti(oldFileLists);
-  }
+    marker: 'blog-cdn'
+  });
 
   const dir = await promisifyReaddir(`${publicPath}${proPath}`);
 
@@ -42,10 +37,19 @@ async function run(proPath = '') {
     if (stat.isFile()) {
       const fileStream = fs.createReadStream(path.resolve(`${publicPath}${proPath}`, dir[i]))
       console.log(`上传文件: ${ossPath}${proPath}/${dir[i]}`)
-      const result = await client.putStream(`${ossPath+proPath}/${dir[i]}`, fileStream)
+      const result = await client.putStream(`${ossPath + proPath}/${dir[i]}`, fileStream)
     } else if (stat.isDirectory()) {
       await run(`${proPath}/${dir[i]}`)
     }
+  }
+
+  console.log('文件已全部上传');
+
+  if (oldFiles.objects) {
+    console.log('开始删除旧文件');
+    const oldFileLists = oldFiles.objects.map(file => file.name);
+    await client.deleteMulti(oldFileLists);
+    console.log('删除旧文件已全部删除');
   }
 }
 
