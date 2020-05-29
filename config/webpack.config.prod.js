@@ -22,7 +22,7 @@ module.exports = merge(baseCongig,{
     main: [resolvePath('../src/client/client-entry.js')]
   },
   output: {
-    filename: 'js/bcdn-[name].[chunkhash:8].js',
+    filename: 'js/[name].[chunkhash:8].js',
     path: resolvePath('../dist/static'),
     publicPath: '/blog-cdn/'
   },
@@ -37,7 +37,7 @@ module.exports = merge(baseCongig,{
       use: [{
         loader: 'file-loader',
         options: {
-          name: 'img/bcdn-[name].[hash:8].[ext]',
+          name: 'img/[name].[hash:8].[ext]',
           publicPath: '/blog-cdn/'
         }
       }]

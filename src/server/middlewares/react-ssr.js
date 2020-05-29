@@ -87,7 +87,7 @@ export default async (req) => {
        
         ${styles.join('')}
         <style id="jss-server-side">${materialCss}</style>
-        <link rel="shortcut icon" href="https://simplog.oss-cn-beijing.aliyuncs.com/system/favicon.ico">
+        <link rel="shortcut icon" href="https://simplog-cdn.oss-cn-shanghai.aliyuncs.com/system/favicon.ico">
       </head>
       <body>
         <!--react-ssr-outlet-->
