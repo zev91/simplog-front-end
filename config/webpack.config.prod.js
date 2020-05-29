@@ -93,15 +93,19 @@ module.exports = merge(baseCongig,{
       new OptimizeCSSAssetsPlugin()
     ],
     splitChunks: {
-      chunks: "all",
-      minChunks: 1,
-      maxAsyncRequests: 20,
-      maxSize: 30000,
+      
       cacheGroups: {
         libs: { // 抽离第三方库
+          maxSize: 0,
           test: /node_modules/, // 指定是node_modules下的第三方包
           chunks: 'initial',
           name: 'libs'// 打包后的文件名，任意命名    
+        },
+        default: {
+          maxAsyncRequests: 10000,
+          chunks: 'async', // 这里只是针对 async 的 chunk，因为 async 的 chunk 都是自动的异步加载的，分多少个都没关系，但是对于 initial 的 chunk，需要手动引入
+          minChunks: 1,
+          maxSize: 40000,
         }
       }
     },
