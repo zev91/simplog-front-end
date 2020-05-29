@@ -29,6 +29,14 @@ async function run(proPath = '') {
     marker: 'blog-cdn'
   });
 
+
+  if (oldFiles.objects) {
+    console.log('开始删除旧文件');
+    const oldFileLists = oldFiles.objects.map(file => file.name);
+    await client.deleteMulti(oldFileLists);
+    console.log('删除旧文件已全部删除');
+  }
+
   const dir = await promisifyReaddir(`${publicPath}${proPath}`);
 
   for (let i = 0; i < dir.length; i++) {
@@ -45,12 +53,6 @@ async function run(proPath = '') {
 
   console.log('文件已全部上传');
 
-  if (oldFiles.objects) {
-    console.log('开始删除旧文件');
-    const oldFileLists = oldFiles.objects.map(file => file.name);
-    await client.deleteMulti(oldFileLists);
-    console.log('删除旧文件已全部删除');
-  }
 }
 
 run()
