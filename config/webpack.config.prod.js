@@ -93,6 +93,10 @@ module.exports = merge(baseCongig,{
       new OptimizeCSSAssetsPlugin()
     ],
     splitChunks: {
+      chunks: "all",
+      minChunks: 1,
+      maxAsyncRequests: 20,
+      maxSize: 30000,
       cacheGroups: {
         libs: { // 抽离第三方库
           test: /node_modules/, // 指定是node_modules下的第三方包
