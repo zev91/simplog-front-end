@@ -105,7 +105,7 @@ module.exports = merge(baseCongig,{
           maxAsyncRequests: 10000,
           chunks: 'async', // 这里只是针对 async 的 chunk，因为 async 的 chunk 都是自动的异步加载的，分多少个都没关系，但是对于 initial 的 chunk，需要手动引入
           minChunks: 1,
-          maxSize: 40000,
+          maxSize: 500000,
         }
       }
     },
