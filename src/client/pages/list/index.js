@@ -5,7 +5,7 @@ import { actions } from './redux';
 import withInitialData from 'src/componentHOC/with-initial-data';
 import withStyles from 'isomorphic-style-loader/withStyles';
 import composeHOC from 'src/utils/composeHOC';
-import css from './style.scss';
+import css from 'styles/pages/list.scss';
 
 //组件
 class List extends React.Component {
@@ -20,6 +20,7 @@ class List extends React.Component {
   }
 
   static async getInitialProps({ store }) {
+    // console.log('getInitialProps====>>>>',)
     return store.dispatch(actions.getInitialData());
   }
 
@@ -32,18 +33,17 @@ class List extends React.Component {
 
     return (
       <div>
-        <button onClick={this.handlerClick}> 加载</button>
         {!list.length ?
           '暂无数据'
           :
           <ul className='user-list'>{list.map(((item, idx) => {
             return (
               <li key={idx}>
-                user: {item.user}
-                city: {item.city}
-                groupName: {item.groupName}
-                intention: {item.intention}
-                date: {item.date}
+                <span>{item.user}</span>
+                <span>{item.city}</span>
+                <span>{item.groupName}</span>
+                <span>{item.intention}</span>
+                <span>{item.date}</span>
               </li>
             )
           }))}</ul>

@@ -1,0 +1,42 @@
+.main-header-box{
+    background: #fff;
+    border-bottom: 1px solid #f1f1f1;
+    color: #909090;
+    z-index: 250;
+
+    .header-container{
+        width: 1200px;
+        display: flex;
+        margin: 0 auto;
+        
+    }
+
+    .brand-logo{
+        display: flex;
+        align-items: center;
+        img{
+            display: block;
+            width: 132px;
+        }
+    }
+
+    .current-user-info{
+        display: flex;
+        align-items: center;
+        margin-left: auto;
+
+        .avatar{
+            width: 30px;
+            margin-right: 8px;
+            img{
+              display: block;
+              width: 100%;
+              border-radius: 50%;
+            }
+        }
+
+        .user-name{
+            color: #000;
+        }
+    }
+}

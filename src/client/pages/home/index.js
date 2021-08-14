@@ -5,7 +5,7 @@ import { actions } from './redux';
 import withStyles from 'isomorphic-style-loader/withStyles';
 import { getInitialData } from './redux';
 import composeHOC from 'src/utils/composeHOC';
-import css from './style.scss';
+import css from 'styles/pages/home.scss';
 
 class Index extends React.Component {
     constructor(props) {
@@ -28,7 +28,7 @@ class Index extends React.Component {
     render() {
         return (
           <div className='home-page-wrap'>
-            <h1 onClick={this.handlerClick}>This is Home page hahhahah!</h1>
+            <h1 onClick={this.handlerClick}>这是首页</h1>
           </div>
         ) 
     }

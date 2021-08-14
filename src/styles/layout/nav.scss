@@ -1,0 +1,27 @@
+.nav-bar{
+    display: flex;
+    margin: 0;
+    margin-left: 24px;
+
+    li{
+        list-style: none;
+        height: 64px;
+        
+        a{
+            color: #86909c;
+            text-decoration: none;
+            font-size: 16px;
+
+            display: inline-block;
+            height: 64px;
+            padding: 0 1.7rem;
+            line-height: 64px;
+        }
+
+        &.active{
+            a{
+                color: rgba(21,156,179,1);
+            } 
+        }
+    }
+}

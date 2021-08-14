@@ -1,7 +1,7 @@
 import React from 'react';
 const { renderToString } = require('react-dom/server');
 import { Provider } from "react-redux";
-import { matchRoute } from '../../router';
+import { matchRoute, LoactionComp } from '../../router';
 import getAssets from '../../../server/common/assets';
 import getStaticRoutes from '../middlewares/get-static-routes';
 import { encrypt } from '../../utils/helper';
@@ -24,6 +24,7 @@ export default async (req) => {
   let fetchDataFn = targetRoute ? targetRoute.component.getInitialProps : null;
   let fetchResult = {};
   const store = getStore();
+  LoactionComp.getInitialProps({ store, req}); //初始化location redux
 
   if (fetchDataFn) {
     fetchResult = await fetchDataFn({ store });
@@ -32,8 +33,6 @@ export default async (req) => {
   for(let key in shouldSsrList){
     fetchResult[key] = await shouldSsrList[key].getInitialProps({ store })
   }
-
-  console.log(shouldSsrList)
 
   let { page } = fetchResult || {};
 
@@ -65,8 +64,11 @@ export default async (req) => {
   const html = renderToString(serverEntry);
   const styles = [];
   [...css].forEach(item => {
-    let [mid, content] = item[0];
-    styles.push(`<style id="s${mid}-0">${content}</style>`)
+    item.forEach(i => {
+      let [mid, content] = i;
+      styles.push(`<style id="s${mid}-0">${content}</style>`)
+    })
+    
   });
 
   template = `<!DOCTYPE html>

@@ -1,0 +1,16 @@
+
+.user-list{
+  list-style: none;
+  margin: 0;
+  padding-left: 12px;
+  li{
+    margin: 32px 0;
+    display: flex;
+    justify-content: space-around;
+    padding-bottom: 38px;;
+    &:not(:last-child){
+      border-bottom: 1px solid #eee;
+    }
+  }
+}
+

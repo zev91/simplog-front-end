@@ -3,8 +3,9 @@ import withStyles from 'isomorphic-style-loader/withStyles';
 import { Link } from "react-router-dom";
 import { hot } from 'react-hot-loader/root';
 import Header from 'src/componentLayout/header';
+import Nav from 'src/componentLayout/nav';
 
-import css from './layout.scss';
+import css from 'styles/layout/layout.scss';
 
 class Index extends Component{
   constructor(props){
@@ -13,15 +14,16 @@ class Index extends Component{
 
   render(){
     return (
-      <div className='layout-box'>
-        <Header />
-        <header>
-          <Link to='/'>首页</Link>
-          <Link to='/list'>列表页</Link>
-        </header>
-       
-        <div>{this.props.children}</div>
+      <>
+       <Header >
+         <Nav/>
+       </Header>
+        
+       <div className='layout-box'>
+         <div className='body-container'>{this.props.children}</div>
       </div>
+      </>
+     
     )
   }
 }

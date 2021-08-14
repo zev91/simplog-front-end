@@ -1,6 +1,7 @@
 import React from 'react';
 import { matchPath } from "react-router";
 import AsyncLoader from 'src/componentHOC/async-loader';
+import LoactionComp from './client/pages/loactionComp';
 
 const routeList = [
   {
@@ -28,5 +29,5 @@ const matchRoute = (path,list=routeList) =>{
 
 
 export default routeList;
-export { matchRoute };
+export { matchRoute, LoactionComp };
 

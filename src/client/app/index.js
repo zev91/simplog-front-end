@@ -3,7 +3,7 @@ import Layout from './layout';
 import { updateLocation } from 'src/utils/redux/location'
 
 import { Route, Switch, withRouter } from 'react-router-dom';
-
+import 'styles/layout/layout.scss';
 function App({ routeList,history }) {
   const [count, setCount] = useState(0);
   useEffect(() => {

@@ -12,6 +12,7 @@ module.exports = {
         'server': resolvePath('../server/'),
         'src': resolvePath('../src/'),
         'utils': resolvePath('../src/utils/'),
+        'styles': resolvePath('../src/styles/'),
       }
   },
   module: {

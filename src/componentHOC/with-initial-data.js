@@ -16,7 +16,6 @@ export default SourceComponent => {
     constructor(props) {
       super(props);
 
-      console.log(SourceComponent.getInitialProps)
       this.state = {
         initialData: {},
         canClientFetch: false //浏览器端是否需要请求数据
@@ -30,6 +29,7 @@ export default SourceComponent => {
 
     async getInitialProps() {
       const props = this.props;
+
       const store = window.__STORE__;//从全局得到 store 
 
       const initialData = props.getInitialData ? await props.getInitialData(): (
